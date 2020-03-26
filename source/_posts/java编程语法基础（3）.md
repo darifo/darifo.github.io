@@ -132,19 +132,181 @@ char 数据类型可以储存任何字符；
 代码例子：
 
 ```java
-public class HelloWorld {
+public class BaseType {
+
+    static boolean bool;
+    static byte by;
+    static char ch;
+    static double d;
+    static float f;
+    static int i;
+    static long l;
+    static short sh;
 
     public static void main(String[] args){
 
-        System.out.println("Hello World");
+        // 默认值
+        System.out.println("Bool :" + bool);
+        System.out.println("Byte :" + by);
+        System.out.println("Character:" + ch);
+        System.out.println("Double :" + d);
+        System.out.println("Float :" + f);
+        System.out.println("Integer :" + i);
+        System.out.println("Long :" + l);
+        System.out.println("Short :" + sh);
 
-        // ...
+        builtInDataTypes();
+        referenceDataTypes();
+    }
+    /*
+    * todo 八大 内置数据类型 4个整型 2个浮点型 1个字符型 1个布尔型
+    * */
+    private static void builtInDataTypes(){
+        System.out.println("说明 \t byte \t int \t short \t long \t float \t double \t char");
+        int[] typeSizeArray = {
+                Byte.SIZE,
+                Integer.SIZE,
+                Short.SIZE,
+                Long.SIZE,
+                Float.SIZE,
+                Double.SIZE,
+                Character.SIZE
+        };
+        System.out.print("长度： \t ");
+        for (int l:typeSizeArray){
+            System.out.print(l + " \t ");
+        }
+
+        System.out.print("\n最小值： \t ");
+        System.out.print(Byte.MIN_VALUE + " \t ");
+        System.out.print(Integer.MIN_VALUE + " \t ");
+        System.out.print(Short.MIN_VALUE + " \t ");
+        System.out.print(Long.MIN_VALUE + " \t ");
+        System.out.print(Float.MIN_VALUE + " \t ");
+        System.out.print(Double.MIN_VALUE + " \t ");
+
+        System.out.print("\n最大值： \t ");
+        System.out.print(Byte.MAX_VALUE + " \t ");
+        System.out.print(Integer.MAX_VALUE + " \t ");
+        System.out.print(Short.MAX_VALUE + " \t ");
+        System.out.print(Long.MAX_VALUE + " \t ");
+        System.out.print(Float.MAX_VALUE + " \t ");
+        System.out.print(Double.MAX_VALUE + " \t ");
     }
 }
+
+```
+
+输出：
+```
+Bool :false
+Byte :0
+Character: 
+Double :0.0
+Float :0.0
+Integer :0
+Long :0
+Short :0
+说明 	 byte 	 int 	 short 	 long 	 float 	 double 	 char
+长度： 	 8 	 32 	 16 	 64 	 32 	 64 	 16 	 
+最小值： 	 -128 	 -2147483648 	 -32768 	 -9223372036854775808 	 1.4E-45 	 4.9E-324 	 
+最大值： 	 127 	 2147483647 	 32767 	 9223372036854775807 	 3.4028235E38 	 1.7976931348623157E308 
 ```
 
 
 ## 引用数据类型
 
 
-...
+引用类型指向一个变量，指向对象的变量是引用变量。声明时被指定特定类型。
+
+对象，数组都是引用类型。
+
+所有引用类型默认值都是null。
+
+引用变量可以兼容类型。
+
+
+```java
+    /*
+    * todo 引用数据类型
+    * */
+    private static void referenceDataTypes(){
+
+        // BaseType这就是引用类型
+        BaseType baseType = new BaseType();
+    }
+```
+
+
+# 2、JAVA常量
+
+
+常量在程序运行时是不能被修改的。
+
+在 Java 中使用 final 关键字来修饰常量。
+
+虽然常量名也可以用小写，但为了便于识别，通常使用大写字母表示常量。
+
+字符串常量和字符常量都可以包含任何Unicode字符。
+
+
+```java
+    /*
+    * todo 常量
+    * */
+    private static void cons(){
+        final int A = 0;
+    }
+```
+
+
+## 转义字符
+
+![](/images/20200326120950.gif)
+
+
+
+## 自动类型转换
+
+整型、实型（常量）、字符型数据可以混合运算。运算中，不同类型的数据先转化为同一类型，然后进行运算。
+
+从低级到高级:
+
+byte,short,char—> int —> long—> float —> double
+
+
+规则：
+
+- 不能对boolean类型进行类型转换。
+
+- 不能把对象类型转换成不相关类的对象。
+
+- 在把容量大的类型转换为容量小的类型时必须使用强制类型转换。
+
+- 转换过程中可能导致溢出或损失精度
+
+
+```java
+    char c1='a'; //定义一个char类型
+    int i1 = c1; //char自动类型转换为int
+    System.out.println("char自动类型转换为int后的值等于" + i1);
+    char c2 = 'A'; //定义一个char类型
+    int i2 = c2 + 1; //char 类型和 int 类型计算
+    System.out.println("char类型和int计算后的值等于" + i2);
+
+
+char自动类型转换为int后的值等于97
+char类型和int计算后的值等于66
+
+```
+
+
+## 强制类型转换
+
+```java
+    int i1 = 123;
+    byte b = (byte) i1; //强制类型转换为byte
+    System.out.println("int强制类型转换为byte后的值等于" + b);
+
+int强制类型转换为byte后的值等于123
+```
