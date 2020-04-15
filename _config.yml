@@ -95,25 +95,22 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 
-
-# Extensions
-## Plugins: http://hexo.io/plugins/
-#RSS订阅
-plugin:
-- hexo-generator-feed
-#Feed Atom
-feed:
-type: atom
-path: atom.xml
-limit: 20
+	
+# 头像
+avatar: /images/avatar.png
 
 
-theme: landscape
-
+theme: next # landscape
 menu:
-  Home: /
-  Archives: /archives
-  About: about
+  home: /||home
+  archives: /archives||archive
+  categories: /categories||th
+  tags: /tags||tags
+  about: /about||user
+#menu:
+  #Home: /
+  #Archives: /archives
+  #About: about
   
 
 # Deployment
