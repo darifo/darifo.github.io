@@ -1,5 +1,6 @@
 ---
 title: BF（Brute Force）模式匹配算法
+date: 2020-3-26 00:00:00
 categories: 
 - 算法
 tags:

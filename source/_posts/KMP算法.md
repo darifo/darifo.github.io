@@ -1,5 +1,6 @@
 ---
 title: KMP算法
+date: 2020-3-27 00:00:00
 categories: 
 - 算法
 tags:
