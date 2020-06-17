@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/10/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BMAC%E4%B8%8A-%E5%AE%89%E8%A3%85Docker%E5%90%8E%E4%BD%BF%E7%94%A8%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/14/SQL-MODE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/10/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BMAC%E4%B8%8A-%E5%AE%89%E8%A3%85Docker%E5%90%8E%E4%BD%BF%E7%94%A8%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/" itemprop="url">记录一下MAC上 安装Docker后使用的那些事儿</a></h2>
+                <a class="post-title-link" href="/2019/01/14/SQL-MODE/" itemprop="url">SQL_MODE</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-10T12:08:08+08:00">
-                2019-01-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T12:00:27+08:00">
+                2019-01-14
               </time>
             
 
@@ -354,8 +354,14 @@
       
         
           
-            <p>笔记分享地址：</p>
-<p><a href="https://note.youdao.com/ynoteshare1/index.html?id=9bfe52e226ccdf01a217d0c8fe2580c4&amp;type=note" target="_blank" rel="noopener">https://note.youdao.com/ynoteshare1/index.html?id=9bfe52e226ccdf01a217d0c8fe2580c4&amp;type=note</a></p>
+            <h2 id="Mysql-TIMESTAMP-字段「Invalid-default-value」问题"><a href="#Mysql-TIMESTAMP-字段「Invalid-default-value」问题" class="headerlink" title="Mysql TIMESTAMP 字段「Invalid default value」问题"></a>Mysql TIMESTAMP 字段「Invalid default value」问题</h2><p>这是我在Mysql数据库中，新建一张表时出现的问题，代码如下</p>
+<p>– 创建表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> seckill(</span><br><span class="line">  <span class="string">`seckill_id`</span> <span class="built_in">bigint</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'商品库存id'</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'商品名称'</span>,</span><br><span class="line">  <span class="string">`number`</span> <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'库存数量'</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">-- 此行不会报错，因为默认值使用CURRENT_TIMESTAMP</span></span><br><span class="line">  <span class="string">`start_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'秒杀开启时间'</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">-- 此行会报错，因为默认值使用“0000-00-00 00:00:00”，</span></span><br><span class="line">  <span class="comment">-- Mysql 5.7版本后的SQL_MODE默认为strict（NO_ZERO_DATE），</span></span><br><span class="line">  <span class="comment">-- 所以第二个出现报错</span></span><br><span class="line">  <span class="comment">-- 解决方案：SET SQL_MODE = 'ALLOW_INVALID_DATES';</span></span><br><span class="line"></span><br><span class="line">  <span class="string">`end_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'秒杀结束时间'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (seckill_id),</span><br><span class="line">  <span class="keyword">key</span> idx_start_time(start_time),</span><br><span class="line">  <span class="keyword">key</span> idx_end_time(end_time),</span><br><span class="line">  <span class="keyword">key</span> idx_create_time(create_time)</span><br><span class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">1000</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=UTF8 <span class="keyword">COMMENT</span>=<span class="string">'秒杀库存表'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我的解决方案是：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> SQL_MODE <span class="comment">=</span> <span class="comment">'ALLOW_INVALID_DATES'</span>;</span><br></pre></td></tr></table></figure>
+
+
 
           
         
@@ -395,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/40/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/40/">40</a><span class="page-number current">41</span><a class="page-number" href="/page/42/">42</a><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/42/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/40/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/40/">40</a><span class="page-number current">41</span><a class="page-number" href="/page/42/">42</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/42/">&gt;</a>
   </nav>
 
 
@@ -445,7 +451,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

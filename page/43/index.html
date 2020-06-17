@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/02/PHP%E5%BC%95%E7%94%A8%E5%8F%98%E9%87%8F%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/10/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BMAC%E4%B8%8A-%E5%AE%89%E8%A3%85Docker%E5%90%8E%E4%BD%BF%E7%94%A8%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/02/PHP%E5%BC%95%E7%94%A8%E5%8F%98%E9%87%8F%E9%97%AE%E9%A2%98/" itemprop="url">PHP引用变量问题</a></h2>
+                <a class="post-title-link" href="/2019/01/10/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BMAC%E4%B8%8A-%E5%AE%89%E8%A3%85Docker%E5%90%8E%E4%BD%BF%E7%94%A8%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/" itemprop="url">记录一下MAC上 安装Docker后使用的那些事儿</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-02T11:38:58+08:00">
-                2019-01-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-10T12:08:08+08:00">
+                2019-01-10
               </time>
             
 
@@ -354,33 +354,8 @@
       
         
           
-            <p>附上代码：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$orders = [</span><br><span class="line">    [<span class="string">'id'</span>=&gt;<span class="number">10001</span>,<span class="string">'channel_type'</span>=&gt;<span class="number">3</span>],</span><br><span class="line">    [<span class="string">'id'</span>=&gt;<span class="number">10002</span>,<span class="string">'channel_type'</span>=&gt;<span class="number">2</span>],</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($orders <span class="keyword">as</span> &amp;$order)&#123;</span><br><span class="line">    $order[<span class="string">'order_price'</span>] = <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var_dump($orders);</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>($orders <span class="keyword">as</span> $order)&#123;</span><br><span class="line">    var_dump($order);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>说明：</p>
-<p>有一个订单数组，我想要在每一个元素上加上一个 order_price 属性，所以第一个遍历使用了 引用符号 &amp; ，在第一个var_dump时会输出我添加成功后的订单数组，包含了订单价格属性，接着我又在后面的业务逻辑中要再次去遍历这个订单数组，我使用了同样的一个别名 “$order”，然后在循环中输出订单元素，发现一个很奇怪的事情，两次输出的订单竟然是同一个：</p>
-<p>[‘id’=&gt;10002,’channel_type’=&gt;2,’order_price’=&gt;0]</p>
-<p>经过请教，发现是因为这个相同的变量名 “$order” 导致的，只需要改成其他名称就可以正常遍历数组内容了；</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span>($orders <span class="keyword">as</span> $ord)&#123;</span><br><span class="line">    var_dump($ord);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>具体原因分析：</p>
-<p>解释:</p>
-<p>1.foreach不是块级域，数组引用结束，$k,$a没有释放内存</p>
-<p>2.当第一次引用循环结束的时候，$a指向数组最后一个元素4</p>
-<p>3.当第二次开始循环 (此时$a已经是指向最后一个元素，是引用)</p>
-<p>循环4次  数组的变化分别是:</p>
-<p>1-&gt;    [1,2,3,4]</p>
-<p>2-&gt;    [1,2,3,4]</p>
-<p>3-&gt;    [1,2,3,3]    </p>
-<p>第三次value指向最后一个元素3   </p>
-<p>但是value是全局引用在上次循环指向了最后一个元素  所以value=3的时候 也会把最后一个元素的值改为3</p>
-<p>4-&gt;    [1,2,3,3]</p>
-<p>注意事项：</p>
-<p>1.foreach 实现原理有个内部指针的概念    </p>
-<p>2.&amp;的foreach循环结束   指针会指向最后一个元素</p>
-<p>如何避免：</p>
-<p>在用&amp;foreach循环后  unset  ($a)</p>
+            <p>笔记分享地址：</p>
+<p><a href="https://note.youdao.com/ynoteshare1/index.html?id=9bfe52e226ccdf01a217d0c8fe2580c4&amp;type=note" target="_blank" rel="noopener">https://note.youdao.com/ynoteshare1/index.html?id=9bfe52e226ccdf01a217d0c8fe2580c4&amp;type=note</a></p>
 
           
         
@@ -420,7 +395,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/42/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><span class="page-number current">43</span>
+    <a class="extend prev" rel="prev" href="/page/42/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/page/44/">44</a><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/44/">&gt;</a>
   </nav>
 
 
@@ -470,7 +445,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

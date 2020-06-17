@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/04/MySQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/07/%E5%9C%A8Docker%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%99%A2%E7%B3%BB%E7%BB%9Fjellyfin/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/04/MySQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" itemprop="url">MySQL基础知识点总结</a></h2>
+                <a class="post-title-link" href="/2020/04/07/%E5%9C%A8Docker%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%99%A2%E7%B3%BB%E7%BB%9Fjellyfin/" itemprop="url">在Docker上部署家庭影院系统jellyfin</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-04T23:19:00+08:00">
-                2020-04-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-07T22:17:36+08:00">
+                2020-04-07
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" itemprop="url" rel="index">
+                    <span itemprop="name">软件安装</span>
                   </a>
                 </span>
 
@@ -354,25 +354,10 @@
       
         
           
-            <h3 id="存储引擎：MyISAM-和-InnoDB"><a href="#存储引擎：MyISAM-和-InnoDB" class="headerlink" title="存储引擎：MyISAM 和 InnoDB"></a>存储引擎：MyISAM 和 InnoDB</h3><p>1、MyISAM </p>
-<ul>
-<li>MySQL 5.5版本前默认存储引擎</li>
-<li>全文索引，不支持 事务 和 行级锁，崩溃无法安全恢复</li>
-<li>适用于 读密集 场景</li>
-<li>只支持表级锁</li>
-<li>查询具有原子性，速度更快</li>
-</ul>
-<p>2、InnoDB</p>
-<ul>
-<li>MySQL 5.5之后 默认存储引擎</li>
-<li>支持 行级锁 和 表级锁 ，默认行级锁</li>
-<li>支持事务、安全恢复、外键等高级功能</li>
-<li>支持 MVCC，高效应对高并发事务</li>
-</ul>
-<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>MySQL 索引 主要数据结构 分为 BTree 和 哈希，底层结构就是对应 BTree 和 哈希表。</p>
-<h4 id="B-树"><a href="#B-树" class="headerlink" title="B 树"></a>B 树</h4><h4 id="非聚集索引"><a href="#非聚集索引" class="headerlink" title="非聚集索引"></a>非聚集索引</h4><p>MyISAM 非聚簇索引</p>
-<h4 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h4><p>InnoDB 聚簇索引</p>
-<h4 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h4><h3 id="最左前缀原则"><a href="#最左前缀原则" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h3>
+            <h3 id="jellyfin"><a href="#jellyfin" class="headerlink" title="jellyfin"></a>jellyfin</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull jellyfin/jellyfin</span><br><span class="line">docker run -d --name jellyfin_server -p 0.0.0.0:8096:8096 -v /e/docker/jellyfin/config:/config -v /e/docker/jellyfin/media:/media jellyfin/jellyfin</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20200407223553.png" alt=""></p>
+
           
         
       
@@ -411,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/17/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/15/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/17/">&gt;</a>
   </nav>
 
 
@@ -461,7 +446,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

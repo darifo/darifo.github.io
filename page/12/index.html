@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/09/TCP-%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93-%E4%B9%8B-ARQ-%E5%8D%8F%E8%AE%AE/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/11/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%85%83%E7%B4%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/09/TCP-%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93-%E4%B9%8B-ARQ-%E5%8D%8F%E8%AE%AE/" itemprop="url">TCP 如何保证可靠传输 之  ARQ 协议</a></h2>
+                <a class="post-title-link" href="/2020/04/11/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%85%83%E7%B4%A0/" itemprop="url">【力扣算法题】删除链表中的倒数第N个元素</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-09T11:32:32+08:00">
-                2020-04-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-11T12:11:47+08:00">
+                2020-04-11
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -354,89 +354,44 @@
       
         
           
-            <p>TCP 相比于 UDP 提供的是 面向连接的、可靠的、字节流传输；</p>
-<p>谈到 TCP 如何保证可靠传输这个问题，我们应该都知道的主要由以下几特点：</p>
-<p>1、校验和（差错控制）： </p>
-<p>对首部和数据进行端到端校验 </p>
-<p>2、流量控制 ： </p>
-<p>连接双方都有固定大小的缓冲区，接收端只允许发送端发送自己缓冲区能存储的数据，当来不及处理时 就会提醒发送方 降低速率 （你发慢点，老子搞不赢），保证包不丢失。（ 滑动窗口协议（连续ARQ协议）实现流量控制 ）</p>
-<p>3、拥塞控制 ： </p>
-<p>网络拥塞，较少数据发送 </p>
-<p>4、超时重传 ： </p>
-<p>发出包会，启动定时器，等待确认</p>
-<p>其实，更细致的还有： </p>
-<p>1、分割数据块</p>
-<p>2、包编号、有序传输</p>
-<p>3、接收端丢弃重复数据</p>
-<p>4、ARQ协议</p>
-<p>这个ARQ 协议可能有些陌生，那么，咱们就盘一下：</p>
-<p>首先搞清楚一个关系：</p>
-<ul>
-<li><p>ARQ 协议 是 自动重传请求协议</p>
-</li>
-<li><p>AQR 协议 是 停止等待协议</p>
-</li>
-<li><p>停止等待协议 是属于 一种 ARQ 协议</p>
-</li>
-<li><p>即 AQR 属于 ARQ</p>
-</li>
+            <p>给定一个链表，删除链表的<strong>倒数第 n 个节点</strong>，并且返回链表的头结点。</p>
+<p>示例：</p>
+<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p>
+<p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</p>
+<p>说明：</p>
+<p>给定的 n 保证是有效的。</p>
+<p>进阶：</p>
+<p>你能尝试使用一趟扫描实现吗？</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>自己手画了一个图，凑合看着理解数据结构先。。。</li>
 </ul>
-<p>哈哈，是不是眼花了？？？</p>
-<h3 id="ARQ-协议-（自动重传请求-Automatic-Repeat-reQuest）"><a href="#ARQ-协议-（自动重传请求-Automatic-Repeat-reQuest）" class="headerlink" title="ARQ 协议 （自动重传请求 Automatic Repeat-reQuest）"></a>ARQ 协议 （自动重传请求 Automatic Repeat-reQuest）</h3><p>基本原理： 每次发完一个分组，就停止发送，等待对方确认，确认收到后再发送下一个分组。</p>
-<p>ARQ 协议 是 OSI 数据链路层和传输层的错误纠正协议之一，使用确认和超时两个机制，在不可靠服务的基础上实现可靠的信息传输。</p>
-<h4 id="AQR-协议-（停止等待-ARQ-协议）"><a href="#AQR-协议-（停止等待-ARQ-协议）" class="headerlink" title="AQR 协议 （停止等待 ARQ 协议）"></a>AQR 协议 （停止等待 ARQ 协议）</h4><p>1、无差错情况： </p>
-<p>发送数据分组，需要得到接收方确认 ACK ，如果 一段时间 没有收到确认，那就重新发送，直到确认后再发下一个分组。</p>
-<p>2、若接收方收到重复分组： </p>
-<p>就自己丢掉吧，但任然要发送确认回复给发送方。</p>
-<p>3、分组丢失和出现差错的情况：</p>
-<p>当分组丢失 或 出现差错 的情况下，发送方都会超时重传分组</p>
-<p>4、应答丢失 和 应答迟到 的情况：</p>
-<p>TCP会给每个字节流都打上序号，用于判断该分组是否已经接收。</p>
-<pre><code>应答丢失：
+<p><img src="/images/20200411144810.png" alt=""></p>
+<p>链表操作的题目，一般都需要有指针（一个或者两个），通过移动指针指向，控制元素的增加、删除等操作</p>
+<p>解决方法有很多种，比如：两遍指针（需要先计算链表长度L）、一遍指针（双指针同时移动）等</p>
+<h4 id="步骤-比较好的算法实现——移动一遍指针"><a href="#步骤-比较好的算法实现——移动一遍指针" class="headerlink" title="步骤 ( 比较好的算法实现——移动一遍指针 )"></a>步骤 ( 比较好的算法实现——移动一遍指针 )</h4><ul>
+<li>链表输入（给定头结点指针 head， 以及移除位置n）</li>
+<li>定义一个指向头结点的节点指针【重要】（h.next = head），为什么要多增加一个节点指向，因为不管对链表进行何种操作，我们的链表头是不能丢失的，否则就找不到数据入口，没有了意义，所以要么多增加一个节点指向头，要么用临时变量操作前存储头指针，总之不能丢失。</li>
+<li>定义节点指针：定义两个节点指针（左指针、右指针），都指向头部节点（p.next = head）</li>
+<li>先移动 右指针 ，移动步数 由 输入的 n 决定（本题，需要移除倒数第 n 个位置的节点，我们就先把右指针往右边移动 n + 1 步，这样 右指针和左指针之间的距离就刚好是 n 个节点）</li>
+<li>然后，我们再 同步移动 两个指针（p = p.next），当 右指针 为 null 时，停止移动，此时，左指针的下一个节点指向刚好就是 倒数第 n 个节点。</li>
+<li>最后，我们操作倒数第 n 个 节点的移除（p.next = p.next.next），意思就是把左指针 下一个节点 指向 了 下下个节点，即跳过了倒数第 n 个节点。</li>
+<li>返回头节点（h.next）结束</li>
+</ul>
+<h4 id="完整代码实现"><a href="#完整代码实现" class="headerlink" title="完整代码实现"></a>完整代码实现</h4><ul>
+<li>时间复杂度： O(L) L为链表长度</li>
+<li>空间复杂度： O(1)</li>
+</ul>
+<p>链表结构</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode next;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x) &#123;</span><br><span class="line">        val = x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    若接收方正确收到分组，并已经返回应答，但应答在返回途中丢失了。
-
-    此时发送方也收不到应答，从而超时重传。紧接着接收方又收到了该分组。
-
-    接收者根据序号来判断当前收到的分组是否已经接收，若已接收则直接丢弃，并补上一个确认应答。
+<p>处理类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.company.darifo.solutions;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RemoveNthNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ListNode headNode = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">static</span> ListNode tmp = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"请输入链表长度："</span>);</span><br><span class="line">        <span class="keyword">int</span> len = scanner.nextInt();</span><br><span class="line">        System.out.println(<span class="string">"请输入头结点值："</span>);</span><br><span class="line">        headNode = <span class="keyword">new</span> ListNode(scanner.nextInt());</span><br><span class="line">        tmp = headNode;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入节点值: "</span>);</span><br><span class="line">            headNode.next = <span class="keyword">new</span> ListNode(scanner.nextInt());</span><br><span class="line">            headNode = headNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 打印输入</span></span><br><span class="line">        printList(tmp);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 移除 倒数 第 n 个节点 n 不能大于链表长度 否则空指针异常</span></span><br><span class="line">        System.out.println(<span class="string">"移除倒数第 ? 个节点: "</span>);</span><br><span class="line">        <span class="keyword">int</span> n = scanner.nextInt();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">2</span>;j&lt;=<span class="number">3</span>;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> ( n &lt; len)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            System.out.println(<span class="string">"输入有误，第 "</span> + j + <span class="string">"次输入："</span>);</span><br><span class="line">            n = scanner.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ( n &gt; len)&#123;</span><br><span class="line">            System.out.println(<span class="string">"三次输入错误！退出"</span>);</span><br><span class="line">            System.exit(-<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行操作</span></span><br><span class="line">        ListNode head = removeNthFromEnd(tmp, n);</span><br><span class="line">        <span class="comment">// 打印结果</span></span><br><span class="line">        printList(head);</span><br><span class="line"></span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printList</span><span class="params">(ListNode node)</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"\n"</span>);</span><br><span class="line">        <span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(node.val + <span class="string">"-&gt;"</span>);</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(<span class="string">"null"</span>);</span><br><span class="line">        System.out.print(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 算法函数</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义两个节点指针，分别指向头结点和头结点的下一节点</span></span><br><span class="line">        ListNode h = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        h.next = head;</span><br><span class="line">        ListNode l = h;</span><br><span class="line">        ListNode r = h;</span><br><span class="line">        <span class="comment">// 首先移动右边指针 r 使其移动 N + 1 位，此时 r 和 l 之间间隔 就是 N</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">            r = r.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 然后，同时向右移动两个指针，使 r 指针 next 为 null 时终止，此时，l 指针的下一个节点就是 倒数第N个节点</span></span><br><span class="line">        <span class="keyword">while</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">            r = r.next;</span><br><span class="line">            l = l.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 移除节点</span></span><br><span class="line">        l.next = l.next.next;</span><br><span class="line">        <span class="keyword">return</span> h.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-应答迟到：
 
-    若由于网络拥塞，接收方迟迟收不到发送方发送的应答，因此会超时重传。
 
-    接收方收到该分组后，发现已经接收，便丢弃该分组，并向发送方补上确认应答。发送方收到应答后便继续发送下一个分组。
-
-    但经过了很长时间后，那个失效的应答最终抵达了发送方，此时发送方可根据序号判断该分组已经接收，此时只需简单丢弃即可。</code></pre><p>注：</p>
-<pre><code>每发送完一个分组，该分组必须被保留，直到收到确认应答为止。
-
-必须给每个分组进行编号。以便按序接收，并判断该分组是否已被接收。
-
-必须设置超时计时器。每发送一个分组就要启动计时器，超时就要重发分组。
-
-计时器的超时时间要大于应答的平均返回时间，否则会出现很多不必要的重传，降低传输效率。但超时时间也不能太长。</code></pre><p>优点：简单</p>
-<p>缺点：信道利用率低、等待时间长</p>
-<h4 id="连续-ARQ-协议-（滑动窗口协议）"><a href="#连续-ARQ-协议-（滑动窗口协议）" class="headerlink" title="连续 ARQ 协议 （滑动窗口协议）"></a>连续 ARQ 协议 （滑动窗口协议）</h4><p>在ARQ协议发送方每次只能发送一个分组，在应答到来前必须等待。</p>
-<p>而连续ARQ协议的发送者拥有一个<strong>发送窗口</strong>，发送者可以在没有得到应答的情况下连续发送窗口中的分组。</p>
-<p>对应接收方 也有一个 <strong>接收窗口</strong> ，接受者并不需要每收到一个分组就返回一个应答，而是连续按顺序接收之后，统一答复。</p>
-<p>注：</p>
-<pre><code>1.接收者收到的字节会存入接收窗口，接收者会对已经正确接收的有序字节进行累计确认，发送完确认应答后，接收窗口就可以向前移动指定字节。
-
-2.同一时刻发送窗口的大小并不一定和接收窗口一样大。
-
-3.发送窗口的大小还受网络拥塞情况影响。当网络出现拥塞时，发送窗口将被调小。
-
-    TCP标准并未规定未按序到达的字节的处理方式。
-    但TCP一般都会缓存这些字节，等缺少的字节到达后再交给应用层处理。
-    这比直接丢弃乱序的字节要节约带宽。
-
-    TCP标准规定接收方必须要有累计确认功能。
-    接收方可以对多个TCP报文段同时确认，但不能拖太长时间，一般是0.5S以内。</code></pre><p>优点：提高信道利用率、容易实现、确认丢失不必重传</p>
-<h3 id="最后附上TCP头部结构图："><a href="#最后附上TCP头部结构图：" class="headerlink" title="最后附上TCP头部结构图："></a>最后附上TCP头部结构图：</h3><p><img src="/images/20200409123601.png" alt=""></p>
-<p>参考：</p>
-<p>[1] <a href="https://blog.csdn.net/weixin_30552811/article/details/96375283" target="_blank" rel="noopener">https://blog.csdn.net/weixin_30552811/article/details/96375283</a></p>
-<p>[2] <a href="https://blog.csdn.net/u010425776/article/details/55006347" target="_blank" rel="noopener">https://blog.csdn.net/u010425776/article/details/55006347</a></p>
-<p>[3] <a href="https://zhuanlan.zhihu.com/p/73506510" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/73506510</a></p>
+<p>来源：</p>
+<p>力扣（LeetCode）链接：<a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list</a></p>
 
           
         
@@ -476,7 +431,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/13/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/11/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/13/">&gt;</a>
   </nav>
 
 
@@ -526,7 +481,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

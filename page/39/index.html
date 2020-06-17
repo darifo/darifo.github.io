@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/14/SQL-MODE/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/15/%E5%B0%9D%E8%AF%95MAC%E5%AE%89%E8%A3%85vue%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/14/SQL-MODE/" itemprop="url">SQL_MODE</a></h2>
+                <a class="post-title-link" href="/2019/01/15/%E5%B0%9D%E8%AF%95MAC%E5%AE%89%E8%A3%85vue%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE/" itemprop="url">尝试MAC安装vue开发环境运行项目</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T12:00:27+08:00">
-                2019-01-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-15T11:56:33+08:00">
+                2019-01-15
               </time>
             
 
@@ -354,14 +354,51 @@
       
         
           
-            <h2 id="Mysql-TIMESTAMP-字段「Invalid-default-value」问题"><a href="#Mysql-TIMESTAMP-字段「Invalid-default-value」问题" class="headerlink" title="Mysql TIMESTAMP 字段「Invalid default value」问题"></a>Mysql TIMESTAMP 字段「Invalid default value」问题</h2><p>这是我在Mysql数据库中，新建一张表时出现的问题，代码如下</p>
-<p>– 创建表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> seckill(</span><br><span class="line">  <span class="string">`seckill_id`</span> <span class="built_in">bigint</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'商品库存id'</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'商品名称'</span>,</span><br><span class="line">  <span class="string">`number`</span> <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'库存数量'</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">-- 此行不会报错，因为默认值使用CURRENT_TIMESTAMP</span></span><br><span class="line">  <span class="string">`start_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'秒杀开启时间'</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">-- 此行会报错，因为默认值使用“0000-00-00 00:00:00”，</span></span><br><span class="line">  <span class="comment">-- Mysql 5.7版本后的SQL_MODE默认为strict（NO_ZERO_DATE），</span></span><br><span class="line">  <span class="comment">-- 所以第二个出现报错</span></span><br><span class="line">  <span class="comment">-- 解决方案：SET SQL_MODE = 'ALLOW_INVALID_DATES';</span></span><br><span class="line"></span><br><span class="line">  <span class="string">`end_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'秒杀结束时间'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (seckill_id),</span><br><span class="line">  <span class="keyword">key</span> idx_start_time(start_time),</span><br><span class="line">  <span class="keyword">key</span> idx_end_time(end_time),</span><br><span class="line">  <span class="keyword">key</span> idx_create_time(create_time)</span><br><span class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">1000</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=UTF8 <span class="keyword">COMMENT</span>=<span class="string">'秒杀库存表'</span>;</span><br></pre></td></tr></table></figure>
+            <p>1、安装nodejs（使用mac包管理工具，没有先安装一下）</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>nodejs</span><br></pre></td></tr></table></figure>
+<p>检测安装成功</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span> <span class="title">-v</span></span><br></pre></td></tr></table></figure>
 
-<p>我的解决方案是：</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> SQL_MODE <span class="comment">=</span> <span class="comment">'ALLOW_INVALID_DATES'</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> -v</span><br></pre></td></tr></table></figure>
 
 
+
+<p>2、安装vue脚手架（自动搭建vue项目框架的工具）</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g vue-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
+
+<p>检测是否安装成功：（ V 要大写 ）</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">vue -V</span></span><br></pre></td></tr></table></figure>
+<p>成功输出vue版本号</p>
+<p>3、安装webpack</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> webpack -g</span><br></pre></td></tr></table></figure>
+
+<p>4、创建一个基于webpack模版的vue项目</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">vue init webpack project_name</span></span><br></pre></td></tr></table></figure>
+
+<p>5、启动vue项目</p>
+<p>进入目录执行</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+
+<p>然后执行</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">run</span><span class="bash"> dev</span></span><br></pre></td></tr></table></figure>
+
+
+<p>成功后，默认运行在：<a href="http://localhost:8080/#/" target="_blank" rel="noopener">http://localhost:8080/#/</a></p>
+<p>如图：</p>
+<p><img src="/images/20200402115726.png" alt="image"></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>安装 element-UI 支持</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> i element-ui -S</span><br></pre></td></tr></table></figure>
+
+<p>引入</p>
+<p>main.js中添加</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(ElementUI);</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<p>页面或组件模版部分添加</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">&lt;el-row&gt;</span></span><br><span class="line">  <span class="symbol">&lt;el-button&gt;</span>默认按钮&lt;/<span class="keyword">el</span>-button&gt;</span><br><span class="line">  &lt;<span class="keyword">el</span>-button <span class="built_in">type</span>=<span class="string">"primary"</span>&gt;主要按钮&lt;/<span class="keyword">el</span>-button&gt;</span><br><span class="line">  &lt;<span class="keyword">el</span>-button <span class="built_in">type</span>=<span class="string">"success"</span>&gt;成功按钮&lt;/<span class="keyword">el</span>-button&gt;</span><br><span class="line">  &lt;<span class="keyword">el</span>-button <span class="built_in">type</span>=<span class="string">"info"</span>&gt;信息按钮&lt;/<span class="keyword">el</span>-button&gt;</span><br><span class="line">  &lt;<span class="keyword">el</span>-button <span class="built_in">type</span>=<span class="string">"warning"</span>&gt;警告按钮&lt;/<span class="keyword">el</span>-button&gt;</span><br><span class="line">  &lt;<span class="keyword">el</span>-button <span class="built_in">type</span>=<span class="string">"danger"</span>&gt;危险按钮&lt;/<span class="keyword">el</span>-button&gt;</span><br><span class="line">&lt;/<span class="keyword">el</span>-row&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20200402115742.png" alt="image"></p>
+<p>可以看出，按钮样式已经正常渲染出来了</p>
 
           
         
@@ -401,7 +438,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/38/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/40/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/38/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/40/">&gt;</a>
   </nav>
 
 
@@ -451,7 +488,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

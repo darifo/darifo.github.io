@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/06/%E9%9B%86%E5%AD%A6%E4%B9%A0%E5%A8%B1%E4%B9%90%E5%BC%80%E5%8F%91%E4%BA%8E%E4%B8%80%E8%BA%AB%E7%9A%84LJ%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/08/Redis%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%8C%82%E6%8E%89%E4%B9%8B%E5%90%8E%E9%87%8D%E5%90%AF%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E5%A4%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/06/%E9%9B%86%E5%AD%A6%E4%B9%A0%E5%A8%B1%E4%B9%90%E5%BC%80%E5%8F%91%E4%BA%8E%E4%B8%80%E8%BA%AB%E7%9A%84LJ%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" itemprop="url">集学习娱乐开发于一身的LJ使用记录</a></h2>
+                <a class="post-title-link" href="/2020/04/08/Redis%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%8C%82%E6%8E%89%E4%B9%8B%E5%90%8E%E9%87%8D%E5%90%AF%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E5%A4%B1/" itemprop="url">Redis如何保证挂掉之后重启数据不丢失</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-06T18:46:36+08:00">
-                2020-04-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-08T22:56:20+08:00">
+                2020-04-08
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" itemprop="url" rel="index">
-                    <span itemprop="name">软件安装</span>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -354,111 +354,126 @@
       
         
           
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自己捡的垃圾，再烂也要用起来</p>
-<p>作为一个入门级别的垃圾佬，去年自行DIY了一台小主机，最初的期望是搭建一套家庭娱乐及文件存储系统，于是乎 开干：</p>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><ul>
-<li>主板 &amp; CPU ： 华擎 J3455 - ITX  大概四五百的样子（全新的），CPU是j3455四核四线程1.5G，板载的没法拆</li>
-<li>内存 ：DDR3 1600 4G * 2  自己买一块几十块，大佬送了一块，共两块8G，可以说足够了</li>
-<li>电源 ：金河田 一百多的样子（缩啥不能缩电源，其实电源卖得很便宜了）</li>
-<li>硬盘 ：希捷 黑盘 500G * 2  这才是垃圾，五十块一个盘，某鱼购</li>
-<li>机箱 ：杂牌ITX小机箱，不说了，就是50包邮的，某鱼</li>
-</ul>
-<p>总共算下来，也差不多700多的样子。</p>
-<h3 id="NAS-黑群晖"><a href="#NAS-黑群晖" class="headerlink" title="NAS 黑群晖"></a>NAS 黑群晖</h3><p>买来组装好之后，直接上的 黑群晖 ，刚开始用着很新鲜，捣鼓了好些天，功能挺强大的，基本文件存储与办公套件齐全，观影系统、下载站、照片管理、笔记本等等，最重要的是还有 <strong>Docker</strong> 、虚拟机啥的，这简直爽翻。</p>
-<p>但是，由于租房的时候办理的网络宽带是移动（办卡送的），所以根本没法外网访问（移动大内网，没有公网IP，其实也可以frp、花生壳啥的做穿透、速度实在太慢）。所以只能每天回到家连上主机搞搞，没啥意思。于是，基本上放哪里吃了几个月灰。。。</p>
-<h3 id="进入正题"><a href="#进入正题" class="headerlink" title="进入正题"></a>进入正题</h3><h4 id="一场事故"><a href="#一场事故" class="headerlink" title="一场事故"></a>一场事故</h4><p>前些天，我重启了服务器，上群辉里面发现一个日志提示 硬盘 “堪用”，意思就是出了问题还是坏了咋的，然后就去拆机检查，是硬盘电源线松动，，再次启动，发现起不来了，让它启动了一晚上也不行，第二天就各种捣鼓，街上显示器启动查看引导、检查路由器网络接入。。。。这一查问题还真多，一边是磁盘里面数据应该被破坏了，一边又是局域网DHCP分配IP身份认证失败，反正搞了大半天没成功。。</p>
-<h4 id="一气之下"><a href="#一气之下" class="headerlink" title="一气之下"></a>一气之下</h4><p>重做引导盘，重新分区格式化磁盘</p>
-<p>准备换成 Linux </p>
-<p>查了一下网上这块主板CPU相关信息，发现 官方说只支持 win10、Ubuntu，而且linux兼容不好。。。</p>
-<p>先不管，直接上 CentOS8 ，发现还真他娘的装不上。。。放弃</p>
-<h4 id="直接上Windows它不香吗？"><a href="#直接上Windows它不香吗？" class="headerlink" title="直接上Windows它不香吗？"></a>直接上Windows它不香吗？</h4><p>安装windows还是比较顺利，</p>
-<p>系统好了，先清理软件垃圾</p>
-<p>关闭防火墙、软件（反正自己局域网，全部裸着好办事）</p>
-<h4 id="Windows10-和-Docker-还是比较好配合"><a href="#Windows10-和-Docker-还是比较好配合" class="headerlink" title="Windows10 和 Docker 还是比较好配合"></a>Windows10 和 Docker 还是比较好配合</h4><ul>
-<li>首先打开 <strong>Hyper-V</strong> 服务</li>
-</ul>
-<p><img src="/images/20200405214929.png" alt=""></p>
+            <p>我们都知道 redis 是一个开源的、基于<strong>内存</strong>的数据结构存储器，可以用作数据库、缓存和消息中间件。最常用做缓存。但是存在内存里面的东西是不稳定的，因为如果系统挂掉重启的话，内存里面数据都会丢失，那么在实际应用中，如果我们用作缓存，应该怎样保证redis挂掉重启后，数据恢复，任然可用呢？ 这是一件很重要的事情。接下来了解一下 Redis 中的 持久化机制。究其 意义、实现方式、以及原理。</p>
+<h2 id="Redis-持久化机制"><a href="#Redis-持久化机制" class="headerlink" title="Redis 持久化机制"></a>Redis 持久化机制</h2><p>持久化的意义：发生故障恢复数据，保障可用性</p>
+<p>redis 持久化主要是：<strong>RDB、AOF</strong> 两种；</p>
+<pre><code>RDB: 将数据库的快照以二进制的方式保存到磁盘；
+
+AOF: 将所有写入命令及相关参数以协议文本的方式写入文件并持久保存磁盘。</code></pre><h3 id="RDB-（快照持久化）"><a href="#RDB-（快照持久化）" class="headerlink" title="RDB （快照持久化）"></a>RDB （快照持久化）</h3><p>通过创建快照获取存储在内存中的数据在某个时间点的副本，然后对快照进行备份，可以将快照复制到其他服务器作为副本（主从架构），可以将快照存储到本地文件，用于重启恢复。主要有两个参数构成：时间和改动的键值的个数，即当在指定时间内被更改的键的个数大于执行数值时，就会进行快照。就像拍照一样，将这一瞬间的所有东西都保存下来。</p>
+<p>RDB 是 Redis 默认采用的持久化方式，在 redis.conf 配置文件中。</p>
+<h4 id="规则："><a href="#规则：" class="headerlink" title="规则："></a>规则：</h4><p><img src="/images/20200408232409.png" alt=""></p>
+<h4 id="rdb文件路径："><a href="#rdb文件路径：" class="headerlink" title="rdb文件路径："></a>rdb文件路径：</h4><p>默认rdb文件存放路径是当前目录，文件名是：dump.rdb。</p>
+<p>可以在配置文件中修改路径和文件名，分别是dir 和 dbfilename</p>
+<p>当 Redis 启动后，会读取 rdb 快照文件，将数据从硬盘加载到内存。</p>
+<h4 id="快照流程"><a href="#快照流程" class="headerlink" title="快照流程"></a>快照流程</h4><p>满足配置规则条件时，</p>
+<p>1、redis 调用 fork 函数 创建 持久化 子进程；</p>
+<p>2、子进程 将 指定数据集 从 内存 写入到 临时的 rdb 快照文件中；</p>
+<p>3、子进程 完成 写入后，redis 使用这个新创建的临时 rdb 文件 替换原来的 rdb 文件（删除旧文件）；</p>
+<pre><code>也就是说任何时候RDB文件都是完整的。
+
+这使得我们可以通过定时备份RDB文件来实 现Redis数据库备份。
+
+RDB文件是经过压缩（可以配置rdbcompression参数以禁用压缩节省CPU占用）的二进制格式，所以占用的空间会小于内存中的数据大小，更加利于传输。</code></pre><p>除了自动快照，也可以手动调用 save 或者 bgsave 命令，两个命令的区别在于，前者是由主进程进行快照操作，会阻塞住其他请求，后者会通过 fork 子进程进行快照操作。 </p>
+<p>注：新的 rdb 文件存储的是执行 fork 那一刻的内存数据。</p>
 <ul>
-<li>下载安装 Docker-Desktop-Windows</li>
-</ul>
-<p><a href="http://get.daocloud.io/#install-docker-for-mac-windows" target="_blank" rel="noopener">http://get.daocloud.io/#install-docker-for-mac-windows</a></p>
-<p><img src="/images/20200405215720.png" alt=""></p>
-<ul>
-<li>启动后 配置 Docker</li>
-</ul>
-<p>主要设置挂载盘、网络、镜像源</p>
-<p><img src="/images/20200406193427.png" alt=""></p>
-<ul>
-<li>安装迅雷</li>
-</ul>
-<p>略</p>
-<ul>
-<li>打开 FTP 服务</li>
-</ul>
-<p>过程详细就不说了，配置用户那里直接选用系统用户登录就行。。。</p>
-<p><img src="/images/20200406193744.png" alt=""></p>
-<p><img src="/images/20200406193847.png" alt=""></p>
-<p><img src="/images/20200406193921.png" alt=""></p>
-<p><img src="/images/20200406193947.png" alt=""></p>
-<p><img src="/images/20200406194046.png" alt=""></p>
-<p>这里，我把 FTP  目录设置到 和 CentOS 容器绑定的目录下面，意味着，我传到ftp的文件都会同步到容器内的 CentOS 系统 目录中，方便后续做其他调试工作啥的。。。</p>
-<ul>
-<li>Docker 容器安装</li>
-</ul>
-<p>0、Docker常用命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker info</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line">docker images</span><br><span class="line"></span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line">docker rm [容器ID]</span><br><span class="line"></span><br><span class="line">docker rmi [镜像ID]</span><br><span class="line"></span><br><span class="line">docker search [搜索内容]</span><br><span class="line"></span><br><span class="line">docker pull [镜像仓库]</span><br><span class="line"></span><br><span class="line">docker commit [要提交的容器ID] [名称:版本号]</span><br><span class="line"></span><br><span class="line">docker run ...</span><br><span class="line"></span><br><span class="line">docker stop [名称或容器ID]</span><br><span class="line"></span><br><span class="line">docker start [名称或容器ID]</span><br></pre></td></tr></table></figure>
-
-
-
-<p>1、CentOS</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker pull centos</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这样运行 加--privileged /usr/sbin/init 才可以 进去运行 sshd </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /e/docker/centos 表示映射 E:/docker/centos 到 内部 /root 目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 一定加上 0.0.0.0 全局监听</span></span><br><span class="line">docker run -itd --privileged --name centos_server -p 0.0.0.0:2002:22 -v /e/docker/centos:/root centos:05 /usr/sbin/init</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 一定要这样进入容器 启动 sshd</span></span><br><span class="line">docker exec -it centos_server /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入容器后</span></span><br><span class="line">systemctl start sshd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看端口监听没有</span></span><br><span class="line">netstat -nltp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">退出，但不停止容器</span></span><br><span class="line">Ctrl+P+Q</span><br></pre></td></tr></table></figure>
-
-<p>默认是没有 openssh-Server 的，需要自行手动安装：</p>
-<p>安装ifconfig</p>
-<p>yum install net-tools.x86_64</p>
-<p>安装ssh</p>
-<p>yum -y install openssh-server</p>
-<p>安装Vim</p>
-<p>yum install vim</p>
-<p>这样，，CentOS容器 + ssh 就跑起来了。连接一下试试</p>
-<p><img src="/images/20200406200730.png" alt=""></p>
-<p>这样我就在外部其他电脑都能直接进入 Windows10 的 Docker 里面的 CentOS 系统咯，相当于有一台 linux 服务器可以随便玩。。。</p>
-<p>2、MySQL</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker pull mysql</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定root密码用 -e MYSQL_ROOT_PASSWORD</span></span><br><span class="line">docker run --name mysql_server -p 0.0.0.0:13306:3306 -v /e/docker/mysql:/data -e MYSQL_ROOT_PASSWORD=Darifo123... -d mysql</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 可进入容器</span></span><br><span class="line">docker attach mysql_server</span><br></pre></td></tr></table></figure>
-
-
-<p>3、Redis</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis</span><br><span class="line"></span><br><span class="line">docker run -d --name redis_server -p 0.0.0.0:16379:6379 -v /e/docker/redis:/data redis</span><br></pre></td></tr></table></figure>
-
-
-<p>其他都是一样的。。。需要时再搞</p>
-<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><ul>
-<li>Windows10 </li>
-<li>FTP</li>
-<li>Docker</li>
-<li><ul>
-<li>CentOS</li>
-</ul>
+<li><p>优点</p>
+<p> 1.RDB 是一个非常紧凑(compact)的文件，它保存了redis 在某个时间点上的数据集。这种文件非常适合用于进行备份和灾难恢复（将持久化到硬盘中的文件恢复即可）。</p>
+<p> 2.生成 RDB 文件 的时候，redis 主进程会 fork() 一个子进程来处理所有保存工作，主进程不需要进行任何磁盘 IO 操作。</p>
+<p> 3.RDB 在恢复大数据集时的速度比 AOF 的恢复速度要快。</p>
 </li>
-<li><ul>
-<li>MySQL</li>
 </ul>
+<ul>
+<li><p>缺点</p>
+<p>  1.每次快照是保存整个数据集数据，可能触发快照时间比较长，比如 10 分钟进行一次，那么如果期间系统挂掉，就有几分钟数据丢掉。最后一次持久化后的数据可能丢失。</p>
+<p>  2.每次保存rdb快照文件，都需要 fork 一个子进程处理持久化工作，如果数据量庞大，可能非常耗时，造成服务器紧张，然后停止一段时间给客户端服务；</p>
 </li>
-<li><ul>
-<li>Redis</li>
 </ul>
+<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><p>AOF 持久化，默认是关闭的</p>
+<p>配置 </p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">appendonly</span> <span class="literal">yes</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>可以打开 AOF 持久化机制，在生产环境里面，一般来说AOF都是要打开的，除非你说随便丢个几分钟的数据也无所谓;</p>
 </li>
-<li><ul>
-<li>…</li>
-</ul>
+<li><p>打开 AOF 持久化机制之后，redis 每次接收到一条写命令，就会写入日志文件中，先写入系统缓存，然后每隔一定时间再 fsync 一下</p>
 </li>
-<li>…</li>
 </ul>
-<p>性能比较差，先弄这么些东西跑着，等着垃圾升级，可以继续扩展，搭建一些娱乐服务。。。</p>
-<p>甚至可以往 CentOS 部署一些爬虫，搞一些小姐姐照片啥的~ </p>
-<p>看下效果吧：</p>
-<p><img src="/images/20200406201845.png" alt=""><br><img src="/images/20200406202210.png" alt=""><br><img src="/images/20200406202236.png" alt=""><br><img src="/images/20200406202427.png" alt=""><br><img src="/images/20200406202531.png" alt=""><br><img src="/images/20200406202601.png" alt=""></p>
-<p>以上，纯属娱乐，欢迎批评指正！</p>
+<ul>
+<li>即使 AOF 和 RDB 都开启了，redis 重启的时候，也是<strong>优先通过 AOF 进行数据恢复</strong>的，因为 aof 数据比较完整</li>
+</ul>
+<p>AOF持久化配置文件的名称：</p>
+<p>　　appendfilename “appendonly.aof”</p>
+<h4 id="AOF-持久化策略-默认每秒-everysec-："><a href="#AOF-持久化策略-默认每秒-everysec-：" class="headerlink" title="AOF 持久化策略(默认每秒 everysec)："></a>AOF 持久化策略(默认每秒 everysec)：</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">appendfsync always # (同步持久化，每次发生数据变更会被立即记录到磁盘，性能差但数据完整性比较好)</span><br><span class="line"></span><br><span class="line">appendfsync everysec # (异步操作，每秒记录，如果一秒钟内宕机，有数据丢失)</span><br><span class="line"></span><br><span class="line">appendfsync no  #（将缓存回写的策略交给系统，linux 默认是30秒将缓冲区的数据回写硬盘的）</span><br></pre></td></tr></table></figure>
+
+<p>always: 每次写入一条数据，立即将这个数据对应的写日志fsync到磁盘上去，性能非常非常差，吞吐量很低; 确保说redis里的数据一条都不丢</p>
+<h4 id="AOF-rewrite-策略"><a href="#AOF-rewrite-策略" class="headerlink" title="AOF rewrite 策略"></a>AOF rewrite 策略</h4><p>AOF持久化机制存在一个致命的问题，随着时间推移，AOF文件会膨胀，如果频繁写入AOF文件会膨胀到无限大，当server重启时严重影响数据库还原时间，影响系统可用性。为解决此问题，系统需要定期重写AOF文件，目前采用的方式是创建一个新的AOF文件，将数据库里的全部数据转换成协议的方式保存到文件中，通过此操作达到减少AOF文件大小的目的，重写后的大小一定是小于等于旧AOF文件的大小。</p>
+<p>配置：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto-aof-rewrite-percentage 100 # 当前写入日志文件的大小超过上一次rewrite之后的文件大小的百分之100 时就是2倍时触发Rewrite）</span><br><span class="line"></span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="重写AOF提供两种方式"><a href="#重写AOF提供两种方式" class="headerlink" title="重写AOF提供两种方式"></a>重写AOF提供两种方式</h5><pre><code>REWRITE: 在主线程中重写AOF，会阻塞工作线程，在生产环境中很少使用，处于废弃状态；
+
+BGREWRITE: 在后台（子进程）重写AOF, 不会阻塞工作线程，能正常服务，此方法最常用。</code></pre><h5 id="BGREWRITE-流程"><a href="#BGREWRITE-流程" class="headerlink" title="BGREWRITE 流程"></a>BGREWRITE 流程</h5><pre><code>1.收到BGREWRITE命令或者系统触发AOF重写
+
+2.主进创建一个子进程并进行AOF重写
+
+3.主进程异步等待子进程结束（信号量），此时主进程能正常接收处理用户请求</code></pre><p>注：在处理过程中，用户请求会修改数据库里数据，会使得当前数据库的数据跟重写后 AOF 里不一致，需要有种机制保证数据的一致性。当前的做法是<strong>在重写 AOF 期间，系统会新开一块内存用于缓存重写期间收到的命令</strong>，在重写完成以后再将缓存中的数据追加到新的AOF。在处理命令时既要将命令追加到 aof_buf，也要追加到重写AOF Buffer。</p>
+<h4 id="AOF流程"><a href="#AOF流程" class="headerlink" title="AOF流程"></a>AOF流程</h4><pre><code>1、redis fork 一个子进程
+
+2、子进程基于当前内存中的数据，构建日志，开始往一个新的临时的AOF文件中写入日志
+
+3、redis主进程，接收到client新的写操作之后，在内存中写入日志，同时新的日志也继续写入旧的AOF文件
+
+4、子进程写完新的日志文件之后，redis主进程将内存中的新日志再次追加到新的AOF文件中
+
+5、用新的日志文件替换掉旧的日志文件</code></pre><p>AOF配置文件损坏修复方法：</p>
+<p>进入redis安装路径 执行 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-check-aof –fix AOF配置文件名称</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>优点 </p>
+<p>  1.更好的保护数据不丢失，一般AOF会每隔1秒，通过一个后台线程执行一次fsync操作，最多丢失1秒钟的数据</p>
+<p>  2.日志文件以append-only模式写入，所以没有任何磁盘寻址的开销，写入性能非常高</p>
+<p>  3.日志文件即使过大的时候，出现后台重写操作，也不会影响客户端的读写。因为在rewrite log的时候，会对其中的指导进行压缩，创建出一份需要恢复数据的最小日志出来。再创建新日志文件的时候，老的日志文件还是照常写入。当新的merge后的日志文件ready的时候，再交换新老日志文件即可。</p>
+<p>  4.日志文件的命令通过非常可读的方式进行记录，这个特性非常适合做灾难性的误删除的紧急恢复。</p>
+</li>
+<li><p>缺点</p>
+<p>  1.对于同一份数据来说，AOF日志文件通常比RDB数据快照文件更大</p>
+<p>  2.AOF开启后，支持的写QPS会比RDB支持的写QPS低，因为AOF一般会配置成每秒fsync一次日志文件，当然，每秒一次fsync，性能也还是很高的</p>
+<p>  3.较为复杂的基于命令日志/merge/回放的方式，比基于RDB每次持久化一份完整的数据快照文件的方式，更加脆弱一些</p>
+</li>
+</ul>
+<h5 id="感谢修正与补充"><a href="#感谢修正与补充" class="headerlink" title="感谢修正与补充"></a>感谢修正与补充</h5><p>woodenrobot：<a href="https://woodenrobot.me/" target="_blank" rel="noopener">https://woodenrobot.me/</a></p>
+<pre><code>1、Redis 默认不开启持久化
+
+2、
+a: 在做RDB的时候 key 有了改动会出现什么情况，即一个持续写入的数据库如何生成快照呢？（写时复制技术）
+b: 服务器内存 4 G ，Redis 占了 3 G ，在 RDB 模式下有没有问题？（fork持久化使用数据指针，并不会全量拷贝内存，没问题）
+
+    (1) Copy On Write (写时复制): 
+
+    linux中引入了“写时复制“技术，
+    也就是只有进程空间的各段的内容要发生变化时，
+    才会将父进程的内容复制一份给子进程。
+
+    内核只为新生成的子进程创建虚拟空间结构，它们来复制于父进程的虚拟究竟结构，
+    但是不为这些段分配物理内存，它们共享父进程的物理空间，
+    当父进程中有更改相应段的行为发生时，再为子进程相应的段分配物理空间。
+
+    使用了“引用计数”，会有一个变量用于保存引用的数量。
+    当第一个类构造时，string的构造函数会根据传入的参数从堆上分配内存，当有其它类需要这块内存时，这个计数为自动累加，
+    当有类析构时，这个计数会减一，直到最后一个类析构时，此时的引用计数为1或是0，此时，程序才会真正的Free这块从堆上分配的内存。引用计数就是string类中写时才拷贝的原理！
+
+    (2) 什么情况下触发Copy On Write(写时复制):
+
+    在共享同一块内存的类发生内容改变时，才会发生Copy On Write(写时复制)。比如string类的[]、=、+=、+等，还有一些string类中诸如insert、replace、append等成员函数等，包括类的析构时。
+
+3、AOF追加：并不是发送到Redis的所有命令都要记录到AOF日志里面，只有那些会导致数据发生修改的命令才会追加到AOF文件。</code></pre><p>参考：</p>
+<p>[1] <a href="https://blog.csdn.net/qq_41864967/article/details/90522398" target="_blank" rel="noopener">https://blog.csdn.net/qq_41864967/article/details/90522398</a></p>
+<p>[2] <a href="https://yq.aliyun.com/articles/11028" target="_blank" rel="noopener">https://yq.aliyun.com/articles/11028</a></p>
+<p>[3] <a href="https://www.jianshu.com/p/a91329ae210c" target="_blank" rel="noopener">https://www.jianshu.com/p/a91329ae210c</a></p>
+<p>[4] <a href="https://blog.csdn.net/doc_sgl/article/details/45129857" target="_blank" rel="noopener">https://blog.csdn.net/doc_sgl/article/details/45129857</a></p>
 
           
         
@@ -498,7 +513,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/16/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/14/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/16/">&gt;</a>
   </nav>
 
 
@@ -548,7 +563,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

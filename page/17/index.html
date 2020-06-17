@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%AD%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%85%B3%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/06/%E9%9B%86%E5%AD%A6%E4%B9%A0%E5%A8%B1%E4%B9%90%E5%BC%80%E5%8F%91%E4%BA%8E%E4%B8%80%E8%BA%AB%E7%9A%84LJ%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%AD%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%85%B3%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" itemprop="url">计算机网络中协议相关一些知识总结</a></h2>
+                <a class="post-title-link" href="/2020/04/06/%E9%9B%86%E5%AD%A6%E4%B9%A0%E5%A8%B1%E4%B9%90%E5%BC%80%E5%8F%91%E4%BA%8E%E4%B8%80%E8%BA%AB%E7%9A%84LJ%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" itemprop="url">集学习娱乐开发于一身的LJ使用记录</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-04T11:59:53+08:00">
-                2020-04-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-06T18:46:36+08:00">
+                2020-04-06
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" itemprop="url" rel="index">
+                    <span itemprop="name">软件安装</span>
                   </a>
                 </span>
 
@@ -354,102 +354,111 @@
       
         
           
-            <h3 id="OSI七层"><a href="#OSI七层" class="headerlink" title="OSI七层"></a>OSI七层</h3><p>自顶向下： </p>
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自己捡的垃圾，再烂也要用起来</p>
+<p>作为一个入门级别的垃圾佬，去年自行DIY了一台小主机，最初的期望是搭建一套家庭娱乐及文件存储系统，于是乎 开干：</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><ul>
+<li>主板 &amp; CPU ： 华擎 J3455 - ITX  大概四五百的样子（全新的），CPU是j3455四核四线程1.5G，板载的没法拆</li>
+<li>内存 ：DDR3 1600 4G * 2  自己买一块几十块，大佬送了一块，共两块8G，可以说足够了</li>
+<li>电源 ：金河田 一百多的样子（缩啥不能缩电源，其实电源卖得很便宜了）</li>
+<li>硬盘 ：希捷 黑盘 500G * 2  这才是垃圾，五十块一个盘，某鱼购</li>
+<li>机箱 ：杂牌ITX小机箱，不说了，就是50包邮的，某鱼</li>
+</ul>
+<p>总共算下来，也差不多700多的样子。</p>
+<h3 id="NAS-黑群晖"><a href="#NAS-黑群晖" class="headerlink" title="NAS 黑群晖"></a>NAS 黑群晖</h3><p>买来组装好之后，直接上的 黑群晖 ，刚开始用着很新鲜，捣鼓了好些天，功能挺强大的，基本文件存储与办公套件齐全，观影系统、下载站、照片管理、笔记本等等，最重要的是还有 <strong>Docker</strong> 、虚拟机啥的，这简直爽翻。</p>
+<p>但是，由于租房的时候办理的网络宽带是移动（办卡送的），所以根本没法外网访问（移动大内网，没有公网IP，其实也可以frp、花生壳啥的做穿透、速度实在太慢）。所以只能每天回到家连上主机搞搞，没啥意思。于是，基本上放哪里吃了几个月灰。。。</p>
+<h3 id="进入正题"><a href="#进入正题" class="headerlink" title="进入正题"></a>进入正题</h3><h4 id="一场事故"><a href="#一场事故" class="headerlink" title="一场事故"></a>一场事故</h4><p>前些天，我重启了服务器，上群辉里面发现一个日志提示 硬盘 “堪用”，意思就是出了问题还是坏了咋的，然后就去拆机检查，是硬盘电源线松动，，再次启动，发现起不来了，让它启动了一晚上也不行，第二天就各种捣鼓，街上显示器启动查看引导、检查路由器网络接入。。。。这一查问题还真多，一边是磁盘里面数据应该被破坏了，一边又是局域网DHCP分配IP身份认证失败，反正搞了大半天没成功。。</p>
+<h4 id="一气之下"><a href="#一气之下" class="headerlink" title="一气之下"></a>一气之下</h4><p>重做引导盘，重新分区格式化磁盘</p>
+<p>准备换成 Linux </p>
+<p>查了一下网上这块主板CPU相关信息，发现 官方说只支持 win10、Ubuntu，而且linux兼容不好。。。</p>
+<p>先不管，直接上 CentOS8 ，发现还真他娘的装不上。。。放弃</p>
+<h4 id="直接上Windows它不香吗？"><a href="#直接上Windows它不香吗？" class="headerlink" title="直接上Windows它不香吗？"></a>直接上Windows它不香吗？</h4><p>安装windows还是比较顺利，</p>
+<p>系统好了，先清理软件垃圾</p>
+<p>关闭防火墙、软件（反正自己局域网，全部裸着好办事）</p>
+<h4 id="Windows10-和-Docker-还是比较好配合"><a href="#Windows10-和-Docker-还是比较好配合" class="headerlink" title="Windows10 和 Docker 还是比较好配合"></a>Windows10 和 Docker 还是比较好配合</h4><ul>
+<li>首先打开 <strong>Hyper-V</strong> 服务</li>
+</ul>
+<p><img src="/images/20200405214929.png" alt=""></p>
 <ul>
-<li>应用层</li>
-<li>表示层</li>
-<li>会话层</li>
-<li>传输层</li>
-<li>网络层</li>
-<li>数据链路层</li>
-<li>物理层</li>
+<li>下载安装 Docker-Desktop-Windows</li>
 </ul>
-<h3 id="TCP-IP四层"><a href="#TCP-IP四层" class="headerlink" title="TCP/IP四层"></a>TCP/IP四层</h3><ul>
-<li>应用层</li>
-<li>运输层</li>
-<li>网际层</li>
-<li>网络接口层</li>
-</ul>
-<h3 id="TCP三次握手四次挥手"><a href="#TCP三次握手四次挥手" class="headerlink" title="TCP三次握手四次挥手"></a>TCP三次握手四次挥手</h3><h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><p>1、客户端发送 <strong>SYN</strong> 到 服务端</p>
-<p>2、服务端 返回 <strong>SYN/ACK</strong> 给 客户端</p>
-<p>3、客户端 发送 <strong>ACK</strong> 给 服务端</p>
-<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><p>1、客户端 发送 <strong>FIN</strong> 到 服务端</p>
-<p>2、服务端 响应 <strong>ACK</strong> 给 客户端</p>
-<p>3、服务端 发送 <strong>FIN</strong> 到 客户端</p>
-<p>4、客户端 发送 <strong>ACK</strong> 到 服务端</p>
-<h3 id="TCP-和-UDP-比较"><a href="#TCP-和-UDP-比较" class="headerlink" title="TCP 和 UDP 比较"></a>TCP 和 UDP 比较</h3><ul>
-<li><p>TCP 面向连接 可靠 字节流 效率慢 资源消耗多 </p>
-</li>
-<li><p>UDP 面向无连接 不可靠 数据报文段 效率快 资源消耗少</p>
-</li>
-</ul>
-<h3 id="TCP-如何保证数据传输可靠性"><a href="#TCP-如何保证数据传输可靠性" class="headerlink" title="TCP 如何保证数据传输可靠性"></a>TCP 如何保证数据传输可靠性</h3><ul>
-<li>分割数据块</li>
-<li>包编号，有序传输</li>
-<li>校验和（差错控制）：端到端校验包的首部和数据是否变化</li>
-<li>流量控制：利用滑动窗口协议控制</li>
-<li>拥塞控制：网络拥堵，减少发送</li>
-<li>ARQ协议：发完一个分组停止等待，确认收到再继续发。分为 停止等待ARQ 和 连续ARQ</li>
-<li>超时重传</li>
-</ul>
-<h3 id="浏览器中输入url后到页面显示发生什么"><a href="#浏览器中输入url后到页面显示发生什么" class="headerlink" title="浏览器中输入url后到页面显示发生什么"></a>浏览器中输入url后到页面显示发生什么</h3><p>1、【DNS解析】浏览器 查找 域名 的 IP 地址 </p>
+<p><a href="http://get.daocloud.io/#install-docker-for-mac-windows" target="_blank" rel="noopener">http://get.daocloud.io/#install-docker-for-mac-windows</a></p>
+<p><img src="/images/20200405215720.png" alt=""></p>
 <ul>
-<li>本地系统 hosts</li>
-<li>路由器缓存</li>
-<li>DNS 服务器缓存</li>
+<li>启动后 配置 Docker</li>
 </ul>
-<p>2、【TCP连接 &amp; 发起 HTTP 请求】浏览器 向 服务器 发送 HTTP 请求</p>
-<p>建立TCP连接（三次握手）：</p>
+<p>主要设置挂载盘、网络、镜像源</p>
+<p><img src="/images/20200406193427.png" alt=""></p>
 <ul>
-<li>应用层 HTTP 协议 请求数据分组 封包 </li>
-<li>传输层 TCP 协议</li>
-<li>到 网络层 使用 OSPF（开放最短路径优先协议）路由器间寻址、IP 协议 发送数据 </li>
-<li>数据链路层 ARP 协议 将 ip地址转换为MAC地址</li>
-<li>物理层 服务器 网卡设备</li>
-<li>反向解包操作…</li>
+<li>安装迅雷</li>
 </ul>
-<p>3、【接收处理请求 &amp; 响应 HTTP】服务器处理请求，并响应</p>
+<p>略</p>
 <ul>
-<li>应用层 HTTP 协议 处理数据并响应HTML</li>
-<li>响应发送数据顺序同上…</li>
+<li>打开 FTP 服务</li>
 </ul>
-<p>4、【页面渲染】浏览器（客户端）接收响应，渲染页面</p>
-<p>5、【TCP 结束】连接结束</p>
-<h3 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h3><ul>
-<li>1XX ：信息状态码 正在处理请求</li>
-<li>2XX ：成功状态码 请求正常处理完成</li>
-<li>3XX ：重定向状态码 </li>
-<li>4XX ：客户端错误状态码 服务器无法处理请求</li>
-<li>5XX ：服务器错误状态码 服务器处理请求出错 </li>
+<p>过程详细就不说了，配置用户那里直接选用系统用户登录就行。。。</p>
+<p><img src="/images/20200406193744.png" alt=""></p>
+<p><img src="/images/20200406193847.png" alt=""></p>
+<p><img src="/images/20200406193921.png" alt=""></p>
+<p><img src="/images/20200406193947.png" alt=""></p>
+<p><img src="/images/20200406194046.png" alt=""></p>
+<p>这里，我把 FTP  目录设置到 和 CentOS 容器绑定的目录下面，意味着，我传到ftp的文件都会同步到容器内的 CentOS 系统 目录中，方便后续做其他调试工作啥的。。。</p>
+<ul>
+<li>Docker 容器安装</li>
 </ul>
-<p>HTTP/1.1 </p>
-<p>409： 请求资源与当前资源状态发生冲突</p>
-<p>410： 服务器上某个资源被永久删除</p>
-<h3 id="Cookies-和-Session"><a href="#Cookies-和-Session" class="headerlink" title="Cookies 和 Session"></a>Cookies 和 Session</h3><ul>
-<li><p>两者都是用来跟踪浏览器用户身份的会话方式</p>
-</li>
-<li><p>Cookie 一般保存用户信息，如登录信息，保持登录（下次访问自动登录，为了安全 ，一般使用加密token，每次登陆后刷新token）</p>
-</li>
-<li><p>Session 通过服务端来记录用户状态</p>
-</li>
-<li><p>Cookie 保存在客户端（浏览器），Session 保存在服务端</p>
-</li>
-<li><p>Cookie 不要存敏感信息，一般加密，需要时去服务端解密</p>
-</li>
+<p>0、Docker常用命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker info</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line">docker images</span><br><span class="line"></span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line">docker rm [容器ID]</span><br><span class="line"></span><br><span class="line">docker rmi [镜像ID]</span><br><span class="line"></span><br><span class="line">docker search [搜索内容]</span><br><span class="line"></span><br><span class="line">docker pull [镜像仓库]</span><br><span class="line"></span><br><span class="line">docker commit [要提交的容器ID] [名称:版本号]</span><br><span class="line"></span><br><span class="line">docker run ...</span><br><span class="line"></span><br><span class="line">docker stop [名称或容器ID]</span><br><span class="line"></span><br><span class="line">docker start [名称或容器ID]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>1、CentOS</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker pull centos</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这样运行 加--privileged /usr/sbin/init 才可以 进去运行 sshd </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /e/docker/centos 表示映射 E:/docker/centos 到 内部 /root 目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 一定加上 0.0.0.0 全局监听</span></span><br><span class="line">docker run -itd --privileged --name centos_server -p 0.0.0.0:2002:22 -v /e/docker/centos:/root centos:05 /usr/sbin/init</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 一定要这样进入容器 启动 sshd</span></span><br><span class="line">docker exec -it centos_server /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入容器后</span></span><br><span class="line">systemctl start sshd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看端口监听没有</span></span><br><span class="line">netstat -nltp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">退出，但不停止容器</span></span><br><span class="line">Ctrl+P+Q</span><br></pre></td></tr></table></figure>
+
+<p>默认是没有 openssh-Server 的，需要自行手动安装：</p>
+<p>安装ifconfig</p>
+<p>yum install net-tools.x86_64</p>
+<p>安装ssh</p>
+<p>yum -y install openssh-server</p>
+<p>安装Vim</p>
+<p>yum install vim</p>
+<p>这样，，CentOS容器 + ssh 就跑起来了。连接一下试试</p>
+<p><img src="/images/20200406200730.png" alt=""></p>
+<p>这样我就在外部其他电脑都能直接进入 Windows10 的 Docker 里面的 CentOS 系统咯，相当于有一台 linux 服务器可以随便玩。。。</p>
+<p>2、MySQL</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker pull mysql</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定root密码用 -e MYSQL_ROOT_PASSWORD</span></span><br><span class="line">docker run --name mysql_server -p 0.0.0.0:13306:3306 -v /e/docker/mysql:/data -e MYSQL_ROOT_PASSWORD=Darifo123... -d mysql</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 可进入容器</span></span><br><span class="line">docker attach mysql_server</span><br></pre></td></tr></table></figure>
+
+
+<p>3、Redis</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis</span><br><span class="line"></span><br><span class="line">docker run -d --name redis_server -p 0.0.0.0:16379:6379 -v /e/docker/redis:/data redis</span><br></pre></td></tr></table></figure>
+
+
+<p>其他都是一样的。。。需要时再搞</p>
+<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><ul>
+<li>Windows10 </li>
+<li>FTP</li>
+<li>Docker</li>
+<li><ul>
+<li>CentOS</li>
 </ul>
-<h4 id="无状态-HTTP协议-如何追踪服务端-Session"><a href="#无状态-HTTP协议-如何追踪服务端-Session" class="headerlink" title="无状态 HTTP协议 如何追踪服务端 Session"></a>无状态 HTTP协议 如何追踪服务端 Session</h4><p>一般在客户端 Cookie 中加上一个 Session ID 实现 ，如果 客户端 Cookie 被禁用了，就通过重写 URL 把 Session ID 放在 URL 后面传到服务器</p>
-<h3 id="HTTP-和-HTTPS"><a href="#HTTP-和-HTTPS" class="headerlink" title="HTTP 和 HTTPS"></a>HTTP 和 HTTPS</h3><ul>
-<li>端口：HTTP 默认使用 80 端口；HTTPS 默认使用 443 端口。</li>
-<li>安全性：HTTP 运行在 TCP 协议之上 ，所有传输内容为明文，无法验证双方身份；HTTPS 运行在 SSL/TLS 协议之上 的 HTTP 协议 ， SSL/TLS 运行在 TCP 之上，所有传输内容经过加密，加密本身使用对称加密，秘钥又使用服务器证书进行了非对称加密。</li>
-<li>资源消耗：HTTPS 资源消耗高于 HTTP ， 因为要进行加解密，身份验证等</li>
+</li>
+<li><ul>
+<li>MySQL</li>
 </ul>
-<h3 id="最后记住"><a href="#最后记住" class="headerlink" title="最后记住"></a>最后记住</h3><ul>
-<li>HTTP、HTTPS 是 应用层 协议</li>
-<li>TCP、UDP 是 传输层 协议</li>
-<li>IP、IPv6 是 网际层 协议</li>
-<li>SSL、TSL、RPC 是 会话层 协议</li>
-<li>PPTP、L2TP、ARP、RARP 是 数据链路层 协议</li>
+</li>
+<li><ul>
+<li>Redis</li>
 </ul>
+</li>
+<li><ul>
+<li>…</li>
+</ul>
+</li>
+<li>…</li>
+</ul>
+<p>性能比较差，先弄这么些东西跑着，等着垃圾升级，可以继续扩展，搭建一些娱乐服务。。。</p>
+<p>甚至可以往 CentOS 部署一些爬虫，搞一些小姐姐照片啥的~ </p>
+<p>看下效果吧：</p>
+<p><img src="/images/20200406201845.png" alt=""><br><img src="/images/20200406202210.png" alt=""><br><img src="/images/20200406202236.png" alt=""><br><img src="/images/20200406202427.png" alt=""><br><img src="/images/20200406202531.png" alt=""><br><img src="/images/20200406202601.png" alt=""></p>
+<p>以上，纯属娱乐，欢迎批评指正！</p>
 
           
         
@@ -489,7 +498,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/18/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/16/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/18/">&gt;</a>
   </nav>
 
 
@@ -539,7 +548,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
