@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/03/26/BF%EF%BC%88Brute%20Force%EF%BC%89%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/03/27/%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/26/BF%EF%BC%88Brute%20Force%EF%BC%89%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/" itemprop="url">BF（Brute Force）模式匹配算法</a></h2>
+                <a class="post-title-link" href="/2020/03/27/%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E7%AE%97%E6%B3%95/" itemprop="url">菲波拉契数的几种算法</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-26T00:00:00+08:00">
-                2020-03-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-27T00:00:00+08:00">
+                2020-03-27
               </time>
             
 
@@ -354,21 +354,11 @@
       
         
           
-            <p>暴力(Brute Force)算法, 是普通的模式匹配算法｡</p>
-<p>思想: 将目标串 S 的第一个字符与模式串 T 的第一个字符进行匹配,若相等,则继续比较 S 的第二个字符和 T 的第二个字符;若不相等,则比较 S 的第二个字符和 T 的第一个字符, 依次比较下去,直到得出最后的匹配结果｡</p>
-<p>时间复杂度:  <font color=red>O(m*n)</font>  m是S的长度  n是T的长度</p>
-<p>空间复杂度:  <font color=red>O(1)</font></p>
-<p>伪代码:</p>
-<p>函数开始, 传入2个参数字符串 S､字符串T;</p>
-<p>初始化字符串数组 A､B , 分别存储 S､T ;</p>
-<p>初始化整型指针 i = 0､ j = 0,意味着分别指向 A､ B 的首元素位置;</p>
-<p>循环体开始,条件是 i 小于 A 的长度, j 小于 B 的长度;</p>
-<p>如果 A[i] 等于 B[j] , i 加 1, j 加 1｡ </p>
-<p>否则 i = i - j + 1, j 等于 0;</p>
-<p>循环体结束;</p>
-<p>如果 j 等于 B 的长度, 说明比较完了,函数返回 ( i - j ) 就是 T 在 S 中的位置;</p>
-<p>否则返回 -1 表示查找失败;</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.company.darifo.algorithms;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* BF算法，即暴力(Brute Force)算法，是普通的模式匹配算法，</span></span><br><span class="line"><span class="comment">* BF算法的思想就是将目标串S的第一个字符与模式串T的第一个字符进行匹配，</span></span><br><span class="line"><span class="comment">* 若相等，则继续比较S的第二个字符和 T的第二个字符；</span></span><br><span class="line"><span class="comment">* 若不相等，则比较S的第二个字符和T的第一个字符，依次比较下去，直到得出最后的匹配结果。BF算法是一种蛮力算法。</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* @todo 时间复杂度为O(M*N)</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BF</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bfFind</span><span class="params">(String S, String T, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] arr1 = S.toCharArray();</span><br><span class="line">        <span class="keyword">char</span>[] arr2 = T.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> i = pos;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; arr1.length &amp;&amp; j &lt; arr2.length) &#123;</span><br><span class="line">            <span class="keyword">if</span>(arr1[i] == arr2[j]) &#123;</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                i = i - j + <span class="number">1</span>;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(j == arr2.length) <span class="keyword">return</span> i - j;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>斐波拉契数列</p>
+<p>  1,1,2,3,5,8,13….</p>
+<p>现在我们想求得第i位的菲波拉契数是多少，直接上代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.company.darifo.solutions;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 斐波拉切数列</span></span><br><span class="line"><span class="comment"> * 求第N位斐波拉切值 todo N太大本类不适用，因为int类型溢出，需要使用BigInteger类实现运算存储，算法思想是不变的</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fibonacci</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> ta = System.currentTimeMillis();</span><br><span class="line">        System.out.println(fib(<span class="number">40</span>));</span><br><span class="line">        <span class="keyword">long</span> tb = System.currentTimeMillis();</span><br><span class="line">        System.out.println(fibWithMemo(<span class="number">40</span>));</span><br><span class="line">        <span class="keyword">long</span> tc = System.currentTimeMillis();</span><br><span class="line">        System.out.println(fibIteration(<span class="number">40</span>));</span><br><span class="line">        <span class="keyword">long</span> td = System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        System.out.println(ta);</span><br><span class="line">        System.out.println(tb);</span><br><span class="line">        System.out.println(tc);</span><br><span class="line">        System.out.println(td);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * todo 暴力递归 时间复杂度：O（2^n） 空间复杂度：O（1）</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (N == <span class="number">1</span> || N == <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> fib(N - <span class="number">1</span>) + fib(N - <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * todo 带备忘录的递归 时间复杂度：O（n）空间复杂度：O（n）</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">fibWithMemo</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (N &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[] memo = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> helper(memo, N);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[] memo, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (memo[n] == <span class="number">0</span>)</span><br><span class="line">            memo[n] = helper(memo, n - <span class="number">1</span>) + helper(memo, n - <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> memo[n];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * todo 迭代法 时间复杂度：O（N） 空间复杂度：O（1）</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">fibIteration</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (N==<span class="number">1</span> || N==<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> a =<span class="number">1</span> , b = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> sum = a + b;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;N;i++)&#123;</span><br><span class="line">            a = b;</span><br><span class="line">            b = sum;</span><br><span class="line">            sum = a+b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -408,7 +398,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/25/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/27/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/25/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/27/">&gt;</a>
   </nav>
 
 
@@ -458,7 +448,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -480,7 +470,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

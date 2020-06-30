@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/09/TCP-%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93-%E4%B9%8B-ARQ-%E5%8D%8F%E8%AE%AE/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/10/%E5%8F%91%E7%8E%B0%E7%A8%8B%E5%BA%8F%E5%8F%8D%E5%BA%94%E5%BE%88%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/09/TCP-%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93-%E4%B9%8B-ARQ-%E5%8D%8F%E8%AE%AE/" itemprop="url">TCP 如何保证可靠传输 之  ARQ 协议</a></h2>
+                <a class="post-title-link" href="/2020/04/10/%E5%8F%91%E7%8E%B0%E7%A8%8B%E5%BA%8F%E5%8F%8D%E5%BA%94%E5%BE%88%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88/" itemprop="url">发现程序反应很慢是为什么</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-09T11:32:32+08:00">
-                2020-04-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-10T15:18:53+08:00">
+                2020-04-10
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
+                  <a href="/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" itemprop="url" rel="index">
+                    <span itemprop="name">经验总结</span>
                   </a>
                 </span>
 
@@ -354,89 +354,145 @@
       
         
           
-            <p>TCP 相比于 UDP 提供的是 面向连接的、可靠的、字节流传输；</p>
-<p>谈到 TCP 如何保证可靠传输这个问题，我们应该都知道的主要由以下几特点：</p>
-<p>1、校验和（差错控制）： </p>
-<p>对首部和数据进行端到端校验 </p>
-<p>2、流量控制 ： </p>
-<p>连接双方都有固定大小的缓冲区，接收端只允许发送端发送自己缓冲区能存储的数据，当来不及处理时 就会提醒发送方 降低速率 （你发慢点，老子搞不赢），保证包不丢失。（ 滑动窗口协议（连续ARQ协议）实现流量控制 ）</p>
-<p>3、拥塞控制 ： </p>
-<p>网络拥塞，较少数据发送 </p>
-<p>4、超时重传 ： </p>
-<p>发出包会，启动定时器，等待确认</p>
-<p>其实，更细致的还有： </p>
-<p>1、分割数据块</p>
-<p>2、包编号、有序传输</p>
-<p>3、接收端丢弃重复数据</p>
-<p>4、ARQ协议</p>
-<p>这个ARQ 协议可能有些陌生，那么，咱们就盘一下：</p>
-<p>首先搞清楚一个关系：</p>
+            <h3 id="近似子问题"><a href="#近似子问题" class="headerlink" title="近似子问题"></a>近似子问题</h3><p>1、一条SQL语句执行很慢的原因有哪些？（据说腾讯面试题）</p>
+<p>2、一个WEB程序突然很慢的原因？</p>
+<p>3、系统上线几个月后突然变慢的原因？</p>
+<p>4、你的网站访问很慢的原因？</p>
+<p>5、浏览器输入地址后发生了什么？（据说百度面试）</p>
+<p>等等…</p>
+<h3 id="全局到细节（分类分析）"><a href="#全局到细节（分类分析）" class="headerlink" title="全局到细节（分类分析）"></a>全局到细节（分类分析）</h3><p>遇到此类问题，我们要揣测面试官想听到什么样的回答，他想考察的知识点有哪些？</p>
+<p>其实，可以问出的知识体系相当的庞大。</p>
 <ul>
-<li><p>ARQ 协议 是 自动重传请求协议</p>
+<li><p>一般而言，应该先站在一个比较全局的角度去思考问题，分类分重点一一阐述。</p>
 </li>
-<li><p>AQR 协议 是 停止等待协议</p>
+<li><p>其次，最好举个相关的例子说明，更能表达清楚。</p>
 </li>
-<li><p>停止等待协议 是属于 一种 ARQ 协议</p>
-</li>
-<li><p>即 AQR 属于 ARQ</p>
+<li><p>最后，需要注意的是，我们在说明白问题原因之后，必须给上一个切实可行的解决思路或者说具体方案。</p>
 </li>
 </ul>
-<p>哈哈，是不是眼花了？？？</p>
-<h3 id="ARQ-协议-（自动重传请求-Automatic-Repeat-reQuest）"><a href="#ARQ-协议-（自动重传请求-Automatic-Repeat-reQuest）" class="headerlink" title="ARQ 协议 （自动重传请求 Automatic Repeat-reQuest）"></a>ARQ 协议 （自动重传请求 Automatic Repeat-reQuest）</h3><p>基本原理： 每次发完一个分组，就停止发送，等待对方确认，确认收到后再发送下一个分组。</p>
-<p>ARQ 协议 是 OSI 数据链路层和传输层的错误纠正协议之一，使用确认和超时两个机制，在不可靠服务的基础上实现可靠的信息传输。</p>
-<h4 id="AQR-协议-（停止等待-ARQ-协议）"><a href="#AQR-协议-（停止等待-ARQ-协议）" class="headerlink" title="AQR 协议 （停止等待 ARQ 协议）"></a>AQR 协议 （停止等待 ARQ 协议）</h4><p>1、无差错情况： </p>
-<p>发送数据分组，需要得到接收方确认 ACK ，如果 一段时间 没有收到确认，那就重新发送，直到确认后再发下一个分组。</p>
-<p>2、若接收方收到重复分组： </p>
-<p>就自己丢掉吧，但任然要发送确认回复给发送方。</p>
-<p>3、分组丢失和出现差错的情况：</p>
-<p>当分组丢失 或 出现差错 的情况下，发送方都会超时重传分组</p>
-<p>4、应答丢失 和 应答迟到 的情况：</p>
-<p>TCP会给每个字节流都打上序号，用于判断该分组是否已经接收。</p>
-<pre><code>应答丢失：
+<h3 id="回到主题"><a href="#回到主题" class="headerlink" title="回到主题"></a>回到主题</h3><p>比如说，最近本人有个面试问题就是：</p>
+<ul>
+<li>发现程序反应很慢是什么原因？</li>
+</ul>
+<p>如果说是后端面试，那么我们可以完全把问题方向 理解成 后端反应慢的问题。</p>
+<h4 id="分情况分析"><a href="#分情况分析" class="headerlink" title="分情况分析"></a>分情况分析</h4><p>1、外部条件没变，一直都很慢？</p>
+<pre><code>（1）代码问题
+（2）服务器问题
+（3）数据库问题</code></pre><p>2、只是偶尔很慢？（抛开网络信道情况）</p>
+<pre><code>（1）服务器问题
+（2）数据库问题</code></pre><p>3、以前正常，只是近期开始变很慢？</p>
+<pre><code>（1）代码问题
+（2）数据库问题
+（3）服务器问题</code></pre><h4 id="阐述"><a href="#阐述" class="headerlink" title="阐述"></a>阐述</h4><h5 id="1-1：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是代码问题"><a href="#1-1：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是代码问题" class="headerlink" title="1-1：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是代码问题"></a>1-1：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是代码问题</h5><pre><code>编码不规范，导致编译或运行慢
 
-    若接收方正确收到分组，并已经返回应答，但应答在返回途中丢失了。
-
-    此时发送方也收不到应答，从而超时重传。紧接着接收方又收到了该分组。
-
-    接收者根据序号来判断当前收到的分组是否已经接收，若已接收则直接丢弃，并补上一个确认应答。
+    如：
+    没有符合高内聚低耦合原则；
+    某些条件判断、循环语句，不规范导致的逻辑问题，由此引发程序执行了无意义的代码，时间复杂度上升；
 
 
-应答迟到：
 
-    若由于网络拥塞，接收方迟迟收不到发送方发送的应答，因此会超时重传。
+数据结构使用不良，算法实现效率低下，导致函数处理慢
 
-    接收方收到该分组后，发现已经接收，便丢弃该分组，并向发送方补上确认应答。发送方收到应答后便继续发送下一个分组。
+    如：
+    像Java中 ArrayList、String、StringBuilder、StringBuffer、HashMap、HashTable、CurrentHashMap等等数据结构使用情况都是严格规定的；
+    算法的话当然不用说，非常重要，像 使用 BF 算法暴力递归 搜寻子字符串，和使用 KMP 算法 动态规划的去查找一个子串，时间复杂度是指数级提升；
 
-    但经过了很长时间后，那个失效的应答最终抵达了发送方，此时发送方可根据序号判断该分组已经接收，此时只需简单丢弃即可。</code></pre><p>注：</p>
-<pre><code>每发送完一个分组，该分组必须被保留，直到收到确认应答为止。
+设计模式上不讲究或者错误使用，导致资源占用高和执行效率低
 
-必须给每个分组进行编号。以便按序接收，并判断该分组是否已被接收。
+    如：
+    最简单的工厂模式、单例模式就是很好的证明，减少资源开销，提神速度和性能；</code></pre><p>解决：<br>检查并优化代码（规范、算法、设计模式）</p>
+<h5 id="1-2：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是服务器问题"><a href="#1-2：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是服务器问题" class="headerlink" title="1-2：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是服务器问题"></a>1-2：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是服务器问题</h5><pre><code>服务器硬件配置低，达不到咱们程序运行环境的最佳配置
 
-必须设置超时计时器。每发送一个分组就要启动计时器，超时就要重发分组。
+服务器软件环境安装或者配置有问题
 
-计时器的超时时间要大于应答的平均返回时间，否则会出现很多不必要的重传，降低传输效率。但超时时间也不能太长。</code></pre><p>优点：简单</p>
-<p>缺点：信道利用率低、等待时间长</p>
-<h4 id="连续-ARQ-协议-（滑动窗口协议）"><a href="#连续-ARQ-协议-（滑动窗口协议）" class="headerlink" title="连续 ARQ 协议 （滑动窗口协议）"></a>连续 ARQ 协议 （滑动窗口协议）</h4><p>在ARQ协议发送方每次只能发送一个分组，在应答到来前必须等待。</p>
-<p>而连续ARQ协议的发送者拥有一个<strong>发送窗口</strong>，发送者可以在没有得到应答的情况下连续发送窗口中的分组。</p>
-<p>对应接收方 也有一个 <strong>接收窗口</strong> ，接受者并不需要每收到一个分组就返回一个应答，而是连续按顺序接收之后，统一答复。</p>
-<p>注：</p>
-<pre><code>1.接收者收到的字节会存入接收窗口，接收者会对已经正确接收的有序字节进行累计确认，发送完确认应答后，接收窗口就可以向前移动指定字节。
+服务器带宽问题</code></pre><p>解决：<br>先从软件检查，排除了软件环境和配置，就使劲砸钱升硬件，买最豪华套餐</p>
+<h5 id="1-3：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是数据库问题"><a href="#1-3：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是数据库问题" class="headerlink" title="1-3：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是数据库问题"></a>1-3：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是数据库问题</h5><pre><code>索引问题（如果有一定数据量）
 
-2.同一时刻发送窗口的大小并不一定和接收窗口一样大。
+    a.字段没有设置索引
+    b.字段有索引，没有命中
+    c.特殊骚操作，导致没有使用上索引
 
-3.发送窗口的大小还受网络拥塞情况影响。当网络出现拥塞时，发送窗口将被调小。
+其他问题
+    不规范频繁删除、插入等</code></pre><p>如：</p>
+<p>1、字段 c 没有建立索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c,d,e <span class="keyword">from</span> t <span class="keyword">where</span> <span class="number">100</span> &lt; c <span class="keyword">and</span> c &lt; <span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
+<p>2、加了 c 和 d 两个字段复合索引 INDEX(c,d)，但是没加 a 索引。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c,d,e <span class="keyword">from</span> t <span class="keyword">where</span> d &gt; <span class="number">100</span> <span class="keyword">and</span> c &lt; <span class="number">100000</span> <span class="keyword">and</span> e &lt; <span class="number">10000</span>;</span><br></pre></td></tr></table></figure>
+<p>虽然，不符合复合索引最左匹配原则，但是查询优化器会自动处理，然而后面的 e 会导致退化为全表查询</p>
+<p>3、函数操作导致没有用上索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c,d,e <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">pow</span>(c,<span class="number">2</span>) = <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
+<p>4、在字段的左边做了运算，不会用上索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c,d,e <span class="keyword">from</span> t <span class="keyword">where</span> c - <span class="number">1</span> = <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
 
-    TCP标准并未规定未按序到达的字节的处理方式。
-    但TCP一般都会缓存这些字节，等缺少的字节到达后再交给应用层处理。
-    这比直接丢弃乱序的字节要节约带宽。
+<p>解决：</p>
+<p>1、优化SQL语句</p>
+<p>2、建立有效的字段索引</p>
+<p>关于SQL无法命中索引情况，可以详细了解下。</p>
+<h5 id="2-1-假设：程序偶尔反应很慢，是服务器问题"><a href="#2-1-假设：程序偶尔反应很慢，是服务器问题" class="headerlink" title="2-1 假设：程序偶尔反应很慢，是服务器问题"></a>2-1 假设：程序偶尔反应很慢，是服务器问题</h5><pre><code>高峰期，服务器负载过高，导致IO占用、CPU、内存资源紧缺
 
-    TCP标准规定接收方必须要有累计确认功能。
-    接收方可以对多个TCP报文段同时确认，但不能拖太长时间，一般是0.5S以内。</code></pre><p>优点：提高信道利用率、容易实现、确认丢失不必重传</p>
-<h3 id="最后附上TCP头部结构图："><a href="#最后附上TCP头部结构图：" class="headerlink" title="最后附上TCP头部结构图："></a>最后附上TCP头部结构图：</h3><p><img src="/images/20200409123601.png" alt=""></p>
-<p>参考：</p>
-<p>[1] <a href="https://blog.csdn.net/weixin_30552811/article/details/96375283" target="_blank" rel="noopener">https://blog.csdn.net/weixin_30552811/article/details/96375283</a></p>
-<p>[2] <a href="https://blog.csdn.net/u010425776/article/details/55006347" target="_blank" rel="noopener">https://blog.csdn.net/u010425776/article/details/55006347</a></p>
-<p>[3] <a href="https://zhuanlan.zhihu.com/p/73506510" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/73506510</a></p>
+    如：某些时候，并发请求服务的数量太多，处理不过来</code></pre><p>解决：</p>
+<p>1、微服务拆分</p>
+<p>2、分布式架构（负载均衡）</p>
+<h5 id="2-2-假设：程序偶尔反应很慢，是数据库问题"><a href="#2-2-假设：程序偶尔反应很慢，是数据库问题" class="headerlink" title="2-2 假设：程序偶尔反应很慢，是数据库问题"></a>2-2 假设：程序偶尔反应很慢，是数据库问题</h5><pre><code>数据库 在 刷新 脏页【重点】
+
+    以下四种情况会刷新脏页：
+
+    a.redolog写满了
+    b.内存不够用了
+    c.MySQL 认为系统“空闲”
+    d.MySQL 正常关闭的时候
+
+    当我们要往数据库插入一条数据、或者要更新一条数据的时候，
+    我们知道数据库会在内存中把对应字段的数据更新了，
+    但是更新之后，这些更新的字段并不会马上同步持久化到磁盘中去，
+    而是把这些更新的记录写入到 redo log 日记中去，等到空闲的时候，
+    在通过 redo log 里的日记把最新的数据同步到磁盘中去。
+
+    redolog写满了就没办法等到空闲的时候再把数据同步到磁盘的，
+    只能暂停其他操作，全身心来把数据同步到磁盘中去的，
+    而这个时候，就会导致我们平时正常的SQL语句突然执行的很慢，
+    所以说，数据库在在同步数据到磁盘的时候，就有可能导致我们的SQL语句执行的很慢了。
+
+    注：
+    当内存数据页跟磁盘数据页内容不一致的时候，我们称这个内存页为“脏页”。
+    内存数据写入到磁盘后，内存和磁盘上的数据页的内容就一致了，称为“干净页”。
+
+
+事务锁（拿不到锁，一直等）
+    如：我们要执行的这条语句，刚好这条语句涉及到的表，别人在用，
+    并且加锁了，我们拿不到锁，只能慢慢等待别人释放锁了。
+    或者，表没有加锁，但要使用到的某个一行被加锁了，就等吧。
+
+    注：show processlist 查看当前状态</code></pre><p>解决：</p>
+<p>除了能该配置，我还能干啥？ 不可能不让它 做 redolog 也不可能偷偷把 事务锁 给干掉了。慢是慢，但是稳啊！</p>
+<h5 id="3-1：假设：近期开始变很慢，是代码问题"><a href="#3-1：假设：近期开始变很慢，是代码问题" class="headerlink" title="3-1：假设：近期开始变很慢，是代码问题"></a>3-1：假设：近期开始变很慢，是代码问题</h5><pre><code>跟踪请求日志，找到最慢的功能模块，检查近期修改或发布的版本记录
+
+    如：某一次上线，某个地方代码修改后有逻辑或规范问题</code></pre><p>解决：<br>加班改，优化（逻辑、算法等）</p>
+<h5 id="3-2：假设：近期开始变很慢，是服务器问题"><a href="#3-2：假设：近期开始变很慢，是服务器问题" class="headerlink" title="3-2：假设：近期开始变很慢，是服务器问题"></a>3-2：假设：近期开始变很慢，是服务器问题</h5><pre><code>服务器硬件配置不够用了
+
+    如：内存
+
+服务器软件配置不合适了
+
+    如：并发数、连接数
+
+其他软件环境问题
+
+    如：加了其他内容，或者更新了啥</code></pre><p>解决：调试改环境配置，加硬件</p>
+<h5 id="3-3：假设：近期开始变很慢，是数据库问题"><a href="#3-3：假设：近期开始变很慢，是数据库问题" class="headerlink" title="3-3：假设：近期开始变很慢，是数据库问题"></a>3-3：假设：近期开始变很慢，是数据库问题</h5><pre><code>索引【主要】
+
+    如：随着系统运行时间增加，数据量增大，查询字段未设置索引、索引未命中等
+
+锁
+    如：近期新增功能中，使用到了新的锁，导致等待时间变长
+
+其他配置不适用了
+    如：连接数、语句执行数</code></pre><p>解决：</p>
+<p>1、主要从索引出发，保证用上索引</p>
+<p>2、检查事务锁情况、配置等</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>其实每个具体问题不是绝对仅限于三个大的场景下，只是根据可能性更高去分析。</p>
+<p>具体情况，还得回到实践中去，跟踪、调试才能一步步定位问题的所在，然后解决它。</p>
+<p><em>个人总结，水平有限，欢迎批评指正！</em></p>
 
           
         
@@ -476,7 +532,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/15/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/13/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/15/">&gt;</a>
   </nav>
 
 
@@ -526,7 +582,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -548,7 +604,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

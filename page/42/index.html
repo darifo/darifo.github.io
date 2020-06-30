@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/12/%E6%9C%80%E8%BF%91%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%80%E4%BA%9BSQL%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/14/SQL-MODE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/12/%E6%9C%80%E8%BF%91%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%80%E4%BA%9BSQL%E6%80%BB%E7%BB%93/" itemprop="url">最近使用的一些SQL总结</a></h2>
+                <a class="post-title-link" href="/2019/01/14/SQL-MODE/" itemprop="url">SQL_MODE</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-12T12:03:31+08:00">
-                2019-01-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T12:00:27+08:00">
+                2019-01-14
               </time>
             
 
@@ -354,51 +354,15 @@
       
         
           
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近在做一个数据导出的小需求，需要从多个表查询关联的数据并输出，同时涉及一部分业务相关的简单逻辑处理；</p>
-<h4 id="解决问题思路："><a href="#解决问题思路：" class="headerlink" title="解决问题思路："></a>解决问题思路：</h4><p>既然是用sql查询去筛选数据并导出，而且又涉及很多张表关联以及一部分字段的计算，我的初步方案是：</p>
-<blockquote>
-<p>拆分逻辑，通过层层查询的嵌套，最外层实现一些逻辑和计算</p>
-</blockquote>
-<h4 id="具体实现："><a href="#具体实现：" class="headerlink" title="具体实现："></a>具体实现：</h4><p>首先，我用了最基础的查询结构：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...;</span><br></pre></td></tr></table></figure>
+            <h2 id="Mysql-TIMESTAMP-字段「Invalid-default-value」问题"><a href="#Mysql-TIMESTAMP-字段「Invalid-default-value」问题" class="headerlink" title="Mysql TIMESTAMP 字段「Invalid default value」问题"></a>Mysql TIMESTAMP 字段「Invalid default value」问题</h2><p>这是我在Mysql数据库中，新建一张表时出现的问题，代码如下</p>
+<p>– 创建表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> seckill(</span><br><span class="line">  <span class="string">`seckill_id`</span> <span class="built_in">bigint</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'商品库存id'</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'商品名称'</span>,</span><br><span class="line">  <span class="string">`number`</span> <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'库存数量'</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">-- 此行不会报错，因为默认值使用CURRENT_TIMESTAMP</span></span><br><span class="line">  <span class="string">`start_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'秒杀开启时间'</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">-- 此行会报错，因为默认值使用“0000-00-00 00:00:00”，</span></span><br><span class="line">  <span class="comment">-- Mysql 5.7版本后的SQL_MODE默认为strict（NO_ZERO_DATE），</span></span><br><span class="line">  <span class="comment">-- 所以第二个出现报错</span></span><br><span class="line">  <span class="comment">-- 解决方案：SET SQL_MODE = 'ALLOW_INVALID_DATES';</span></span><br><span class="line"></span><br><span class="line">  <span class="string">`end_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'秒杀结束时间'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (seckill_id),</span><br><span class="line">  <span class="keyword">key</span> idx_start_time(start_time),</span><br><span class="line">  <span class="keyword">key</span> idx_end_time(end_time),</span><br><span class="line">  <span class="keyword">key</span> idx_create_time(create_time)</span><br><span class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">1000</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=UTF8 <span class="keyword">COMMENT</span>=<span class="string">'秒杀库存表'</span>;</span><br></pre></td></tr></table></figure>
 
-<p>这是最里层，需要查询一些必须的基础数据，就好比一个程序的入口，以此为突破点，查询到的数据作为下一步的条件，继续查询；</p>
-<p>接下来我是这样写的：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> a.* , table_B.* <span class="keyword">from</span> (</span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...</span><br><span class="line">) a , table_B <span class="keyword">where</span> a.xid =  table_B.xid ... ;</span><br></pre></td></tr></table></figure>
-
-<p>这里就是以第一步的查询结果作为数据源，进行二次查询，同时加上条件筛选；</p>
-<p>接下来的操作就根据业务复杂度进行，完全可以像这样：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> b.* , table_C.* <span class="keyword">from</span> (</span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> (</span><br><span class="line">        <span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...</span><br><span class="line">    ) a , table_B <span class="keyword">where</span> a.xid =  table_B.xid ... </span><br><span class="line">) b , table_C <span class="keyword">where</span> b.aid = table_C.aid ... ;</span><br></pre></td></tr></table></figure>
+<p>我的解决方案是：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> SQL_MODE <span class="comment">=</span> <span class="comment">'ALLOW_INVALID_DATES'</span>;</span><br></pre></td></tr></table></figure>
 
 
 
-<p>进行多次的查询，直到所需要的数据字段都查询出来之后，你可以在最外层加入一些基础计算：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">    c.aaaa                                              <span class="keyword">as</span> AAAA,</span><br><span class="line">    <span class="keyword">ROUND</span>((c.bbbb/c.cccc ),<span class="number">2</span>)                           <span class="keyword">as</span> BBBB,  <span class="comment"># 结果保留两位小数</span></span><br><span class="line">    <span class="keyword">ifnull</span>(c.cccc,<span class="number">0</span>)                                    <span class="keyword">as</span> CCCC,  <span class="comment"># 如果结果为null，返回0</span></span><br><span class="line">    <span class="keyword">if</span>(table_D.dddd&gt;<span class="number">0</span>,<span class="keyword">if</span>(table_D.dddd&gt;<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>),<span class="number">0</span>)     <span class="keyword">as</span> DDDD,  <span class="comment"># 条件语句</span></span><br><span class="line">    <span class="keyword">case</span> table_D.eeee</span><br><span class="line">        <span class="keyword">when</span> <span class="number">0</span> <span class="keyword">then</span> <span class="string">'a'</span></span><br><span class="line">        <span class="keyword">when</span> <span class="number">1</span> <span class="keyword">then</span> <span class="string">'b'</span></span><br><span class="line">        <span class="keyword">when</span> <span class="number">2</span> <span class="keyword">then</span> <span class="string">'c'</span></span><br><span class="line">        <span class="keyword">else</span> <span class="string">'d'</span></span><br><span class="line">    <span class="keyword">end</span>                                                 <span class="keyword">as</span>    EEEE  <span class="comment"># 类似于 switch case 用法</span></span><br><span class="line">    ....</span><br><span class="line"><span class="keyword">from</span> (</span><br><span class="line">    <span class="keyword">select</span> b.* , table_C.* <span class="keyword">from</span> (</span><br><span class="line">        <span class="keyword">select</span> * <span class="keyword">from</span> (</span><br><span class="line">            <span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...</span><br><span class="line">        ) a , table_B <span class="keyword">where</span> a.xid =  table_B.xid ... </span><br><span class="line">    ) b , table_C <span class="keyword">where</span> b.aid = table_C.aid ... </span><br><span class="line">) c , table_D ...;</span><br></pre></td></tr></table></figure>
-
-<p>当然，这些都是很简单的操作，很多时候都需要对数据进行 分组、求和、统计、排序等操作；那就需要根据特定的需求进行语句的改造和优化；</p>
-<p>例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> a.* , <span class="keyword">count</span>(table_B.aaa) <span class="keyword">as</span> AAAA ,<span class="keyword">sum</span>(a.cccc) <span class="keyword">as</span> CCCC <span class="keyword">from</span> (</span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...</span><br><span class="line">) a , table_B <span class="keyword">where</span> a.xid =  table_B.xid  <span class="keyword">group</span> <span class="keyword">by</span> table_B.aaa ... ;</span><br></pre></td></tr></table></figure>
-
-<p>就是在某一层的查询，进行了分组统计求和操作；</p>
-<p>再复杂一点还可以加上 连接（左连接、右连接等）、自查询、子查询等操作；</p>
-<p>例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c.*, table_D.*, aa.*</span><br><span class="line"><span class="keyword">from</span> (</span><br><span class="line">    <span class="keyword">select</span> b.* , table_C.* <span class="keyword">from</span> (</span><br><span class="line">        <span class="keyword">select</span> * <span class="keyword">from</span> (</span><br><span class="line">            <span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...</span><br><span class="line">        ) a , table_B <span class="keyword">where</span> a.xid =  table_B.xid ... </span><br><span class="line">    ) b , table_C <span class="keyword">where</span> b.aid = table_C.aid ... </span><br><span class="line">) c , table_D ...</span><br><span class="line"></span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> </span><br><span class="line">        (<span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...) <span class="keyword">as</span> aa </span><br><span class="line">    <span class="keyword">on</span> aa.aid = c.aid</span><br><span class="line">    </span><br><span class="line"><span class="keyword">where</span> ...</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
-
-<p>哈哈，当你发现运行上面这个结构的语句时，会报一个错误 ： “找不到 c.aid 字段！”，因为这里比较特殊，连接查询两边都是 查询 而不是真实表，所以都需要用括号把 left join 两端的完整查询给扩起来，如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c.*, table_D.*, aa.*</span><br><span class="line"><span class="keyword">from</span> (</span><br><span class="line">    (</span><br><span class="line">        <span class="keyword">select</span> b.* , table_C.* <span class="keyword">from</span> (</span><br><span class="line">            <span class="keyword">select</span> * <span class="keyword">from</span> (</span><br><span class="line">                <span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...</span><br><span class="line">            ) a , table_B <span class="keyword">where</span> a.xid =  table_B.xid ... </span><br><span class="line">        ) b , table_C <span class="keyword">where</span> b.aid = table_C.aid ... </span><br><span class="line">    ) c , table_D ...</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> </span><br><span class="line">        (<span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...) <span class="keyword">as</span> aa </span><br><span class="line">    <span class="keyword">on</span> aa.aid = c.aid</span><br><span class="line">    </span><br><span class="line"><span class="keyword">where</span> ...</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
-
-<p>只需要在from后面的查询两端加上括号包起来就OK了。</p>
-<p>其实，在以上多次查询嵌套的使用过程中，还有一个需要注意的细节就是：每一个内层查询的字段有可能和外层查询的字段有重复的情况，如果你在当前层查询的外层查询中要使用存在重复的字段，需要在内层查询的 select 输出字段列表的时候，就要指定该字段的来源表或查询，否则，会提示字段不存在错误，所以 不要一味使用 * 输出字段列表；</p>
-<p>例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> b.* , table_C.* <span class="keyword">from</span> (</span><br><span class="line">    <span class="keyword">select</span> a.*, table_B.* <span class="keyword">from</span> (</span><br><span class="line">        <span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...</span><br><span class="line">    ) a , table_B <span class="keyword">where</span> a.xid =  table_B.xid ... </span><br><span class="line">) b , table_C <span class="keyword">where</span> b.oid = table_C.oid ... ;</span><br></pre></td></tr></table></figure>
-
-<p>如果内层查询两张表或查询都有 oid 字段，上述语句会报错，“字段 b.oid 不存在”，因为内层查询输出字段 没有指定这个 oid 是来源于哪一个表或查询；</p>
-<p>正确的应该是这样写：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> b.* , table_C.* <span class="keyword">from</span> (</span><br><span class="line">    <span class="keyword">select</span> a.*, table_B.oid <span class="keyword">from</span> (</span><br><span class="line">        <span class="keyword">select</span> * <span class="keyword">from</span> table_A <span class="keyword">where</span> ...</span><br><span class="line">    ) a , table_B <span class="keyword">where</span> a.xid =  table_B.xid ... </span><br><span class="line">) b , table_C <span class="keyword">where</span> b.oid = table_C.oid ... ;</span><br></pre></td></tr></table></figure>
-
-<p>以上，b 作为上一层查询的所有输出结果，所以 b 是包含 a 集合和 table_B 集合的并集，并且内层指定了 oid 来源于 table_B 表，所以语句正确；</p>
-<hr>
-<h4 id="未完待续……"><a href="#未完待续……" class="headerlink" title="未完待续……"></a>未完待续……</h4>
           
         
       
@@ -437,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/41/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/43/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/41/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/43/">&gt;</a>
   </nav>
 
 
@@ -487,7 +451,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -509,7 +473,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

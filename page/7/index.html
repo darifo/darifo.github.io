@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/15/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E9%A2%9C%E8%89%B2%E6%8E%92%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B9%8B-%E9%98%9F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/15/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E9%A2%9C%E8%89%B2%E6%8E%92%E5%BA%8F/" itemprop="url">【力扣算法题】颜色排序</a></h2>
+                <a class="post-title-link" href="/2020/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B9%8B-%E9%98%9F%E5%88%97/" itemprop="url">数据结构-之-队列</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-15T23:31:08+08:00">
-                2020-04-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-17T10:03:22+08:00">
+                2020-04-17
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
                   </a>
                 </span>
 
@@ -354,22 +354,7 @@
       
         
           
-            <h3 id="75-Sort-Colors"><a href="#75-Sort-Colors" class="headerlink" title="75. Sort Colors"></a>75. Sort Colors</h3><pre><code>Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white and blue.
-
-Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
-
-Note: You are not suppose to use the library&apos;s sort function for this problem.
-
-Example:
-
-Input: [2,0,2,1,1,0]
-Output: [0,0,1,1,2,2]</code></pre><h4 id="方法一：搜索计数"><a href="#方法一：搜索计数" class="headerlink" title="方法一：搜索计数"></a>方法一：搜索计数</h4><p>时间复杂度：O(n)  两遍扫描</p>
-<p>空间复杂度：O(1)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 计数统计法</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 思路：元素类型有限（0、1、2），统计每一种颜色的个数，然后再依次填入数组</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 时间复杂度 ： O(n) 两遍扫描数组</span></span><br><span class="line"><span class="comment">* 空间复杂度 ： O(1)</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sortColors1</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">    <span class="comment">// 遍历元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">        <span class="comment">// 对应元素次数加一</span></span><br><span class="line">        count[num]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count[<span class="number">0</span>]; i++) &#123;</span><br><span class="line">        nums[index++] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count[<span class="number">1</span>]; i++) &#123;</span><br><span class="line">        nums[index++] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count[<span class="number">2</span>]; i++) &#123;</span><br><span class="line">        nums[index++] = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="方法二：多路搜索交换（三路快排思路）"><a href="#方法二：多路搜索交换（三路快排思路）" class="headerlink" title="方法二：多路搜索交换（三路快排思路）"></a>方法二：多路搜索交换（三路快排思路）</h4><p>时间复杂度：O(n) 一遍扫描</p>
-<p>空间复杂度：O(1)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 三路快排( 多路快排 ) 交换元素</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 思路：三个指针（zero、i、two），[0,zero]区间都存放元素0，[zero+1,i-1]区间存储元素1，[two,n-1]区间存放元素2</span></span><br><span class="line"><span class="comment">* 移动指针 i , 寻找元素，判断是0、1、2，然后和 指针 zero 、two 位置元素进行互换</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 时间复杂度：O(n) 一遍扫描</span></span><br><span class="line"><span class="comment">* 空间复杂度：O(1)</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sortColors2</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始 [0,-1]表示初始没有任何元素区间</span></span><br><span class="line">    <span class="keyword">int</span> zero = -<span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 初始 [n,n-1] 同理 也是空区间</span></span><br><span class="line">    <span class="keyword">int</span> two = nums.length;</span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="comment">// 初始化 i 指针 遍历数组 填充区间</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; two; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] == <span class="number">1</span>)</span><br><span class="line">            i++;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] == <span class="number">2</span>) &#123;</span><br><span class="line">            temp = nums[--two];</span><br><span class="line">            nums[two] = nums[i];</span><br><span class="line">            nums[i] = temp;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            temp = nums[++zero];</span><br><span class="line">            nums[zero] = nums[i];</span><br><span class="line">            nums[i++] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
           
         
       
@@ -408,7 +393,7 @@ Output: [0,0,1,1,2,2]</code></pre><h4 id="方法一：搜索计数"><a href="#�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/8/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/8/">&gt;</a>
   </nav>
 
 
@@ -458,7 +443,7 @@ Output: [0,0,1,1,2,2]</code></pre><h4 id="方法一：搜索计数"><a href="#�
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -480,7 +465,7 @@ Output: [0,0,1,1,2,2]</code></pre><h4 id="方法一：搜索计数"><a href="#�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

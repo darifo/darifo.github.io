@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/10/%E5%8F%91%E7%8E%B0%E7%A8%8B%E5%BA%8F%E5%8F%8D%E5%BA%94%E5%BE%88%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/11/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%85%83%E7%B4%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/10/%E5%8F%91%E7%8E%B0%E7%A8%8B%E5%BA%8F%E5%8F%8D%E5%BA%94%E5%BE%88%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88/" itemprop="url">发现程序反应很慢是为什么</a></h2>
+                <a class="post-title-link" href="/2020/04/11/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%85%83%E7%B4%A0/" itemprop="url">【力扣算法题】删除链表中的倒数第N个元素</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-10T15:18:53+08:00">
-                2020-04-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-11T12:11:47+08:00">
+                2020-04-11
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" itemprop="url" rel="index">
-                    <span itemprop="name">经验总结</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -354,145 +354,44 @@
       
         
           
-            <h3 id="近似子问题"><a href="#近似子问题" class="headerlink" title="近似子问题"></a>近似子问题</h3><p>1、一条SQL语句执行很慢的原因有哪些？（据说腾讯面试题）</p>
-<p>2、一个WEB程序突然很慢的原因？</p>
-<p>3、系统上线几个月后突然变慢的原因？</p>
-<p>4、你的网站访问很慢的原因？</p>
-<p>5、浏览器输入地址后发生了什么？（据说百度面试）</p>
-<p>等等…</p>
-<h3 id="全局到细节（分类分析）"><a href="#全局到细节（分类分析）" class="headerlink" title="全局到细节（分类分析）"></a>全局到细节（分类分析）</h3><p>遇到此类问题，我们要揣测面试官想听到什么样的回答，他想考察的知识点有哪些？</p>
-<p>其实，可以问出的知识体系相当的庞大。</p>
-<ul>
-<li><p>一般而言，应该先站在一个比较全局的角度去思考问题，分类分重点一一阐述。</p>
-</li>
-<li><p>其次，最好举个相关的例子说明，更能表达清楚。</p>
-</li>
-<li><p>最后，需要注意的是，我们在说明白问题原因之后，必须给上一个切实可行的解决思路或者说具体方案。</p>
-</li>
+            <p>给定一个链表，删除链表的<strong>倒数第 n 个节点</strong>，并且返回链表的头结点。</p>
+<p>示例：</p>
+<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p>
+<p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</p>
+<p>说明：</p>
+<p>给定的 n 保证是有效的。</p>
+<p>进阶：</p>
+<p>你能尝试使用一趟扫描实现吗？</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
+<li>自己手画了一个图，凑合看着理解数据结构先。。。</li>
 </ul>
-<h3 id="回到主题"><a href="#回到主题" class="headerlink" title="回到主题"></a>回到主题</h3><p>比如说，最近本人有个面试问题就是：</p>
-<ul>
-<li>发现程序反应很慢是什么原因？</li>
+<p><img src="/images/20200411144810.png" alt=""></p>
+<p>链表操作的题目，一般都需要有指针（一个或者两个），通过移动指针指向，控制元素的增加、删除等操作</p>
+<p>解决方法有很多种，比如：两遍指针（需要先计算链表长度L）、一遍指针（双指针同时移动）等</p>
+<h4 id="步骤-比较好的算法实现——移动一遍指针"><a href="#步骤-比较好的算法实现——移动一遍指针" class="headerlink" title="步骤 ( 比较好的算法实现——移动一遍指针 )"></a>步骤 ( 比较好的算法实现——移动一遍指针 )</h4><ul>
+<li>链表输入（给定头结点指针 head， 以及移除位置n）</li>
+<li>定义一个指向头结点的节点指针【重要】（h.next = head），为什么要多增加一个节点指向，因为不管对链表进行何种操作，我们的链表头是不能丢失的，否则就找不到数据入口，没有了意义，所以要么多增加一个节点指向头，要么用临时变量操作前存储头指针，总之不能丢失。</li>
+<li>定义节点指针：定义两个节点指针（左指针、右指针），都指向头部节点（p.next = head）</li>
+<li>先移动 右指针 ，移动步数 由 输入的 n 决定（本题，需要移除倒数第 n 个位置的节点，我们就先把右指针往右边移动 n + 1 步，这样 右指针和左指针之间的距离就刚好是 n 个节点）</li>
+<li>然后，我们再 同步移动 两个指针（p = p.next），当 右指针 为 null 时，停止移动，此时，左指针的下一个节点指向刚好就是 倒数第 n 个节点。</li>
+<li>最后，我们操作倒数第 n 个 节点的移除（p.next = p.next.next），意思就是把左指针 下一个节点 指向 了 下下个节点，即跳过了倒数第 n 个节点。</li>
+<li>返回头节点（h.next）结束</li>
 </ul>
-<p>如果说是后端面试，那么我们可以完全把问题方向 理解成 后端反应慢的问题。</p>
-<h4 id="分情况分析"><a href="#分情况分析" class="headerlink" title="分情况分析"></a>分情况分析</h4><p>1、外部条件没变，一直都很慢？</p>
-<pre><code>（1）代码问题
-（2）服务器问题
-（3）数据库问题</code></pre><p>2、只是偶尔很慢？（抛开网络信道情况）</p>
-<pre><code>（1）服务器问题
-（2）数据库问题</code></pre><p>3、以前正常，只是近期开始变很慢？</p>
-<pre><code>（1）代码问题
-（2）数据库问题
-（3）服务器问题</code></pre><h4 id="阐述"><a href="#阐述" class="headerlink" title="阐述"></a>阐述</h4><h5 id="1-1：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是代码问题"><a href="#1-1：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是代码问题" class="headerlink" title="1-1：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是代码问题"></a>1-1：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是代码问题</h5><pre><code>编码不规范，导致编译或运行慢
+<h4 id="完整代码实现"><a href="#完整代码实现" class="headerlink" title="完整代码实现"></a>完整代码实现</h4><ul>
+<li>时间复杂度： O(L) L为链表长度</li>
+<li>空间复杂度： O(1)</li>
+</ul>
+<p>链表结构</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode next;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x) &#123;</span><br><span class="line">        val = x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    如：
-    没有符合高内聚低耦合原则；
-    某些条件判断、循环语句，不规范导致的逻辑问题，由此引发程序执行了无意义的代码，时间复杂度上升；
+<p>处理类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.company.darifo.solutions;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RemoveNthNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ListNode headNode = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">static</span> ListNode tmp = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"请输入链表长度："</span>);</span><br><span class="line">        <span class="keyword">int</span> len = scanner.nextInt();</span><br><span class="line">        System.out.println(<span class="string">"请输入头结点值："</span>);</span><br><span class="line">        headNode = <span class="keyword">new</span> ListNode(scanner.nextInt());</span><br><span class="line">        tmp = headNode;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入节点值: "</span>);</span><br><span class="line">            headNode.next = <span class="keyword">new</span> ListNode(scanner.nextInt());</span><br><span class="line">            headNode = headNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 打印输入</span></span><br><span class="line">        printList(tmp);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 移除 倒数 第 n 个节点 n 不能大于链表长度 否则空指针异常</span></span><br><span class="line">        System.out.println(<span class="string">"移除倒数第 ? 个节点: "</span>);</span><br><span class="line">        <span class="keyword">int</span> n = scanner.nextInt();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">2</span>;j&lt;=<span class="number">3</span>;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> ( n &lt; len)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            System.out.println(<span class="string">"输入有误，第 "</span> + j + <span class="string">"次输入："</span>);</span><br><span class="line">            n = scanner.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ( n &gt; len)&#123;</span><br><span class="line">            System.out.println(<span class="string">"三次输入错误！退出"</span>);</span><br><span class="line">            System.exit(-<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行操作</span></span><br><span class="line">        ListNode head = removeNthFromEnd(tmp, n);</span><br><span class="line">        <span class="comment">// 打印结果</span></span><br><span class="line">        printList(head);</span><br><span class="line"></span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printList</span><span class="params">(ListNode node)</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"\n"</span>);</span><br><span class="line">        <span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(node.val + <span class="string">"-&gt;"</span>);</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(<span class="string">"null"</span>);</span><br><span class="line">        System.out.print(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 算法函数</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义两个节点指针，分别指向头结点和头结点的下一节点</span></span><br><span class="line">        ListNode h = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        h.next = head;</span><br><span class="line">        ListNode l = h;</span><br><span class="line">        ListNode r = h;</span><br><span class="line">        <span class="comment">// 首先移动右边指针 r 使其移动 N + 1 位，此时 r 和 l 之间间隔 就是 N</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">            r = r.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 然后，同时向右移动两个指针，使 r 指针 next 为 null 时终止，此时，l 指针的下一个节点就是 倒数第N个节点</span></span><br><span class="line">        <span class="keyword">while</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">            r = r.next;</span><br><span class="line">            l = l.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 移除节点</span></span><br><span class="line">        l.next = l.next.next;</span><br><span class="line">        <span class="keyword">return</span> h.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-数据结构使用不良，算法实现效率低下，导致函数处理慢
 
-    如：
-    像Java中 ArrayList、String、StringBuilder、StringBuffer、HashMap、HashTable、CurrentHashMap等等数据结构使用情况都是严格规定的；
-    算法的话当然不用说，非常重要，像 使用 BF 算法暴力递归 搜寻子字符串，和使用 KMP 算法 动态规划的去查找一个子串，时间复杂度是指数级提升；
-
-设计模式上不讲究或者错误使用，导致资源占用高和执行效率低
-
-    如：
-    最简单的工厂模式、单例模式就是很好的证明，减少资源开销，提神速度和性能；</code></pre><p>解决：<br>检查并优化代码（规范、算法、设计模式）</p>
-<h5 id="1-2：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是服务器问题"><a href="#1-2：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是服务器问题" class="headerlink" title="1-2：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是服务器问题"></a>1-2：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是服务器问题</h5><pre><code>服务器硬件配置低，达不到咱们程序运行环境的最佳配置
-
-服务器软件环境安装或者配置有问题
-
-服务器带宽问题</code></pre><p>解决：<br>先从软件检查，排除了软件环境和配置，就使劲砸钱升硬件，买最豪华套餐</p>
-<h5 id="1-3：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是数据库问题"><a href="#1-3：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是数据库问题" class="headerlink" title="1-3：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是数据库问题"></a>1-3：假设：从程序开发完成部署后，外部条件不变情况下，一直都很慢，是数据库问题</h5><pre><code>索引问题（如果有一定数据量）
-
-    a.字段没有设置索引
-    b.字段有索引，没有命中
-    c.特殊骚操作，导致没有使用上索引
-
-其他问题
-    不规范频繁删除、插入等</code></pre><p>如：</p>
-<p>1、字段 c 没有建立索引</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c,d,e <span class="keyword">from</span> t <span class="keyword">where</span> <span class="number">100</span> &lt; c <span class="keyword">and</span> c &lt; <span class="number">1000000</span>;</span><br></pre></td></tr></table></figure>
-<p>2、加了 c 和 d 两个字段复合索引 INDEX(c,d)，但是没加 a 索引。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c,d,e <span class="keyword">from</span> t <span class="keyword">where</span> d &gt; <span class="number">100</span> <span class="keyword">and</span> c &lt; <span class="number">100000</span> <span class="keyword">and</span> e &lt; <span class="number">10000</span>;</span><br></pre></td></tr></table></figure>
-<p>虽然，不符合复合索引最左匹配原则，但是查询优化器会自动处理，然而后面的 e 会导致退化为全表查询</p>
-<p>3、函数操作导致没有用上索引</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c,d,e <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">pow</span>(c,<span class="number">2</span>) = <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
-<p>4、在字段的左边做了运算，不会用上索引</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c,d,e <span class="keyword">from</span> t <span class="keyword">where</span> c - <span class="number">1</span> = <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
-
-<p>解决：</p>
-<p>1、优化SQL语句</p>
-<p>2、建立有效的字段索引</p>
-<p>关于SQL无法命中索引情况，可以详细了解下。</p>
-<h5 id="2-1-假设：程序偶尔反应很慢，是服务器问题"><a href="#2-1-假设：程序偶尔反应很慢，是服务器问题" class="headerlink" title="2-1 假设：程序偶尔反应很慢，是服务器问题"></a>2-1 假设：程序偶尔反应很慢，是服务器问题</h5><pre><code>高峰期，服务器负载过高，导致IO占用、CPU、内存资源紧缺
-
-    如：某些时候，并发请求服务的数量太多，处理不过来</code></pre><p>解决：</p>
-<p>1、微服务拆分</p>
-<p>2、分布式架构（负载均衡）</p>
-<h5 id="2-2-假设：程序偶尔反应很慢，是数据库问题"><a href="#2-2-假设：程序偶尔反应很慢，是数据库问题" class="headerlink" title="2-2 假设：程序偶尔反应很慢，是数据库问题"></a>2-2 假设：程序偶尔反应很慢，是数据库问题</h5><pre><code>数据库 在 刷新 脏页【重点】
-
-    以下四种情况会刷新脏页：
-
-    a.redolog写满了
-    b.内存不够用了
-    c.MySQL 认为系统“空闲”
-    d.MySQL 正常关闭的时候
-
-    当我们要往数据库插入一条数据、或者要更新一条数据的时候，
-    我们知道数据库会在内存中把对应字段的数据更新了，
-    但是更新之后，这些更新的字段并不会马上同步持久化到磁盘中去，
-    而是把这些更新的记录写入到 redo log 日记中去，等到空闲的时候，
-    在通过 redo log 里的日记把最新的数据同步到磁盘中去。
-
-    redolog写满了就没办法等到空闲的时候再把数据同步到磁盘的，
-    只能暂停其他操作，全身心来把数据同步到磁盘中去的，
-    而这个时候，就会导致我们平时正常的SQL语句突然执行的很慢，
-    所以说，数据库在在同步数据到磁盘的时候，就有可能导致我们的SQL语句执行的很慢了。
-
-    注：
-    当内存数据页跟磁盘数据页内容不一致的时候，我们称这个内存页为“脏页”。
-    内存数据写入到磁盘后，内存和磁盘上的数据页的内容就一致了，称为“干净页”。
-
-
-事务锁（拿不到锁，一直等）
-    如：我们要执行的这条语句，刚好这条语句涉及到的表，别人在用，
-    并且加锁了，我们拿不到锁，只能慢慢等待别人释放锁了。
-    或者，表没有加锁，但要使用到的某个一行被加锁了，就等吧。
-
-    注：show processlist 查看当前状态</code></pre><p>解决：</p>
-<p>除了能该配置，我还能干啥？ 不可能不让它 做 redolog 也不可能偷偷把 事务锁 给干掉了。慢是慢，但是稳啊！</p>
-<h5 id="3-1：假设：近期开始变很慢，是代码问题"><a href="#3-1：假设：近期开始变很慢，是代码问题" class="headerlink" title="3-1：假设：近期开始变很慢，是代码问题"></a>3-1：假设：近期开始变很慢，是代码问题</h5><pre><code>跟踪请求日志，找到最慢的功能模块，检查近期修改或发布的版本记录
-
-    如：某一次上线，某个地方代码修改后有逻辑或规范问题</code></pre><p>解决：<br>加班改，优化（逻辑、算法等）</p>
-<h5 id="3-2：假设：近期开始变很慢，是服务器问题"><a href="#3-2：假设：近期开始变很慢，是服务器问题" class="headerlink" title="3-2：假设：近期开始变很慢，是服务器问题"></a>3-2：假设：近期开始变很慢，是服务器问题</h5><pre><code>服务器硬件配置不够用了
-
-    如：内存
-
-服务器软件配置不合适了
-
-    如：并发数、连接数
-
-其他软件环境问题
-
-    如：加了其他内容，或者更新了啥</code></pre><p>解决：调试改环境配置，加硬件</p>
-<h5 id="3-3：假设：近期开始变很慢，是数据库问题"><a href="#3-3：假设：近期开始变很慢，是数据库问题" class="headerlink" title="3-3：假设：近期开始变很慢，是数据库问题"></a>3-3：假设：近期开始变很慢，是数据库问题</h5><pre><code>索引【主要】
-
-    如：随着系统运行时间增加，数据量增大，查询字段未设置索引、索引未命中等
-
-锁
-    如：近期新增功能中，使用到了新的锁，导致等待时间变长
-
-其他配置不适用了
-    如：连接数、语句执行数</code></pre><p>解决：</p>
-<p>1、主要从索引出发，保证用上索引</p>
-<p>2、检查事务锁情况、配置等</p>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>其实每个具体问题不是绝对仅限于三个大的场景下，只是根据可能性更高去分析。</p>
-<p>具体情况，还得回到实践中去，跟踪、调试才能一步步定位问题的所在，然后解决它。</p>
-<p><em>个人总结，水平有限，欢迎批评指正！</em></p>
+<p>来源：</p>
+<p>力扣（LeetCode）链接：<a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list</a></p>
 
           
         
@@ -532,7 +431,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/14/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/12/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/14/">&gt;</a>
   </nav>
 
 
@@ -582,7 +481,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -604,7 +503,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/11/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%85%83%E7%B4%A0/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B9%8B-%E6%A0%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/11/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%85%83%E7%B4%A0/" itemprop="url">【力扣算法题】删除链表中的倒数第N个元素</a></h2>
+                <a class="post-title-link" href="/2020/04/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B9%8B-%E6%A0%88/" itemprop="url">数据结构 之 栈 </a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-11T12:11:47+08:00">
-                2020-04-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-12T12:39:23+08:00">
+                2020-04-12
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
                   </a>
                 </span>
 
@@ -354,44 +354,87 @@
       
         
           
-            <p>给定一个链表，删除链表的<strong>倒数第 n 个节点</strong>，并且返回链表的头结点。</p>
-<p>示例：</p>
-<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p>
-<p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</p>
-<p>说明：</p>
-<p>给定的 n 保证是有效的。</p>
-<p>进阶：</p>
-<p>你能尝试使用一趟扫描实现吗？</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
-<li>自己手画了一个图，凑合看着理解数据结构先。。。</li>
+            <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>栈 是一种最常用和最重要的数据结构之一。</p>
+<p>二叉树算法中大量使用到栈，通常将递归算法转换成非递归算法时也需要用到栈。</p>
+<ul>
+<li>栈 是一种只能在一端进行插入或者删除操作的 <strong>线性表</strong></li>
+<li>栈顶：允许进行插入、删除操作的一端，栈顶的当前位置是动态的</li>
+<li>空栈：没有数据元素</li>
+<li>压栈（进栈）：插入操作</li>
+<li>退栈（出栈）：删除</li>
 </ul>
-<p><img src="/images/20200411144810.png" alt=""></p>
-<p>链表操作的题目，一般都需要有指针（一个或者两个），通过移动指针指向，控制元素的增加、删除等操作</p>
-<p>解决方法有很多种，比如：两遍指针（需要先计算链表长度L）、一遍指针（双指针同时移动）等</p>
-<h4 id="步骤-比较好的算法实现——移动一遍指针"><a href="#步骤-比较好的算法实现——移动一遍指针" class="headerlink" title="步骤 ( 比较好的算法实现——移动一遍指针 )"></a>步骤 ( 比较好的算法实现——移动一遍指针 )</h4><ul>
-<li>链表输入（给定头结点指针 head， 以及移除位置n）</li>
-<li>定义一个指向头结点的节点指针【重要】（h.next = head），为什么要多增加一个节点指向，因为不管对链表进行何种操作，我们的链表头是不能丢失的，否则就找不到数据入口，没有了意义，所以要么多增加一个节点指向头，要么用临时变量操作前存储头指针，总之不能丢失。</li>
-<li>定义节点指针：定义两个节点指针（左指针、右指针），都指向头部节点（p.next = head）</li>
-<li>先移动 右指针 ，移动步数 由 输入的 n 决定（本题，需要移除倒数第 n 个位置的节点，我们就先把右指针往右边移动 n + 1 步，这样 右指针和左指针之间的距离就刚好是 n 个节点）</li>
-<li>然后，我们再 同步移动 两个指针（p = p.next），当 右指针 为 null 时，停止移动，此时，左指针的下一个节点指向刚好就是 倒数第 n 个节点。</li>
-<li>最后，我们操作倒数第 n 个 节点的移除（p.next = p.next.next），意思就是把左指针 下一个节点 指向 了 下下个节点，即跳过了倒数第 n 个节点。</li>
-<li>返回头节点（h.next）结束</li>
+<p>线性表 主要由 顺序表示 或 链式表示。在实际应用中，常以栈、队列、字符串等特殊形式使用。</p>
+<p>顺序表示指的是用一组地址连续的存储单元依次存储线性表的数据元素，称为线性表的顺序存储结构或顺序映像。</p>
+<p>链式表示指的是用一组任意的存储单元存储线性表中的数据元素，称为线性表的链式存储结构。它的存储单元可以是连续的，也可以是不连续的。</p>
+<pre><code>注：数据的 物理存储结构 分为以下四种，
+
+1.顺序存储 ：
+
+    用一组地址连续的存储单元依次存储线性表的各个数据元素，
+    称作 线性表 的顺序存储结构
+
+2.链接存储 
+
+    用一组任意的存储单元存储线性表的数据元素(这组存储单元可以是连续的,也可以是不连续的)。
+
+3.索引存储 
+
+    除建立存储结点信息外，还建立附加的索引表来标识结点的地址。
+    索引表由若干索引项组成。
+
+4.散列存储
+
+    散列存储，又称hash存储，是一种力图将数据元素的存储位置与关键码之间建立确定对应关系的查找技术。
+    由节点的关键码值决定节点的存储地址。
+    散列法又被成为关键字——地址转换法。
+
+
+顺序结构和链接结构适用在内存结构中。
+
+索引结构和散列结构适用在外存与内存交互结构。</code></pre><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>先入后出，后入先出</li>
+<li>只允许在栈顶操作元素</li>
 </ul>
-<h4 id="完整代码实现"><a href="#完整代码实现" class="headerlink" title="完整代码实现"></a>完整代码实现</h4><ul>
-<li>时间复杂度： O(L) L为链表长度</li>
-<li>空间复杂度： O(1)</li>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p><img src="/images/stack.png" alt=""></p>
+<p>栈的基本操作有： 插入（压栈）、删除（出栈）、判断为空、查找元素等</p>
+<ul>
+<li>顺序存储结构（顺序栈）</li>
 </ul>
-<p>链表结构</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode next;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x) &#123;</span><br><span class="line">        val = x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分配一块连续存储区域来存储栈中元素，并用一个变量指向 栈顶元素</p>
+<p><img src="/images/20200412171841.png" alt=""></p>
+<p>顺序栈要点：</p>
+<p>1、栈顶指针 top </p>
+<p>2、栈最大大小 MaxSize</p>
+<p>具体代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyStack</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* Java program to implement basic stack */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX = <span class="number">1000</span>;  <span class="comment">// Maximum size of Stack</span></span><br><span class="line">    <span class="keyword">int</span> top; <span class="comment">// 栈顶</span></span><br><span class="line">    <span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[MAX]; <span class="comment">// 线性存储空间申请</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (top &lt; <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    MyStack() &#123;</span><br><span class="line">        top = -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (top &gt;= (MAX - <span class="number">1</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Stack Overflow"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            a[++top] = x;  <span class="comment">// 首次 top = （-1 + 1） = 0 开始存入</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (top &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Stack Underflow"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> a[top--]; <span class="comment">// 出栈，栈顶往下移动</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>处理类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.company.darifo.solutions;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RemoveNthNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ListNode headNode = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">static</span> ListNode tmp = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"请输入链表长度："</span>);</span><br><span class="line">        <span class="keyword">int</span> len = scanner.nextInt();</span><br><span class="line">        System.out.println(<span class="string">"请输入头结点值："</span>);</span><br><span class="line">        headNode = <span class="keyword">new</span> ListNode(scanner.nextInt());</span><br><span class="line">        tmp = headNode;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入节点值: "</span>);</span><br><span class="line">            headNode.next = <span class="keyword">new</span> ListNode(scanner.nextInt());</span><br><span class="line">            headNode = headNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 打印输入</span></span><br><span class="line">        printList(tmp);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 移除 倒数 第 n 个节点 n 不能大于链表长度 否则空指针异常</span></span><br><span class="line">        System.out.println(<span class="string">"移除倒数第 ? 个节点: "</span>);</span><br><span class="line">        <span class="keyword">int</span> n = scanner.nextInt();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">2</span>;j&lt;=<span class="number">3</span>;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> ( n &lt; len)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            System.out.println(<span class="string">"输入有误，第 "</span> + j + <span class="string">"次输入："</span>);</span><br><span class="line">            n = scanner.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ( n &gt; len)&#123;</span><br><span class="line">            System.out.println(<span class="string">"三次输入错误！退出"</span>);</span><br><span class="line">            System.exit(-<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行操作</span></span><br><span class="line">        ListNode head = removeNthFromEnd(tmp, n);</span><br><span class="line">        <span class="comment">// 打印结果</span></span><br><span class="line">        printList(head);</span><br><span class="line"></span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printList</span><span class="params">(ListNode node)</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"\n"</span>);</span><br><span class="line">        <span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(node.val + <span class="string">"-&gt;"</span>);</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(<span class="string">"null"</span>);</span><br><span class="line">        System.out.print(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 算法函数</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义两个节点指针，分别指向头结点和头结点的下一节点</span></span><br><span class="line">        ListNode h = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        h.next = head;</span><br><span class="line">        ListNode l = h;</span><br><span class="line">        ListNode r = h;</span><br><span class="line">        <span class="comment">// 首先移动右边指针 r 使其移动 N + 1 位，此时 r 和 l 之间间隔 就是 N</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">            r = r.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 然后，同时向右移动两个指针，使 r 指针 next 为 null 时终止，此时，l 指针的下一个节点就是 倒数第N个节点</span></span><br><span class="line">        <span class="keyword">while</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">            r = r.next;</span><br><span class="line">            l = l.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 移除节点</span></span><br><span class="line">        l.next = l.next.next;</span><br><span class="line">        <span class="keyword">return</span> h.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实java中util包里面有专门的 Stack 泛型类实现的栈 比较强大, 继承了Vector：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Vector</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Creates an empty Stack.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> E <span class="title">push</span><span class="params">(E item)</span> </span>&#123;</span><br><span class="line">        addElement(item);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> E <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        E       obj;</span><br><span class="line">        <span class="keyword">int</span>     len = size();</span><br><span class="line"></span><br><span class="line">        obj = peek();</span><br><span class="line">        removeElementAt(len - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> E <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>     len = size();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line">        <span class="keyword">return</span> elementAt(len - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = lastIndexOf(o);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> size() - i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">empty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size() == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里看不到具体存储定义，再往上 看 Vector 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Object[] elementData;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">int</span> elementCount;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，元素的存储结构 是 对象数组 ，甚至在 Stack 类的 push、pop等方法操作上 加了 synchronized 同步锁，也就是说，操作是线程安全的。</p>
+<ul>
+<li>链式存储结构（链栈）</li>
+</ul>
+<p>优点：不存在栈满上溢的情况</p>
+<p>在栈的链式结构实现中，一般把链表的头指针做为栈顶</p>
+<p><img src="/images/20200412184416.png" alt=""></p>
+<p>链栈要点：</p>
+<p>1、栈顶指针 top</p>
+<p>2、下一节点 next</p>
+<p>链栈 java 实现代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 链栈结构体</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StackNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> data;  <span class="comment">// 数据</span></span><br><span class="line">    StackNode next;  <span class="comment">// 下一个节点</span></span><br><span class="line"></span><br><span class="line">    StackNode(<span class="keyword">int</span> data) &#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackAsLinkedList</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Java Code for Linked List Implementation</span></span><br><span class="line"></span><br><span class="line">    StackNode root;   <span class="comment">// 栈顶指针</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> root == <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</span><br><span class="line">        StackNode newNode = <span class="keyword">new</span> StackNode(data);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            root = newNode;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 这里三行 实现 入栈时 栈顶的移动 【重要】</span></span><br><span class="line">            StackNode temp = root;  <span class="comment">// 定义一个临时指针存储 栈顶指针</span></span><br><span class="line">            root = newNode;  <span class="comment">//  栈顶 向后 移动到新元素上</span></span><br><span class="line">            newNode.next = temp;  <span class="comment">// 新元素的下一个节点指向原来的栈顶</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> popped = Integer.MIN_VALUE;  <span class="comment">// 定义一个最小int值</span></span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Stack is Empty"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            popped = root.data; <span class="comment">// 相当于删除栈顶数据</span></span><br><span class="line">            root = root.next; <span class="comment">// 把栈顶指针指向下一层元素</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> popped;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Stack is empty"</span>);</span><br><span class="line">            <span class="keyword">return</span> Integer.MIN_VALUE;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> root.data;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        StackAsLinkedList sll = <span class="keyword">new</span> StackAsLinkedList();</span><br><span class="line"></span><br><span class="line">        sll.push(<span class="number">10</span>);</span><br><span class="line">        sll.push(<span class="number">20</span>);</span><br><span class="line">        sll.push(<span class="number">30</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(sll.pop() + <span class="string">" popped from stack"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Top element is "</span> + sll.peek());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-
-
-<p>来源：</p>
-<p>力扣（LeetCode）链接：<a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list</a></p>
+<h3 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h3><ul>
+<li>算数表达式求值</li>
+<li>编译原理（语法分析器等）</li>
+<li>求解迷宫路径</li>
+</ul>
 
           
         
@@ -431,7 +474,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/13/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/11/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/13/">&gt;</a>
   </nav>
 
 
@@ -481,7 +524,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -503,7 +546,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
