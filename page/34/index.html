@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/07/18/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8alias%E5%91%BD%E4%BB%A4%E5%BF%AB%E6%8D%B7%E7%99%BB%E5%BD%95%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/07/23/PHP7%E5%AE%89%E8%A3%85MongoDB%E6%89%A9%E5%B1%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/18/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8alias%E5%91%BD%E4%BB%A4%E5%BF%AB%E6%8D%B7%E7%99%BB%E5%BD%95%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url">Linux下使用alias命令快捷登录服务器</a></h2>
+                <a class="post-title-link" href="/2019/07/23/PHP7%E5%AE%89%E8%A3%85MongoDB%E6%89%A9%E5%B1%95/" itemprop="url">PHP7安装MongoDB扩展(Linux)</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T11:00:44+08:00">
-                2019-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-23T10:14:03+08:00">
+                2019-07-23
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E6%8A%80%E5%B7%A7/" itemprop="url" rel="index">
-                    <span itemprop="name">技能技巧</span>
+                  <a href="/categories/%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" itemprop="url" rel="index">
+                    <span itemprop="name">环境安装</span>
                   </a>
                 </span>
 
@@ -354,15 +354,35 @@
       
         
           
-            <p>编辑 <strong>~/.bash_profile</strong> 配置文件，末尾加上：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alias myserv='ssh darifo@*.*.*.*'</span><br><span class="line">alias me='echo darifo'</span><br></pre></td></tr></table></figure>
+            <h2 id="方法1"><a href="#方法1" class="headerlink" title="方法1:"></a>方法1:</h2><p>官网下载压缩包：<a href="https://pecl.php.net/package/mongodb" target="_blank" rel="noopener">https://pecl.php.net/package/mongodb</a></p>
+<p>step1:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">tar</span> -zxvf 包名</span><br></pre></td></tr></table></figure>
 
-<p>配置ssh key</p>
-<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh</span><br><span class="line">id_rsa.pub</span><br></pre></td></tr></table></figure>
+<ul>
+<li>step2:</li>
+</ul>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">phpize</span><br><span class="line"></span><br><span class="line">./configure </span><br><span class="line"></span><br><span class="line"><span class="built_in">make</span> </span><br><span class="line"></span><br><span class="line">sudo <span class="built_in">make</span> install</span><br></pre></td></tr></table></figure>
 
-<p>生成ssh-key</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssh-keygen</span></span><br></pre></td></tr></table></figure>
+<p>php.ini加上</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">extension</span>=mongodb.so</span><br></pre></td></tr></table></figure>
 
+<h2 id="方法2"><a href="#方法2" class="headerlink" title="方法2:"></a>方法2:</h2><p>安装pecl：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -O http<span class="variable">s:</span>//pear.php.net/<span class="keyword">go</span>-pear.phar</span><br><span class="line"></span><br><span class="line">sudo php -d detect_unicode=<span class="number">0</span> <span class="keyword">go</span>-pear.phar</span><br></pre></td></tr></table></figure>
+
+<p>一直回车</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pecl <span class="built_in">version</span></span><br></pre></td></tr></table></figure>
+
+<p>安装mongo：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">pecl</span> <span class="selector-tag">install</span> <span class="selector-tag">mongodb-1</span><span class="selector-class">.5</span><span class="selector-class">.3</span><span class="selector-class">.tgz</span></span><br></pre></td></tr></table></figure>
+
+<p>这里会提示写权限，加上 sudo 即可</p>
+<p>使用pecl安装会自动执行phpize、configure、make、make install 推荐使用；</p>
+<p>编译问题(Security/Security.h can’t be found in macOS)：</p>
+<blockquote>
+<p>fixed, the real problem is Security/Security.h can’t be found in macOS 10.14.3, and there is another similar problem to CoreFoundation/CFBase.h it can be fixed by following steps:</p>
+</blockquote>
+<p>解决：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd mongodb<span class="number">-1.5</span><span class="number">.3</span>/include</span><br><span class="line"></span><br><span class="line">ln -s <span class="regexp">/Library/</span>Developer<span class="regexp">/CommandLineTools/</span>SDKs<span class="regexp">/MacOSX.sdk/</span>System<span class="regexp">/Library/</span></span><br><span class="line">Frameworks<span class="regexp">/Security.framework/</span>Versions<span class="regexp">/A/</span>Headers/ Security</span><br><span class="line"></span><br><span class="line">ln -s <span class="regexp">/Library/</span>Developer<span class="regexp">/CommandLineTools/</span>SDKs<span class="regexp">/MacOSX.sdk/</span>System<span class="regexp">/Library/</span>Frameworks<span class="regexp">/CoreFoundation.framework/</span>Versions<span class="regexp">/A/</span>Headers/ CoreFoundation</span><br><span class="line"></span><br><span class="line">brew install pcre</span><br><span class="line"></span><br><span class="line">make</span><br></pre></td></tr></table></figure>
           
         
       
@@ -401,7 +421,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/33/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/35/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/33/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/35/">&gt;</a>
   </nav>
 
 
@@ -451,7 +471,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -473,7 +493,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

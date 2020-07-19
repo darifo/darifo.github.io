@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/02/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2020/04/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%AD%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%85%B3%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/02/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F/" itemprop="url">【力扣算法题】生命游戏</a></h2>
+                <a class="post-title-link" href="/2020/04/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%AD%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%85%B3%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" itemprop="url">计算机网络中协议相关一些知识总结</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-02T18:56:09+08:00">
-                2020-04-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-04T11:59:53+08:00">
+                2020-04-04
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
                   </a>
                 </span>
 
@@ -354,21 +354,102 @@
       
         
           
-            <p>给定一个包含 m × n 个格子的面板，每一个格子都可以看成是一个细胞。每个细胞都具有一个初始状态：1 即为活细胞（live），或 0 即为死细胞（dead）。每个细胞与其八个相邻位置（水平，垂直，对角线）的细胞都遵循以下四条生存定律：</p>
-<p>1.如果活细胞周围八个位置的活细胞数少于两个，则该位置活细胞死亡；</p>
-<p>2.如果活细胞周围八个位置有两个或三个活细胞，则该位置活细胞仍然存活；</p>
-<p>3.如果活细胞周围八个位置有超过三个活细胞，则该位置活细胞死亡；</p>
-<p>4.如果死细胞周围正好有三个活细胞，则该位置死细胞复活；</p>
-<p>根据当前状态，写一个函数来计算面板上所有细胞的下一个（一次更新后的）状态。下一个状态是通过将上述规则同时应用于当前状态下的每个细胞所形成的，其中细胞的出生和死亡是同时发生的。</p>
-<p>案例：</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">输入： </span><br><span class="line">[</span><br><span class="line">  [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">  [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">[</span><br><span class="line">  [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>],</span><br><span class="line">  [<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">  [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><p>由题目意思可知，在矩阵（二维数组）中，1是活细胞，0是死细胞，在特定条件下，活细胞会死，死细胞会活，而题目要求是求出这个矩阵面板上所有细胞的下一状态，即只做一次条件匹配，更新后的细胞存活和死亡状态，不妨看一下案例输入矩阵，第一行第二个细胞是活细胞，它的上下左右斜八个方向（边缘细胞少于八个方向），只有一个活细胞（第二行第三个），即命中题目条件1，所以这个活细胞会死掉，同理，可以推算其他细胞在进行一次条件匹配后，是存活还是死亡。</p>
-<p>那么，具体逻辑应该是怎样呢。</p>
-<h4 id="方法一：复制参考矩阵"><a href="#方法一：复制参考矩阵" class="headerlink" title="方法一：复制参考矩阵"></a>方法一：复制参考矩阵</h4><p>时间复杂度：O(mn)  m,n为矩阵行列长度</p>
-<p>空间复杂度：O(mn) mn为复制矩阵所需空间</p>
-<h4 id="方法二：带复合状态的遍历搜寻及恢复"><a href="#方法二：带复合状态的遍历搜寻及恢复" class="headerlink" title="方法二：带复合状态的遍历搜寻及恢复"></a>方法二：带复合状态的遍历搜寻及恢复</h4><p>时间复杂度：O(mn)  m,n为矩阵行列长度<br>空间复杂度：O(1)</p>
-<h5 id="详细流程见代码注释："><a href="#详细流程见代码注释：" class="headerlink" title="详细流程见代码注释："></a>详细流程见代码注释：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.company.darifo.solutions;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameOfLife</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        GameOfLife gameOfLife = <span class="keyword">new</span> GameOfLife();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[][] b = &#123;</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>&#125;,</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>&#125;,</span><br><span class="line">                &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>&#125;,</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        printMap(b);</span><br><span class="line">        gameOfLife.funcOne(b);</span><br><span class="line">        printMap(b);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[][] d = &#123;</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>&#125;,</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>&#125;,</span><br><span class="line">                &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>&#125;,</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        printMap(d);</span><br><span class="line">        gameOfLife.funcTow(d);</span><br><span class="line">        printMap(d);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printMap</span><span class="params">(<span class="keyword">int</span>[][] map)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"矩阵打印如下："</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] chars : map) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> aChar : chars) &#123;</span><br><span class="line">                System.out.print(aChar);</span><br><span class="line">                System.out.print(<span class="string">'\t'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.print(<span class="string">'\n'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * todo 方法一 复制数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">funcOne</span><span class="params">(<span class="keyword">int</span>[][] board)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义搜索方向坐标偏移量数组</span></span><br><span class="line">        <span class="keyword">int</span>[] nb = &#123;<span class="number">0</span>, <span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化面板行列</span></span><br><span class="line">        <span class="keyword">int</span> rows = board.length;</span><br><span class="line">        <span class="keyword">int</span> cols = board[<span class="number">0</span>].length;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 复制一份数组，用于参考</span></span><br><span class="line">        <span class="keyword">int</span>[][] copyBoard = <span class="keyword">new</span> <span class="keyword">int</span>[rows][cols];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> rr = <span class="number">0</span>; rr &lt; rows; rr++) &#123;</span><br><span class="line">            System.arraycopy(board[rr], <span class="number">0</span>, copyBoard[rr], <span class="number">0</span>, cols);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历每一个细胞</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 初始化本细胞周围存活细胞数</span></span><br><span class="line">                <span class="keyword">int</span> aliveNb = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//开始从本细胞不同方向去搜寻周边细胞 ,根据坐标偏移量数组nb[0,1,-1]实现八个方向搜索</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">3</span>; x++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; <span class="number">3</span>; y++) &#123;</span><br><span class="line">                        <span class="comment">// 取出坐标偏移量，以获得周围细胞数据</span></span><br><span class="line">                        <span class="comment">// 横坐标纵坐标偏移量不能同时为0 否则就没意义（没有移动）</span></span><br><span class="line">                        <span class="keyword">if</span> (!(nb[x] == <span class="number">0</span> &amp;&amp; nb[y] == <span class="number">0</span>)) &#123;</span><br><span class="line">                            <span class="comment">// 横坐标偏移量</span></span><br><span class="line">                            <span class="keyword">int</span> r = i + nb[x];</span><br><span class="line">                            <span class="comment">// 纵坐标偏移量</span></span><br><span class="line">                            <span class="keyword">int</span> c = j + nb[y];</span><br><span class="line"></span><br><span class="line">                            <span class="comment">// 用偏移后的坐标去取该位置细胞的状态, 如果存活，本细胞周围存活细胞数+1</span></span><br><span class="line">                            <span class="comment">// 注意：偏移后坐标不能越界（不能超过面板边界）</span></span><br><span class="line">                            <span class="keyword">if</span> ((r &gt;= <span class="number">0</span> &amp;&amp; c &gt;= <span class="number">0</span>) &amp;&amp; (r &lt; rows &amp;&amp; c &lt; cols) &amp;&amp; copyBoard[r][c] == <span class="number">1</span>) &#123;</span><br><span class="line">                                aliveNb += <span class="number">1</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 更新细胞状态</span></span><br><span class="line">                <span class="comment">// 1.活细胞，周边存活数小于2，细胞死亡</span></span><br><span class="line">                <span class="comment">// 3.活细胞，周边活细胞超过三个，细胞死亡</span></span><br><span class="line">                <span class="keyword">if</span> (copyBoard[i][j] == <span class="number">1</span> &amp;&amp; (aliveNb &lt; <span class="number">2</span> || aliveNb &gt; <span class="number">3</span>)) &#123;</span><br><span class="line">                    <span class="comment">// 改变原数组内容</span></span><br><span class="line">                    board[i][j] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 2.活细胞，周边存活细胞数2-3个，细胞存活 (不用管，反正都是活的)</span></span><br><span class="line">                <span class="comment">// 4.死细胞，周边存活数正好3个，细胞复活</span></span><br><span class="line">                <span class="keyword">if</span> (copyBoard[i][j] == <span class="number">0</span> &amp;&amp; aliveNb == <span class="number">3</span>) &#123;</span><br><span class="line">                    <span class="comment">// 改变原数组内容</span></span><br><span class="line">                    board[i][j] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * todo 方法二 复定义复合状态</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">funcTow</span><span class="params">(<span class="keyword">int</span>[][] board)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义搜索方向坐标偏移量数组</span></span><br><span class="line">        <span class="keyword">int</span>[] nb = &#123;<span class="number">0</span>, <span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化面板行列</span></span><br><span class="line">        <span class="keyword">int</span> rows = board.length;</span><br><span class="line">        <span class="keyword">int</span> cols = board[<span class="number">0</span>].length;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历每一个细胞</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 初始化本细胞周围存活细胞数</span></span><br><span class="line">                <span class="keyword">int</span> aliveNb = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//开始从本细胞不同方向去搜寻周边细胞 ,根据坐标偏移量数组nb[0,1,-1]实现八个方向搜索</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">3</span>; x++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; <span class="number">3</span>; y++) &#123;</span><br><span class="line">                        <span class="comment">// 取出坐标偏移量，以获得周围细胞数据</span></span><br><span class="line">                        <span class="comment">// 横坐标纵坐标偏移量不能同时为0 否则就没意义（没有移动）</span></span><br><span class="line">                        <span class="keyword">if</span> (!(nb[x] == <span class="number">0</span> &amp;&amp; nb[y] == <span class="number">0</span>)) &#123;</span><br><span class="line">                            <span class="comment">// 横坐标偏移量</span></span><br><span class="line">                            <span class="keyword">int</span> r = i + nb[x];</span><br><span class="line">                            <span class="comment">// 纵坐标偏移量</span></span><br><span class="line">                            <span class="keyword">int</span> c = j + nb[y];</span><br><span class="line"></span><br><span class="line">                            <span class="comment">// 用偏移后的坐标去取该位置细胞的状态, 如果存活，本细胞周围存活细胞数+1</span></span><br><span class="line">                            <span class="comment">// 注意：偏移后坐标不能越界（不能超过面板边界）</span></span><br><span class="line">                            <span class="keyword">if</span> (</span><br><span class="line">                                    (r &gt;= <span class="number">0</span> &amp;&amp; c &gt;= <span class="number">0</span>) &amp;&amp;</span><br><span class="line">                                            (r &lt; rows &amp;&amp; c &lt; cols) &amp;&amp;</span><br><span class="line">                                            (board[r][c] == <span class="number">1</span> || board[r][c] == <span class="number">20</span>)</span><br><span class="line">                            ) &#123;</span><br><span class="line">                                <span class="comment">// 条件注意：（状态转换由下面两个条件语句控制）</span></span><br><span class="line">                                <span class="comment">// 复合状态21表示之前是死的，活了就变为21（根据下面条件得）</span></span><br><span class="line">                                <span class="comment">// 复合状态20表示之前是活的，现在死掉了</span></span><br><span class="line"></span><br><span class="line">                                aliveNb += <span class="number">1</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 更新细胞状态</span></span><br><span class="line">                <span class="comment">// 1.活细胞，周边存活数小于2，细胞死亡</span></span><br><span class="line">                <span class="comment">// 3.活细胞，周边活细胞超过三个，细胞死亡</span></span><br><span class="line">                <span class="keyword">if</span> (</span><br><span class="line">                        (board[i][j] == <span class="number">1</span> || board[i][j] == <span class="number">21</span>) &amp;&amp;</span><br><span class="line">                                (aliveNb &lt; <span class="number">2</span> || aliveNb &gt; <span class="number">3</span>)</span><br><span class="line">                ) &#123;</span><br><span class="line">                    <span class="comment">// 改变原数组内容 死掉 复合状态20 过去是活的</span></span><br><span class="line">                    board[i][j] = <span class="number">20</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 2.活细胞，周边存活细胞数2-3个，细胞存活 (不用管，反正都是活的)</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// 4.死细胞，周边存活数正好3个，细胞复活</span></span><br><span class="line">                <span class="keyword">if</span> (</span><br><span class="line">                        (board[i][j] == <span class="number">0</span> || board[i][j] == <span class="number">20</span>) &amp;&amp;</span><br><span class="line">                                aliveNb == <span class="number">3</span></span><br><span class="line">                ) &#123;</span><br><span class="line">                    <span class="comment">// 改变原数组内容 活着复合状态21 过去是死的</span></span><br><span class="line">                    board[i][j] = <span class="number">21</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 搜寻结束，回归复合状态 （把数组中20、21转换成0、1）</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">20</span> || board[i][j] == <span class="number">0</span>) &#123;</span><br><span class="line">                    board[i][j] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">21</span> || board[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                    board[i][j] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="OSI七层"><a href="#OSI七层" class="headerlink" title="OSI七层"></a>OSI七层</h3><p>自顶向下： </p>
+<ul>
+<li>应用层</li>
+<li>表示层</li>
+<li>会话层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>数据链路层</li>
+<li>物理层</li>
+</ul>
+<h3 id="TCP-IP四层"><a href="#TCP-IP四层" class="headerlink" title="TCP/IP四层"></a>TCP/IP四层</h3><ul>
+<li>应用层</li>
+<li>运输层</li>
+<li>网际层</li>
+<li>网络接口层</li>
+</ul>
+<h3 id="TCP三次握手四次挥手"><a href="#TCP三次握手四次挥手" class="headerlink" title="TCP三次握手四次挥手"></a>TCP三次握手四次挥手</h3><h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><p>1、客户端发送 <strong>SYN</strong> 到 服务端</p>
+<p>2、服务端 返回 <strong>SYN/ACK</strong> 给 客户端</p>
+<p>3、客户端 发送 <strong>ACK</strong> 给 服务端</p>
+<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><p>1、客户端 发送 <strong>FIN</strong> 到 服务端</p>
+<p>2、服务端 响应 <strong>ACK</strong> 给 客户端</p>
+<p>3、服务端 发送 <strong>FIN</strong> 到 客户端</p>
+<p>4、客户端 发送 <strong>ACK</strong> 到 服务端</p>
+<h3 id="TCP-和-UDP-比较"><a href="#TCP-和-UDP-比较" class="headerlink" title="TCP 和 UDP 比较"></a>TCP 和 UDP 比较</h3><ul>
+<li><p>TCP 面向连接 可靠 字节流 效率慢 资源消耗多 </p>
+</li>
+<li><p>UDP 面向无连接 不可靠 数据报文段 效率快 资源消耗少</p>
+</li>
+</ul>
+<h3 id="TCP-如何保证数据传输可靠性"><a href="#TCP-如何保证数据传输可靠性" class="headerlink" title="TCP 如何保证数据传输可靠性"></a>TCP 如何保证数据传输可靠性</h3><ul>
+<li>分割数据块</li>
+<li>包编号，有序传输</li>
+<li>校验和（差错控制）：端到端校验包的首部和数据是否变化</li>
+<li>流量控制：利用滑动窗口协议控制</li>
+<li>拥塞控制：网络拥堵，减少发送</li>
+<li>ARQ协议：发完一个分组停止等待，确认收到再继续发。分为 停止等待ARQ 和 连续ARQ</li>
+<li>超时重传</li>
+</ul>
+<h3 id="浏览器中输入url后到页面显示发生什么"><a href="#浏览器中输入url后到页面显示发生什么" class="headerlink" title="浏览器中输入url后到页面显示发生什么"></a>浏览器中输入url后到页面显示发生什么</h3><p>1、【DNS解析】浏览器 查找 域名 的 IP 地址 </p>
+<ul>
+<li>本地系统 hosts</li>
+<li>路由器缓存</li>
+<li>DNS 服务器缓存</li>
+</ul>
+<p>2、【TCP连接 &amp; 发起 HTTP 请求】浏览器 向 服务器 发送 HTTP 请求</p>
+<p>建立TCP连接（三次握手）：</p>
+<ul>
+<li>应用层 HTTP 协议 请求数据分组 封包 </li>
+<li>传输层 TCP 协议</li>
+<li>到 网络层 使用 OSPF（开放最短路径优先协议）路由器间寻址、IP 协议 发送数据 </li>
+<li>数据链路层 ARP 协议 将 ip地址转换为MAC地址</li>
+<li>物理层 服务器 网卡设备</li>
+<li>反向解包操作…</li>
+</ul>
+<p>3、【接收处理请求 &amp; 响应 HTTP】服务器处理请求，并响应</p>
+<ul>
+<li>应用层 HTTP 协议 处理数据并响应HTML</li>
+<li>响应发送数据顺序同上…</li>
+</ul>
+<p>4、【页面渲染】浏览器（客户端）接收响应，渲染页面</p>
+<p>5、【TCP 结束】连接结束</p>
+<h3 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h3><ul>
+<li>1XX ：信息状态码 正在处理请求</li>
+<li>2XX ：成功状态码 请求正常处理完成</li>
+<li>3XX ：重定向状态码 </li>
+<li>4XX ：客户端错误状态码 服务器无法处理请求</li>
+<li>5XX ：服务器错误状态码 服务器处理请求出错 </li>
+</ul>
+<p>HTTP/1.1 </p>
+<p>409： 请求资源与当前资源状态发生冲突</p>
+<p>410： 服务器上某个资源被永久删除</p>
+<h3 id="Cookies-和-Session"><a href="#Cookies-和-Session" class="headerlink" title="Cookies 和 Session"></a>Cookies 和 Session</h3><ul>
+<li><p>两者都是用来跟踪浏览器用户身份的会话方式</p>
+</li>
+<li><p>Cookie 一般保存用户信息，如登录信息，保持登录（下次访问自动登录，为了安全 ，一般使用加密token，每次登陆后刷新token）</p>
+</li>
+<li><p>Session 通过服务端来记录用户状态</p>
+</li>
+<li><p>Cookie 保存在客户端（浏览器），Session 保存在服务端</p>
+</li>
+<li><p>Cookie 不要存敏感信息，一般加密，需要时去服务端解密</p>
+</li>
+</ul>
+<h4 id="无状态-HTTP协议-如何追踪服务端-Session"><a href="#无状态-HTTP协议-如何追踪服务端-Session" class="headerlink" title="无状态 HTTP协议 如何追踪服务端 Session"></a>无状态 HTTP协议 如何追踪服务端 Session</h4><p>一般在客户端 Cookie 中加上一个 Session ID 实现 ，如果 客户端 Cookie 被禁用了，就通过重写 URL 把 Session ID 放在 URL 后面传到服务器</p>
+<h3 id="HTTP-和-HTTPS"><a href="#HTTP-和-HTTPS" class="headerlink" title="HTTP 和 HTTPS"></a>HTTP 和 HTTPS</h3><ul>
+<li>端口：HTTP 默认使用 80 端口；HTTPS 默认使用 443 端口。</li>
+<li>安全性：HTTP 运行在 TCP 协议之上 ，所有传输内容为明文，无法验证双方身份；HTTPS 运行在 SSL/TLS 协议之上 的 HTTP 协议 ， SSL/TLS 运行在 TCP 之上，所有传输内容经过加密，加密本身使用对称加密，秘钥又使用服务器证书进行了非对称加密。</li>
+<li>资源消耗：HTTPS 资源消耗高于 HTTP ， 因为要进行加解密，身份验证等</li>
+</ul>
+<h3 id="最后记住"><a href="#最后记住" class="headerlink" title="最后记住"></a>最后记住</h3><ul>
+<li>HTTP、HTTPS 是 应用层 协议</li>
+<li>TCP、UDP 是 传输层 协议</li>
+<li>IP、IPv6 是 网际层 协议</li>
+<li>SSL、TSL、RPC 是 会话层 协议</li>
+<li>PPTP、L2TP、ARP、RARP 是 数据链路层 协议</li>
+</ul>
 
           
         
@@ -408,7 +489,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/20/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/22/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/20/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/22/">&gt;</a>
   </nav>
 
 
@@ -458,7 +539,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -480,7 +561,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

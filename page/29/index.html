@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/12/13/java%E7%BC%96%E7%A8%8B%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/12/20/%E8%AF%A6%E7%BB%86%E7%90%86%E8%A7%A3String%E3%80%81StringBuffer%E3%80%81StringBuilder%E5%8C%BA%E5%88%AB%E7%94%A8%E9%80%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/13/java%E7%BC%96%E7%A8%8B%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/" itemprop="url">java编程语法基础（3）</a></h2>
+                <a class="post-title-link" href="/2019/12/20/%E8%AF%A6%E7%BB%86%E7%90%86%E8%A7%A3String%E3%80%81StringBuffer%E3%80%81StringBuilder%E5%8C%BA%E5%88%AB%E7%94%A8%E9%80%94/" itemprop="url">详细理解String、StringBuffer、StringBuilder区别用途</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-13T10:14:03+08:00">
-                2019-12-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-20T18:45:01+08:00">
+                2019-12-20
               </time>
             
 
@@ -354,105 +354,31 @@
       
         
           
-            <h1 id="1、基本数据类型"><a href="#1、基本数据类型" class="headerlink" title="1、基本数据类型"></a>1、基本数据类型</h1><p>Java 的两大数据类型:</p>
-<ul>
-<li>内置数据类型</li>
-<li>引用数据类型</li>
-</ul>
-<h2 id="内置数据类型"><a href="#内置数据类型" class="headerlink" title="内置数据类型"></a>内置数据类型</h2><p>Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。</p>
-<p><strong>byte</strong>：</p>
-<p>byte 数据类型是<font color=red> 8 </font>位、有符号的，以二进制补码表示的整数；</p>
-<p>最小值是 -128（-2^7）；</p>
-<p>最大值是 127（2^7-1）；</p>
-<p>默认值是 0；</p>
-<p>byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 变量占用的空间只有 int 类型的四分之一；</p>
-<p>例子：byte a = 100，byte b = -50。</p>
-<p><strong>short</strong>：</p>
-<p>short 数据类型是 <font color=red> 16 </font> 位、有符号的以二进制补码表示的整数</p>
-<p>最小值是 -32768（-2^15）；</p>
-<p>最大值是 32767（2^15 - 1）；</p>
-<p>Short 数据类型也可以像 byte 那样节省空间。一个short变量是int型变量所占空间的二分之一；</p>
-<p>默认值是 0；</p>
-<p>例子：short s = 1000，short r = -20000。</p>
-<p><strong>int</strong>：</p>
-<p>int 数据类型是<font color=red> 32 </font>位、有符号的以二进制补码表示的整数；</p>
-<p>最小值是 -2,147,483,648（-2^31）；</p>
-<p>最大值是 2,147,483,647（2^31 - 1）；</p>
-<p>一般地整型变量默认为 int 类型；</p>
-<p>默认值是 0 ；</p>
-<p>例子：int a = 100000, int b = -200000。</p>
-<p><strong>long</strong>：</p>
-<p>long 数据类型是 <font color=red>64</font> 位、有符号的以二进制补码表示的整数；</p>
-<p>最小值是 -9,223,372,036,854,775,808（-2^63）；</p>
-<p>最大值是 9,223,372,036,854,775,807（2^63 -1）；</p>
-<p>这种类型主要使用在需要比较大整数的系统上；</p>
-<p>默认值是 0L；</p>
-<p>例子： long a = 100000L，Long b = -200000L。</p>
-<p>“L”理论上不分大小写，但是若写成”l”容易与数字”1”混淆，不容易分辩。所以最好大写。</p>
-<p><strong>float</strong>：</p>
-<p>float 数据类型是单精度、<font color=red> 32 </font> 位、符合IEEE 754标准的浮点数；</p>
-<p>float 在储存大型浮点数组的时候可节省内存空间；</p>
-<p>默认值是 0.0f；</p>
-<p>浮点数不能用来表示精确的值，如货币；</p>
-<p>例子：float f1 = 234.5f。</p>
-<p><strong>double</strong>：</p>
-<p>double 数据类型是双精度、<font color=red> 64 </font> 位、符合IEEE 754标准的浮点数；</p>
-<p>浮点数的默认类型为double类型；</p>
-<p>double类型同样不能表示精确的值，如货币；</p>
-<p>默认值是 0.0d；</p>
-<p>例子：double d1 = 123.4。</p>
-<p><strong>boolean</strong>：</p>
-<p>boolean数据类型表示一位的信息；</p>
-<p>只有两个取值：true 和 false；</p>
-<p>这种类型只作为一种标志来记录 true/false 情况；</p>
-<p>默认值是 false；</p>
-<p>例子：boolean one = true。</p>
-<p><strong>char</strong>：</p>
-<p>char类型是一个单一的 <font color=red>16</font> 位 Unicode 字符；</p>
-<p>最小值是 \u0000（即为0）；</p>
-<p>最大值是 \uffff（即为65,535）；</p>
-<p>char 数据类型可以储存任何字符；</p>
-<p>例子：char letter = ‘A’;。</p>
-<p>代码例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseType</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">boolean</span> bool;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">byte</span> by;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">char</span> ch;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">double</span> d;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">float</span> f;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> l;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">short</span> sh;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 默认值</span></span><br><span class="line">        System.out.println(<span class="string">"Bool :"</span> + bool);</span><br><span class="line">        System.out.println(<span class="string">"Byte :"</span> + by);</span><br><span class="line">        System.out.println(<span class="string">"Character:"</span> + ch);</span><br><span class="line">        System.out.println(<span class="string">"Double :"</span> + d);</span><br><span class="line">        System.out.println(<span class="string">"Float :"</span> + f);</span><br><span class="line">        System.out.println(<span class="string">"Integer :"</span> + i);</span><br><span class="line">        System.out.println(<span class="string">"Long :"</span> + l);</span><br><span class="line">        System.out.println(<span class="string">"Short :"</span> + sh);</span><br><span class="line"></span><br><span class="line">        builtInDataTypes();</span><br><span class="line">        referenceDataTypes();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * todo 八大 内置数据类型 4个整型 2个浮点型 1个字符型 1个布尔型</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">builtInDataTypes</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"说明 \t byte \t int \t short \t long \t float \t double \t char"</span>);</span><br><span class="line">        <span class="keyword">int</span>[] typeSizeArray = &#123;</span><br><span class="line">                Byte.SIZE,</span><br><span class="line">                Integer.SIZE,</span><br><span class="line">                Short.SIZE,</span><br><span class="line">                Long.SIZE,</span><br><span class="line">                Float.SIZE,</span><br><span class="line">                Double.SIZE,</span><br><span class="line">                Character.SIZE</span><br><span class="line">        &#125;;</span><br><span class="line">        System.out.print(<span class="string">"长度： \t "</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> l:typeSizeArray)&#123;</span><br><span class="line">            System.out.print(l + <span class="string">" \t "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.print(<span class="string">"\n最小值： \t "</span>);</span><br><span class="line">        System.out.print(Byte.MIN_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Integer.MIN_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Short.MIN_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Long.MIN_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Float.MIN_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Double.MIN_VALUE + <span class="string">" \t "</span>);</span><br><span class="line"></span><br><span class="line">        System.out.print(<span class="string">"\n最大值： \t "</span>);</span><br><span class="line">        System.out.print(Byte.MAX_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Integer.MAX_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Short.MAX_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Long.MAX_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Float.MAX_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">        System.out.print(Double.MAX_VALUE + <span class="string">" \t "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span>[] value;</span><br></pre></td></tr></table></figure>
 
-<p>输出：</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Bool :<span class="literal">false</span></span><br><span class="line">Byte :<span class="number">0</span></span><br><span class="line">Character: </span><br><span class="line">Double :<span class="number">0.0</span></span><br><span class="line">Float :<span class="number">0.0</span></span><br><span class="line">Integer :<span class="number">0</span></span><br><span class="line">Long :<span class="number">0</span></span><br><span class="line">Short :<span class="number">0</span></span><br><span class="line">说明 	 byte 	 <span class="built_in">int</span> 	 short 	 long 	 <span class="built_in">float</span> 	 <span class="built_in">double</span> 	 char</span><br><span class="line">长度： 	 <span class="number">8</span> 	 <span class="number">32</span> 	 <span class="number">16</span> 	 <span class="number">64</span> 	 <span class="number">32</span> 	 <span class="number">64</span> 	 <span class="number">16</span> 	 </span><br><span class="line">最小值： 	 <span class="number">-128</span> 	 <span class="number">-2147483648</span> 	 <span class="number">-32768</span> 	 <span class="number">-9223372036854775808</span> 	 <span class="number">1.4E-45</span> 	 <span class="number">4.9E-324</span> 	 </span><br><span class="line">最大值： 	 <span class="number">127</span> 	 <span class="number">2147483647</span> 	 <span class="number">32767</span> 	 <span class="number">9223372036854775807</span> 	 <span class="number">3.4028235E38</span> 	 <span class="number">1.7976931348623157E308</span></span><br></pre></td></tr></table></figure>
+<p>java 9 后改用 byte 数组存储，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">byte</span>[] value;</span><br></pre></td></tr></table></figure>
 
+<p>1、定义使用了final关键词，所以，<strong>String对象是不可变的</strong></p>
+<p>2、可以把 String 对象理解为 常量 ，不可变，即 <strong>线程安全</strong></p>
+<p>3、每次对 String 类型进行改变的时候，都会重新生成一个 String 对象，然后指向新的 String 对象。</p>
+<h3 id="StringBuffer"><a href="#StringBuffer" class="headerlink" title="StringBuffer"></a>StringBuffer</h3><p>继承自 抽象类 AbstractStringBuilder </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractStringBuilder</span> <span class="keyword">implements</span> <span class="title">Appendable</span>, <span class="title">CharSequence</span> </span>&#123;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The value is used for character storage.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">char</span>[] value;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The count is the number of characters used.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">int</span> count;</span><br><span class="line"> AbstractStringBuilder(<span class="keyword">int</span> capacity) &#123;</span><br><span class="line"> value = <span class="keyword">new</span> <span class="keyword">char</span>[capacity];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h2><p>引用类型指向一个变量，指向对象的变量是引用变量。声明时被指定特定类型。</p>
-<p>对象，数组都是引用类型。</p>
-<p>所有引用类型默认值都是null。</p>
-<p>引用变量可以兼容类型。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* todo 引用数据类型</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">referenceDataTypes</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// BaseType这就是引用类型</span></span><br><span class="line">    BaseType baseType = <span class="keyword">new</span> BaseType();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">char</span>[] value;</span><br></pre></td></tr></table></figure>
 
-
-<h1 id="2、JAVA常量"><a href="#2、JAVA常量" class="headerlink" title="2、JAVA常量"></a>2、JAVA常量</h1><p>常量在程序运行时是不能被修改的。</p>
-<p>在 Java 中使用 final 关键字来修饰常量。</p>
-<p>虽然常量名也可以用小写，但为了便于识别，通常使用大写字母表示常量。</p>
-<p>字符串常量和字符常量都可以包含任何Unicode字符。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* todo 常量</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">cons</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> A = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><p><img src="/images/20200326120950.gif" alt=""></p>
-<h2 id="自动类型转换"><a href="#自动类型转换" class="headerlink" title="自动类型转换"></a>自动类型转换</h2><p>整型、实型（常量）、字符型数据可以混合运算。运算中，不同类型的数据先转化为同一类型，然后进行运算。</p>
-<p>从低级到高级:</p>
-<p>byte,short,char—&gt; int —&gt; long—&gt; float —&gt; double</p>
-<p>规则：</p>
-<ul>
-<li><p>不能对boolean类型进行类型转换。</p>
-</li>
-<li><p>不能把对象类型转换成不相关类的对象。</p>
-</li>
-<li><p>在把容量大的类型转换为容量小的类型时必须使用强制类型转换。</p>
-</li>
-<li><p>转换过程中可能导致溢出或损失精度</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">char</span> c1=<span class="string">'a'</span>; <span class="comment">//定义一个char类型</span></span><br><span class="line">    <span class="keyword">int</span> i1 = c1; <span class="comment">//char自动类型转换为int</span></span><br><span class="line">    System.out.println(<span class="string">"char自动类型转换为int后的值等于"</span> + i1);</span><br><span class="line">    <span class="keyword">char</span> c2 = <span class="string">'A'</span>; <span class="comment">//定义一个char类型</span></span><br><span class="line">    <span class="keyword">int</span> i2 = c2 + <span class="number">1</span>; <span class="comment">//char 类型和 int 类型计算</span></span><br><span class="line">    System.out.println(<span class="string">"char类型和int计算后的值等于"</span> + i2);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span>自动类型转换为<span class="keyword">int</span>后的值等于<span class="number">97</span></span><br><span class="line"><span class="keyword">char</span>类型和<span class="keyword">int</span>计算后的值等于<span class="number">66</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i1 = <span class="number">123</span>;</span><br><span class="line">    <span class="keyword">byte</span> b = (<span class="keyword">byte</span>) i1; <span class="comment">//强制类型转换为byte</span></span><br><span class="line">    System.out.println(<span class="string">"int强制类型转换为byte后的值等于"</span> + b);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>强制类型转换为<span class="keyword">byte</span>后的值等于<span class="number">123</span></span><br></pre></td></tr></table></figure>
+<p>1、没有使用 final 关键词修饰，所以 <strong>可变</strong></p>
+<p>2、StringBuffer 对调用方法加了<strong>同步锁</strong>, 所以多线程下，是<strong>线程安全</strong>的</p>
+<p>3、StringBuffer每次操作都是对 StringBuffer 对象本身进行的，而没有生成新的对象和引用</p>
+<h3 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h3><p>同样继承自 AbstractStringBuilder</p>
+<p>1、<strong>可变</strong></p>
+<p>2、StringBuilder并没有对方法加同步锁，所以是<strong>非线程安全</strong>的</p>
+<p>3、同等操作下 StringBuilder 比StringBuffer 性能略好，但是多线程下有风险</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>1、操作少量数据适用 String</p>
+<p>2、单线程 大量数据操作 StringBuilder</p>
+<p>3、多线程 大量数据操作 StringBuffer</p>
 
           
         
@@ -492,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/28/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/30/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/28/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/30/">&gt;</a>
   </nav>
 
 
@@ -542,7 +468,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -564,7 +490,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

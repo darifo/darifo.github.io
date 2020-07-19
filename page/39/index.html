@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/17/Vue-axios-%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3/">
+    <link itemprop="mainEntityOfPage" href="https://darifo.github.io/2019/01/20/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95wiki%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Darifo">
@@ -280,7 +280,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/17/Vue-axios-%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3/" itemprop="url">Vue + axios 异步请求遇到的一些问题和解决</a></h2>
+                <a class="post-title-link" href="/2019/01/20/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95wiki%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" itemprop="url">搭建一个简单wiki遇到问题总结</a></h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-17T11:45:59+08:00">
-                2019-01-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-20T11:42:28+08:00">
+                2019-01-20
               </time>
             
 
@@ -354,113 +354,152 @@
       
         
           
-            <p>技术栈</p>
-<blockquote>
-<p>Vue + Vue-router + axios + element-UI  &amp;&amp;  ThinkPHP5</p>
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>使用技术框架：vue2 + vue-router + axios + mavonEditor + elementUI + ThinkPHP5</p>
 </blockquote>
-<h1 id="1、使用axios异步请求跨域问题解决"><a href="#1、使用axios异步请求跨域问题解决" class="headerlink" title="1、使用axios异步请求跨域问题解决"></a>1、使用axios异步请求跨域问题解决</h1><p>解决跨域问题常用的解决方案有两个：</p>
-<blockquote>
-<p>JSONP：利用script标签可跨域的特点，在跨域脚本中可以直接回调当前脚本的函数。</p>
-</blockquote>
-<blockquote>
-<p>CORS：服务器设置HTTP响应头中Access-Control-Allow-Origin值，解除跨域限制。</p>
-</blockquote>
-<ul>
-<li>后端解除限制</li>
-</ul>
-<p>使用的TP5框架，在入口文件 index.php 添加如下代码（比较暴力的配置，详细的可以看一下文档末尾的说明）：</p>
-<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Origin:*'</span>);  <span class="comment">// * 允许所有主机连接</span></span><br><span class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Methods:*'</span>);  <span class="comment">// * 允许所有类型请求方法</span></span><br><span class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Headers:*'</span>);  <span class="comment">// * 允许所有头</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>前端方案</li>
-</ul>
-<p>代理 </p>
-<blockquote>
-<p>正向代理、反向代理</p>
-</blockquote>
-<p>不是很了解，有待学习····</p>
-<h1 id="2、发送-OPTION-预检请求导致的接口错误解决"><a href="#2、发送-OPTION-预检请求导致的接口错误解决" class="headerlink" title="2、发送 OPTION 预检请求导致的接口错误解决"></a>2、发送 OPTION 预检请求导致的接口错误解决</h1><p>背景：</p>
-<p>其实这个问题在之前项目开发中遇到过多次了，对前端（vue、axios）也不是很熟练，一直没总结，导致最近又遇到了，还是犯这种错，所以在这里简单总结了一下，希望以后遇到能够很快定位到问题所在；</p>
-<p>我在使用axios发送异步请求的时候，会发起两次“重复”请求，实际上是两次不同的请求，</p>
-<p>第一次是以 OPTION 方式 发起的 预检请求 ，也就是提前告诉服务器，我要以什么方式去请求你啦，做好准备哦！这个信息是通过 HTTP 请求头的 “Access-Control-Request-Method” 传递的，==这个预请求不会带参数到后端，所以我们后端接口往往获取不到此类请求的参数，这也就是为什么接口一般会 500 的原因啦==；</p>
-<p><img src="/images/20200402114820.png" alt="image"></p>
-<p>第二次请求是真实请求，也就是我们想要发送的 POST 类型请求，真实请求会带上请求参数，向后端获取对应的数据，这时后端接口才能正常获取参数，执行逻辑代码，返回数据，完成整个流程；<br><img src="/images/20200402114858.png" alt="image"></p>
-<p>所以，为了不出现 500 的致命错误，代码逻辑还需要相当的严谨才好啊～～～</p>
-<p>比如，对于接口参数，接收或是转成数组、对象 等 操作的时候 ， 最好不要直接用下标或者属性去获取，还是先验证一番！至少知道错在哪，不会导致错误被直接抛出，也不利于程序安全，同样，try…catch 代码块也体现出相当重要的地位。</p>
-<p><img src="/images/20200402114919.png" alt="image"></p>
-<ul>
-<li>接口过滤请求，只接收 指定类型的请求处理逻辑；</li>
-</ul>
-<p>tp5 继承 Controller 类可调用request-&gt;isPost()</p>
-<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">if</span> ($this-&gt;</span><span class="function"><span class="title">request</span>-&gt;</span>isPost())&#123;</span><br><span class="line">    <span class="comment">// 处理逻辑，获取参数</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// 返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>设置头“Access-Control-Allow-Methods”，不允许 OPTION 请求；</li>
-</ul>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header('Access-Control-Allow-Methods<span class="symbol">:POST</span>,GET')<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-
-
-
 <hr>
-<h1 id="相关文档说明："><a href="#相关文档说明：" class="headerlink" title="相关文档说明："></a>相关文档说明：</h1><h2 id="HTTP-响应首部字段"><a href="#HTTP-响应首部字段" class="headerlink" title="HTTP 响应首部字段"></a>HTTP 响应首部字段</h2><blockquote>
-<h3 id="Access-Control-Allow-Credentials"><a href="#Access-Control-Allow-Credentials" class="headerlink" title="Access-Control-Allow-Credentials"></a>Access-Control-Allow-Credentials</h3></blockquote>
-<p>响应头表示是否可以将对请求的响应暴露给页面。返回true则可以，其他值均不可以。<br>Credentials可以是 cookies, authorization headers 或 TLS client certificates。<br>当作为对预检请求的响应的一部分时，这能表示是否真正的请求可以使用credentials。注意简单的GET 请求没有预检，所以若一个对资源的请求带了credentials，如果这个返回这个资源，响应就会被浏览器忽视，不会返回到web内容。</p>
-<p>Access-Control-Allow-Credentials 头 工作中与XMLHttpRequest.withCredentials 或Fetch API中的Request() 构造器中的credentials 选项结合使用。Credentials必须在前后端都被配置（即the Access-Control-Allow-Credentials header 和 XHR 或Fetch request中都要配置）才能使带credentials的CORS请求成功。</p>
-<p>语法：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Access-Control-Allow-Credentials:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>主要功能包括：</p>
+<ul>
+<li>新增分类菜单</li>
+<li>新增markdown文档</li>
+<li>编辑文档</li>
+<li>删除文档</li>
+<li>结构化查看文档</li>
+</ul>
+<hr>
+<h3 id="涉及技术点："><a href="#涉及技术点：" class="headerlink" title="涉及技术点："></a>涉及技术点：</h3><h5 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h5><ul>
+<li>无限级分类数据获取及菜单渲染</li>
+<li>前端路由跳转及参数获取</li>
+<li>axios异步数据请求</li>
+<li>无状态刷新页面</li>
+<li>localStorage本地数据存取</li>
+<li>表单数据验证</li>
+<li>弹窗消息管理</li>
+<li>数据loading效果控制</li>
+<li>组件化父子组件通讯</li>
+<li>双向数据绑定</li>
+<li>组件生命周期</li>
+<li>mavonEditor</li>
+<li>接口数据格式转换</li>
+</ul>
+<h5 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h5><ul>
+<li>递归方式实现无限级菜单数据查询</li>
+</ul>
+<h5 id="数据表设计"><a href="#数据表设计" class="headerlink" title="数据表设计"></a>数据表设计</h5><ul>
+<li>单表多功能数据结构</li>
+</ul>
+<hr>
+<h3 id="搭建架子"><a href="#搭建架子" class="headerlink" title="搭建架子"></a>搭建架子</h3><h5 id="前端架子"><a href="#前端架子" class="headerlink" title="前端架子"></a>前端架子</h5><p>在之前的一篇文档《尝试MAC安装vue开发运行环境》所完成的工作基础上，</p>
+<p>我们还需要进入已经能运行的项目目录，安装一些插件：</p>
+<p>路由模块：==vue-router==</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">run</span> vue-router <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<h2 id="Access-Control-Allow-Origin"><a href="#Access-Control-Allow-Origin" class="headerlink" title="Access-Control-Allow-Origin"></a>Access-Control-Allow-Origin</h2></blockquote>
-<p>指定了允许访问该资源的域</p>
-<p>语法：</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: <span class="variable">&lt;origin&gt;</span> |<span class="string"> *</span></span><br></pre></td></tr></table></figure>
-<p>origin 参数的值指定了允许访问该资源的外域 URI。对于不需要携带身份凭证的请求，服务器可以指定该字段的值为通配符，表示允许来自所有域的请求。</p>
-<p>如果服务端指定了具体的域名而非“*”，那么响应首部中的 Vary 字段的值必须包含 Origin。这将告诉客户端：服务器对不同的源站返回不同的内容。</p>
-<blockquote>
-<h2 id="Access-Control-Allow-Methods"><a href="#Access-Control-Allow-Methods" class="headerlink" title="Access-Control-Allow-Methods"></a>Access-Control-Allow-Methods</h2></blockquote>
-<p>指明了实际请求所允许使用的 HTTP 方法。</p>
-<p>语法：</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Methods: &lt;<span class="function"><span class="keyword">method</span>&gt;[, &lt;<span class="title">method</span>&gt;]*</span></span><br></pre></td></tr></table></figure>
+<p>请求模块：==axios==</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">run</span> axios <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+
+<p>安装模块：==mavonEditor==</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> mavon-editor <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+
+<p>安装模块：==elementUI== （我之前已经安装好）</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> i element-ui -S</span><br></pre></td></tr></table></figure>
+
+<h5 id="后端架子"><a href="#后端架子" class="headerlink" title="后端架子"></a>后端架子</h5><p>ThinkPHP框架，创建一个api模块，新建controller</p>
+<h5 id="数据表设计-1"><a href="#数据表设计-1" class="headerlink" title="数据表设计"></a>数据表设计</h5><table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>字段类型</th>
+<th>字段长度</th>
+<th>是否为空</th>
+<th>是否主键</th>
+<th>默认值</th>
+<th>字段说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><p>==main.js==</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入vue模块</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入路由模块</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入axios网络请求模块</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="keyword">import</span> VueAxios <span class="keyword">from</span> <span class="string">'vue-axios'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入elementUI组件</span></span><br><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入markdown编辑器mavonEditor</span></span><br><span class="line"><span class="keyword">import</span> mavonEditor <span class="keyword">from</span> <span class="string">'mavon-editor'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'mavon-editor/dist/css/index.css'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入自定义工具扩展库</span></span><br><span class="line"><span class="keyword">import</span> utils <span class="keyword">from</span> <span class="string">'./utils'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注入vue</span></span><br><span class="line">Vue.use(mavonEditor)</span><br><span class="line">Vue.use(VueAxios,axios);</span><br><span class="line">Vue.use(ElementUI);</span><br><span class="line"></span><br><span class="line"><span class="comment">// axios统一接口地址配置</span></span><br><span class="line">axios.defaults.baseURL = <span class="string">""</span></span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* eslint-disable no-new */</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  router,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: <span class="string">'&lt;App/&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>==App.vue==</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;img src="./assets/logo.png"&gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">v-if</span>=<span class="string">"isRouterAlive"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">  name: <span class="string">'App'</span>,</span></span><br><span class="line">	provide ()&#123;</span><br><span class="line"><span class="actionscript">     <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">       reload:<span class="keyword">this</span>.reload</span></span><br><span class="line">     &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data()&#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">       isRouterAlive:<span class="literal">true</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		reload ()&#123;</span><br><span class="line"><span class="actionscript">       <span class="keyword">this</span>.isRouterAlive = <span class="literal">false</span></span></span><br><span class="line"><span class="actionscript">       <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">          <span class="keyword">this</span>.isRouterAlive = <span class="literal">true</span></span></span><br><span class="line">       &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-id">#app</span> &#123;</span></span><br><span class="line">  font-family: 'Avenir', Helvetica, Arial, sans-serif;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">  -moz-osx-font-smoothing: grayscale;</span><br><span class="line">  text-align: center;</span><br><span class="line"><span class="css">  <span class="selector-tag">color</span>: <span class="selector-id">#2c3e50</span>;</span></span><br><span class="line">  margin-top: 60px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>==router/index.js==</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// =========组件引入=========</span></span><br><span class="line"><span class="keyword">import</span> DocumentWiki <span class="keyword">from</span> <span class="string">'@/components/document/wiki'</span></span><br><span class="line"><span class="keyword">import</span> DocumentWikiDetail <span class="keyword">from</span> <span class="string">'@/components/document/wiki_detail'</span></span><br><span class="line"><span class="keyword">import</span> DocumentWikiAdd <span class="keyword">from</span> <span class="string">'@/components/document/wiki_add'</span></span><br><span class="line"><span class="keyword">import</span> DocumentWikiEditor <span class="keyword">from</span> <span class="string">'@/components/document/wiki_editor'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">	&#123;</span><br><span class="line">	  path: <span class="string">'/document/wiki'</span>,</span><br><span class="line">	  name: <span class="string">'DocumentWiki'</span>,</span><br><span class="line">	  component: DocumentWiki</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">	  path: <span class="string">'/document/wiki_detail'</span>,</span><br><span class="line">	  name: <span class="string">'DocumentWikiDetail'</span>,</span><br><span class="line">	  component: DocumentWikiDetail</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">	  path: <span class="string">'/document/wiki_add'</span>,</span><br><span class="line">	  name: <span class="string">'DocumentWikiAdd'</span>,</span><br><span class="line">	  component: DocumentWikiAdd</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">	  path: <span class="string">'/document/wiki_editor'</span>,</span><br><span class="line">	  name: <span class="string">'DocumentWikiEditor'</span>,</span><br><span class="line">	  component: DocumentWikiEditor</span><br><span class="line">	&#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 
-
-<blockquote>
-<h2 id="Access-Control-Allow-Headers"><a href="#Access-Control-Allow-Headers" class="headerlink" title="Access-Control-Allow-Headers"></a>Access-Control-Allow-Headers</h2></blockquote>
-<p>指明了实际请求中允许携带的首部字段。</p>
-<p>语法：</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Allow-Headers: &lt;field-<span class="keyword">name</span>&gt;[, &lt;field-<span class="keyword">name</span>&gt;]*</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<h2 id="Access-Control-Expose-Headers"><a href="#Access-Control-Expose-Headers" class="headerlink" title="Access-Control-Expose-Headers"></a>Access-Control-Expose-Headers</h2></blockquote>
-<p>在跨域访问时，XMLHttpRequest对象的getResponseHeader()方法只能拿到一些最基本的响应头，Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma，如果要访问其他头，则需要服务器设置本响应头。</p>
-<p>Access-Control-Expose-Headers 头让服务器把允许浏览器访问的头放入白名单，例如</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Expose-Headers: X-My-Custom-<span class="keyword">Header</span>, X-Another-Custom-<span class="keyword">Header</span></span><br></pre></td></tr></table></figure>
-
-<p>这样浏览器就能够通过getResponseHeader访问X-My-Custom-Header和 X-Another-Custom-Header 响应头了。</p>
-<blockquote>
-<h2 id="Access-Control-Max-Age"><a href="#Access-Control-Max-Age" class="headerlink" title="Access-Control-Max-Age"></a>Access-Control-Max-Age</h2></blockquote>
-<p>指定了preflight请求的结果能够被缓存多久。</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Max-Age: &lt;<span class="keyword">delta</span>-seconds&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>delta-seconds 参数表示preflight请求的结果在多少秒内有效。</p>
-<h2 id="HTTP-请求首部字段"><a href="#HTTP-请求首部字段" class="headerlink" title="HTTP 请求首部字段"></a>HTTP 请求首部字段</h2><blockquote>
-<h2 id="Origin"><a href="#Origin" class="headerlink" title="Origin"></a>Origin</h2></blockquote>
-<p>表明预检请求或实际请求的源站。</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Origin:</span> <span class="params">&lt;origin&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>origin 参数的值为源站 URI。它不包含任何路径信息，只是服务器名称。</p>
-<blockquote>
-<h2 id="Access-Control-Request-Method"><a href="#Access-Control-Request-Method" class="headerlink" title="Access-Control-Request-Method"></a>Access-Control-Request-Method</h2></blockquote>
-<p>用于预检请求。其作用是，将实际请求所使用的 HTTP 方法告诉服务器。</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Request-<span class="function"><span class="keyword">Method</span>:</span> &lt;<span class="function"><span class="keyword">method</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-<blockquote>
-<h2 id="Access-Control-Request-Headers"><a href="#Access-Control-Request-Headers" class="headerlink" title="Access-Control-Request-Headers"></a>Access-Control-Request-Headers</h2></blockquote>
-<p>用于预检请求。其作用是，将实际请求所携带的首部字段告诉服务器。</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Request-Headers: &lt;field-<span class="keyword">name</span>&gt;[, &lt;field-<span class="keyword">name</span>&gt;]*</span><br></pre></td></tr></table></figure>
 
 
 
@@ -503,7 +542,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/38/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/40/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/38/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/40/">&gt;</a>
   </nav>
 
 
@@ -553,7 +592,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -575,7 +614,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
