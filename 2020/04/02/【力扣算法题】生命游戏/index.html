@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="算法,数组,矩阵," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="给定一个包含 m × n 个格子的面板，每一个格子都可以看成是一个细胞。每个细胞都具有一个初始状态：1 即为活细胞（live），或 0 即为死细胞（dead）。每个细胞与其八个相邻位置（水平，垂直，对角线）的细胞都遵循以下四条生存定律： 1.如果活细胞周围八个位置的活细胞数少于两个，则该位置活细胞死亡； 2.如果活细胞周围八个位置有两个或三个活细胞，则该位置活细胞仍然存活； 3.如果活细胞周围八个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【力扣算法题】生命游戏">
+<meta property="og:url" content="http://blog.darifo.xyz/2020/04/02/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F/index.html">
+<meta property="og:site_name" content="Darifo&#39;s Blog">
+<meta property="og:description" content="给定一个包含 m × n 个格子的面板，每一个格子都可以看成是一个细胞。每个细胞都具有一个初始状态：1 即为活细胞（live），或 0 即为死细胞（dead）。每个细胞与其八个相邻位置（水平，垂直，对角线）的细胞都遵循以下四条生存定律： 1.如果活细胞周围八个位置的活细胞数少于两个，则该位置活细胞死亡； 2.如果活细胞周围八个位置有两个或三个活细胞，则该位置活细胞仍然存活； 3.如果活细胞周围八个">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-02T10:56:09.000Z">
+<meta property="article:modified_time" content="2020-04-02T10:56:09.000Z">
+<meta property="article:author" content="Darifo">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="矩阵">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.darifo.xyz/2020/04/02/【力扣算法题】生命游戏/"/>
+
+
+
+
+
+  <title>【力扣算法题】生命游戏 | Darifo's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Darifo's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Live to learn old, there are still many to learn. </h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.darifo.xyz/2020/04/02/%E3%80%90%E5%8A%9B%E6%89%A3%E7%AE%97%E6%B3%95%E9%A2%98%E3%80%91%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Darifo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Darifo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">【力扣算法题】生命游戏</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-02T18:56:09+08:00">
+                2020-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>给定一个包含 m × n 个格子的面板，每一个格子都可以看成是一个细胞。每个细胞都具有一个初始状态：1 即为活细胞（live），或 0 即为死细胞（dead）。每个细胞与其八个相邻位置（水平，垂直，对角线）的细胞都遵循以下四条生存定律：</p>
+<p>1.如果活细胞周围八个位置的活细胞数少于两个，则该位置活细胞死亡；</p>
+<p>2.如果活细胞周围八个位置有两个或三个活细胞，则该位置活细胞仍然存活；</p>
+<p>3.如果活细胞周围八个位置有超过三个活细胞，则该位置活细胞死亡；</p>
+<p>4.如果死细胞周围正好有三个活细胞，则该位置死细胞复活；</p>
+<p>根据当前状态，写一个函数来计算面板上所有细胞的下一个（一次更新后的）状态。下一个状态是通过将上述规则同时应用于当前状态下的每个细胞所形成的，其中细胞的出生和死亡是同时发生的。</p>
+<p>案例：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">输入： </span><br><span class="line">[</span><br><span class="line">  [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">  [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">[</span><br><span class="line">  [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>],</span><br><span class="line">  [<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">  [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><p>由题目意思可知，在矩阵（二维数组）中，1是活细胞，0是死细胞，在特定条件下，活细胞会死，死细胞会活，而题目要求是求出这个矩阵面板上所有细胞的下一状态，即只做一次条件匹配，更新后的细胞存活和死亡状态，不妨看一下案例输入矩阵，第一行第二个细胞是活细胞，它的上下左右斜八个方向（边缘细胞少于八个方向），只有一个活细胞（第二行第三个），即命中题目条件1，所以这个活细胞会死掉，同理，可以推算其他细胞在进行一次条件匹配后，是存活还是死亡。</p>
+<p>那么，具体逻辑应该是怎样呢。</p>
+<h4 id="方法一：复制参考矩阵"><a href="#方法一：复制参考矩阵" class="headerlink" title="方法一：复制参考矩阵"></a>方法一：复制参考矩阵</h4><p>时间复杂度：O(mn)  m,n为矩阵行列长度</p>
+<p>空间复杂度：O(mn) mn为复制矩阵所需空间</p>
+<h4 id="方法二：带复合状态的遍历搜寻及恢复"><a href="#方法二：带复合状态的遍历搜寻及恢复" class="headerlink" title="方法二：带复合状态的遍历搜寻及恢复"></a>方法二：带复合状态的遍历搜寻及恢复</h4><p>时间复杂度：O(mn)  m,n为矩阵行列长度<br>空间复杂度：O(1)</p>
+<h5 id="详细流程见代码注释："><a href="#详细流程见代码注释：" class="headerlink" title="详细流程见代码注释："></a>详细流程见代码注释：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.company.darifo.solutions;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameOfLife</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        GameOfLife gameOfLife = <span class="keyword">new</span> GameOfLife();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[][] b = &#123;</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>&#125;,</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>&#125;,</span><br><span class="line">                &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>&#125;,</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        printMap(b);</span><br><span class="line">        gameOfLife.funcOne(b);</span><br><span class="line">        printMap(b);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[][] d = &#123;</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>&#125;,</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>&#125;,</span><br><span class="line">                &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>&#125;,</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        printMap(d);</span><br><span class="line">        gameOfLife.funcTow(d);</span><br><span class="line">        printMap(d);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printMap</span><span class="params">(<span class="keyword">int</span>[][] map)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"矩阵打印如下："</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] chars : map) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> aChar : chars) &#123;</span><br><span class="line">                System.out.print(aChar);</span><br><span class="line">                System.out.print(<span class="string">'\t'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.print(<span class="string">'\n'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * todo 方法一 复制数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">funcOne</span><span class="params">(<span class="keyword">int</span>[][] board)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义搜索方向坐标偏移量数组</span></span><br><span class="line">        <span class="keyword">int</span>[] nb = &#123;<span class="number">0</span>, <span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化面板行列</span></span><br><span class="line">        <span class="keyword">int</span> rows = board.length;</span><br><span class="line">        <span class="keyword">int</span> cols = board[<span class="number">0</span>].length;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 复制一份数组，用于参考</span></span><br><span class="line">        <span class="keyword">int</span>[][] copyBoard = <span class="keyword">new</span> <span class="keyword">int</span>[rows][cols];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> rr = <span class="number">0</span>; rr &lt; rows; rr++) &#123;</span><br><span class="line">            System.arraycopy(board[rr], <span class="number">0</span>, copyBoard[rr], <span class="number">0</span>, cols);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历每一个细胞</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 初始化本细胞周围存活细胞数</span></span><br><span class="line">                <span class="keyword">int</span> aliveNb = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//开始从本细胞不同方向去搜寻周边细胞 ,根据坐标偏移量数组nb[0,1,-1]实现八个方向搜索</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">3</span>; x++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; <span class="number">3</span>; y++) &#123;</span><br><span class="line">                        <span class="comment">// 取出坐标偏移量，以获得周围细胞数据</span></span><br><span class="line">                        <span class="comment">// 横坐标纵坐标偏移量不能同时为0 否则就没意义（没有移动）</span></span><br><span class="line">                        <span class="keyword">if</span> (!(nb[x] == <span class="number">0</span> &amp;&amp; nb[y] == <span class="number">0</span>)) &#123;</span><br><span class="line">                            <span class="comment">// 横坐标偏移量</span></span><br><span class="line">                            <span class="keyword">int</span> r = i + nb[x];</span><br><span class="line">                            <span class="comment">// 纵坐标偏移量</span></span><br><span class="line">                            <span class="keyword">int</span> c = j + nb[y];</span><br><span class="line"></span><br><span class="line">                            <span class="comment">// 用偏移后的坐标去取该位置细胞的状态, 如果存活，本细胞周围存活细胞数+1</span></span><br><span class="line">                            <span class="comment">// 注意：偏移后坐标不能越界（不能超过面板边界）</span></span><br><span class="line">                            <span class="keyword">if</span> ((r &gt;= <span class="number">0</span> &amp;&amp; c &gt;= <span class="number">0</span>) &amp;&amp; (r &lt; rows &amp;&amp; c &lt; cols) &amp;&amp; copyBoard[r][c] == <span class="number">1</span>) &#123;</span><br><span class="line">                                aliveNb += <span class="number">1</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 更新细胞状态</span></span><br><span class="line">                <span class="comment">// 1.活细胞，周边存活数小于2，细胞死亡</span></span><br><span class="line">                <span class="comment">// 3.活细胞，周边活细胞超过三个，细胞死亡</span></span><br><span class="line">                <span class="keyword">if</span> (copyBoard[i][j] == <span class="number">1</span> &amp;&amp; (aliveNb &lt; <span class="number">2</span> || aliveNb &gt; <span class="number">3</span>)) &#123;</span><br><span class="line">                    <span class="comment">// 改变原数组内容</span></span><br><span class="line">                    board[i][j] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 2.活细胞，周边存活细胞数2-3个，细胞存活 (不用管，反正都是活的)</span></span><br><span class="line">                <span class="comment">// 4.死细胞，周边存活数正好3个，细胞复活</span></span><br><span class="line">                <span class="keyword">if</span> (copyBoard[i][j] == <span class="number">0</span> &amp;&amp; aliveNb == <span class="number">3</span>) &#123;</span><br><span class="line">                    <span class="comment">// 改变原数组内容</span></span><br><span class="line">                    board[i][j] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * todo 方法二 复定义复合状态</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">funcTow</span><span class="params">(<span class="keyword">int</span>[][] board)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义搜索方向坐标偏移量数组</span></span><br><span class="line">        <span class="keyword">int</span>[] nb = &#123;<span class="number">0</span>, <span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化面板行列</span></span><br><span class="line">        <span class="keyword">int</span> rows = board.length;</span><br><span class="line">        <span class="keyword">int</span> cols = board[<span class="number">0</span>].length;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历每一个细胞</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 初始化本细胞周围存活细胞数</span></span><br><span class="line">                <span class="keyword">int</span> aliveNb = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//开始从本细胞不同方向去搜寻周边细胞 ,根据坐标偏移量数组nb[0,1,-1]实现八个方向搜索</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">3</span>; x++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; <span class="number">3</span>; y++) &#123;</span><br><span class="line">                        <span class="comment">// 取出坐标偏移量，以获得周围细胞数据</span></span><br><span class="line">                        <span class="comment">// 横坐标纵坐标偏移量不能同时为0 否则就没意义（没有移动）</span></span><br><span class="line">                        <span class="keyword">if</span> (!(nb[x] == <span class="number">0</span> &amp;&amp; nb[y] == <span class="number">0</span>)) &#123;</span><br><span class="line">                            <span class="comment">// 横坐标偏移量</span></span><br><span class="line">                            <span class="keyword">int</span> r = i + nb[x];</span><br><span class="line">                            <span class="comment">// 纵坐标偏移量</span></span><br><span class="line">                            <span class="keyword">int</span> c = j + nb[y];</span><br><span class="line"></span><br><span class="line">                            <span class="comment">// 用偏移后的坐标去取该位置细胞的状态, 如果存活，本细胞周围存活细胞数+1</span></span><br><span class="line">                            <span class="comment">// 注意：偏移后坐标不能越界（不能超过面板边界）</span></span><br><span class="line">                            <span class="keyword">if</span> (</span><br><span class="line">                                    (r &gt;= <span class="number">0</span> &amp;&amp; c &gt;= <span class="number">0</span>) &amp;&amp;</span><br><span class="line">                                            (r &lt; rows &amp;&amp; c &lt; cols) &amp;&amp;</span><br><span class="line">                                            (board[r][c] == <span class="number">1</span> || board[r][c] == <span class="number">20</span>)</span><br><span class="line">                            ) &#123;</span><br><span class="line">                                <span class="comment">// 条件注意：（状态转换由下面两个条件语句控制）</span></span><br><span class="line">                                <span class="comment">// 复合状态21表示之前是死的，活了就变为21（根据下面条件得）</span></span><br><span class="line">                                <span class="comment">// 复合状态20表示之前是活的，现在死掉了</span></span><br><span class="line"></span><br><span class="line">                                aliveNb += <span class="number">1</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 更新细胞状态</span></span><br><span class="line">                <span class="comment">// 1.活细胞，周边存活数小于2，细胞死亡</span></span><br><span class="line">                <span class="comment">// 3.活细胞，周边活细胞超过三个，细胞死亡</span></span><br><span class="line">                <span class="keyword">if</span> (</span><br><span class="line">                        (board[i][j] == <span class="number">1</span> || board[i][j] == <span class="number">21</span>) &amp;&amp;</span><br><span class="line">                                (aliveNb &lt; <span class="number">2</span> || aliveNb &gt; <span class="number">3</span>)</span><br><span class="line">                ) &#123;</span><br><span class="line">                    <span class="comment">// 改变原数组内容 死掉 复合状态20 过去是活的</span></span><br><span class="line">                    board[i][j] = <span class="number">20</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 2.活细胞，周边存活细胞数2-3个，细胞存活 (不用管，反正都是活的)</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// 4.死细胞，周边存活数正好3个，细胞复活</span></span><br><span class="line">                <span class="keyword">if</span> (</span><br><span class="line">                        (board[i][j] == <span class="number">0</span> || board[i][j] == <span class="number">20</span>) &amp;&amp;</span><br><span class="line">                                aliveNb == <span class="number">3</span></span><br><span class="line">                ) &#123;</span><br><span class="line">                    <span class="comment">// 改变原数组内容 活着复合状态21 过去是死的</span></span><br><span class="line">                    board[i][j] = <span class="number">21</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 搜寻结束，回归复合状态 （把数组中20、21转换成0、1）</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">20</span> || board[i][j] == <span class="number">0</span>) &#123;</span><br><span class="line">                    board[i][j] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">21</span> || board[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                    board[i][j] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
+          
+            <a href="/tags/%E7%9F%A9%E9%98%B5/" rel="tag"># 矩阵</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/27/KMP%E7%AE%97%E6%B3%95/" rel="next" title="KMP算法">
+                <i class="fa fa-chevron-left"></i> KMP算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%AD%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%85%B3%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" rel="prev" title="计算机网络中协议相关一些知识总结">
+                计算机网络中协议相关一些知识总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Darifo" />
+            
+              <p class="site-author-name" itemprop="name">Darifo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/darifo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:feaglenet@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.darifo.xyz/" title="Darifo`s Blog" target="_blank">Darifo`s Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题"><span class="nav-number">1.</span> <span class="nav-text">解题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一：复制参考矩阵"><span class="nav-number">1.1.</span> <span class="nav-text">方法一：复制参考矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二：带复合状态的遍历搜寻及恢复"><span class="nav-number">1.2.</span> <span class="nav-text">方法二：带复合状态的遍历搜寻及恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#详细流程见代码注释："><span class="nav-number">1.2.1.</span> <span class="nav-text">详细流程见代码注释：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Darifo`s Blog</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

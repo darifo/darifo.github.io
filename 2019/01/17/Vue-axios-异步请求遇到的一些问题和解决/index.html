@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Vue,axios,跨域,Option请求," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="技术栈  Vue + Vue-router + axios + element-UI  &amp;&amp;  ThinkPHP5  1、使用axios异步请求跨域问题解决解决跨域问题常用的解决方案有两个：  JSONP：利用script标签可跨域的特点，在跨域脚本中可以直接回调当前脚本的函数。   CORS：服务器设置HTTP响应头中Access-Control-Allow-Origin值，解除">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue + axios 异步请求遇到的一些问题和解决">
+<meta property="og:url" content="http://blog.darifo.xyz/2019/01/17/Vue-axios-%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3/index.html">
+<meta property="og:site_name" content="Darifo&#39;s Blog">
+<meta property="og:description" content="技术栈  Vue + Vue-router + axios + element-UI  &amp;&amp;  ThinkPHP5  1、使用axios异步请求跨域问题解决解决跨域问题常用的解决方案有两个：  JSONP：利用script标签可跨域的特点，在跨域脚本中可以直接回调当前脚本的函数。   CORS：服务器设置HTTP响应头中Access-Control-Allow-Origin值，解除">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://blog.darifo.xyz/images/20200402114820.png">
+<meta property="og:image" content="http://blog.darifo.xyz/images/20200402114858.png">
+<meta property="og:image" content="http://blog.darifo.xyz/images/20200402114919.png">
+<meta property="article:published_time" content="2019-01-17T03:45:59.000Z">
+<meta property="article:modified_time" content="2019-01-17T03:45:59.000Z">
+<meta property="article:author" content="Darifo">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="axios">
+<meta property="article:tag" content="跨域">
+<meta property="article:tag" content="Option请求">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.darifo.xyz/images/20200402114820.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.darifo.xyz/2019/01/17/Vue-axios-异步请求遇到的一些问题和解决/"/>
+
+
+
+
+
+  <title>Vue + axios 异步请求遇到的一些问题和解决 | Darifo's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Darifo's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Live to learn old, there are still many to learn. </h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.darifo.xyz/2019/01/17/Vue-axios-%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Darifo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Darifo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Vue + axios 异步请求遇到的一些问题和解决</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-17T11:45:59+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" itemprop="url" rel="index">
+                    <span itemprop="name">经验总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>技术栈</p>
+<blockquote>
+<p>Vue + Vue-router + axios + element-UI  &amp;&amp;  ThinkPHP5</p>
+</blockquote>
+<h1 id="1、使用axios异步请求跨域问题解决"><a href="#1、使用axios异步请求跨域问题解决" class="headerlink" title="1、使用axios异步请求跨域问题解决"></a>1、使用axios异步请求跨域问题解决</h1><p>解决跨域问题常用的解决方案有两个：</p>
+<blockquote>
+<p>JSONP：利用script标签可跨域的特点，在跨域脚本中可以直接回调当前脚本的函数。</p>
+</blockquote>
+<blockquote>
+<p>CORS：服务器设置HTTP响应头中Access-Control-Allow-Origin值，解除跨域限制。</p>
+</blockquote>
+<ul>
+<li>后端解除限制</li>
+</ul>
+<p>使用的TP5框架，在入口文件 index.php 添加如下代码（比较暴力的配置，详细的可以看一下文档末尾的说明）：</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Origin:*'</span>);  <span class="comment">// * 允许所有主机连接</span></span><br><span class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Methods:*'</span>);  <span class="comment">// * 允许所有类型请求方法</span></span><br><span class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Headers:*'</span>);  <span class="comment">// * 允许所有头</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>前端方案</li>
+</ul>
+<p>代理 </p>
+<blockquote>
+<p>正向代理、反向代理</p>
+</blockquote>
+<p>不是很了解，有待学习····</p>
+<h1 id="2、发送-OPTION-预检请求导致的接口错误解决"><a href="#2、发送-OPTION-预检请求导致的接口错误解决" class="headerlink" title="2、发送 OPTION 预检请求导致的接口错误解决"></a>2、发送 OPTION 预检请求导致的接口错误解决</h1><p>背景：</p>
+<p>其实这个问题在之前项目开发中遇到过多次了，对前端（vue、axios）也不是很熟练，一直没总结，导致最近又遇到了，还是犯这种错，所以在这里简单总结了一下，希望以后遇到能够很快定位到问题所在；</p>
+<p>我在使用axios发送异步请求的时候，会发起两次“重复”请求，实际上是两次不同的请求，</p>
+<p>第一次是以 OPTION 方式 发起的 预检请求 ，也就是提前告诉服务器，我要以什么方式去请求你啦，做好准备哦！这个信息是通过 HTTP 请求头的 “Access-Control-Request-Method” 传递的，==这个预请求不会带参数到后端，所以我们后端接口往往获取不到此类请求的参数，这也就是为什么接口一般会 500 的原因啦==；</p>
+<p><img src="/images/20200402114820.png" alt="image"></p>
+<p>第二次请求是真实请求，也就是我们想要发送的 POST 类型请求，真实请求会带上请求参数，向后端获取对应的数据，这时后端接口才能正常获取参数，执行逻辑代码，返回数据，完成整个流程；<br><img src="/images/20200402114858.png" alt="image"></p>
+<p>所以，为了不出现 500 的致命错误，代码逻辑还需要相当的严谨才好啊～～～</p>
+<p>比如，对于接口参数，接收或是转成数组、对象 等 操作的时候 ， 最好不要直接用下标或者属性去获取，还是先验证一番！至少知道错在哪，不会导致错误被直接抛出，也不利于程序安全，同样，try…catch 代码块也体现出相当重要的地位。</p>
+<p><img src="/images/20200402114919.png" alt="image"></p>
+<ul>
+<li>接口过滤请求，只接收 指定类型的请求处理逻辑；</li>
+</ul>
+<p>tp5 继承 Controller 类可调用request-&gt;isPost()</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">if</span> ($this-&gt;</span><span class="function"><span class="title">request</span>-&gt;</span>isPost())&#123;</span><br><span class="line">    <span class="comment">// 处理逻辑，获取参数</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// 返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>设置头“Access-Control-Allow-Methods”，不允许 OPTION 请求；</li>
+</ul>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header('Access-Control-Allow-Methods<span class="symbol">:POST</span>,GET')<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h1 id="相关文档说明："><a href="#相关文档说明：" class="headerlink" title="相关文档说明："></a>相关文档说明：</h1><h2 id="HTTP-响应首部字段"><a href="#HTTP-响应首部字段" class="headerlink" title="HTTP 响应首部字段"></a>HTTP 响应首部字段</h2><blockquote>
+<h3 id="Access-Control-Allow-Credentials"><a href="#Access-Control-Allow-Credentials" class="headerlink" title="Access-Control-Allow-Credentials"></a>Access-Control-Allow-Credentials</h3></blockquote>
+<p>响应头表示是否可以将对请求的响应暴露给页面。返回true则可以，其他值均不可以。<br>Credentials可以是 cookies, authorization headers 或 TLS client certificates。<br>当作为对预检请求的响应的一部分时，这能表示是否真正的请求可以使用credentials。注意简单的GET 请求没有预检，所以若一个对资源的请求带了credentials，如果这个返回这个资源，响应就会被浏览器忽视，不会返回到web内容。</p>
+<p>Access-Control-Allow-Credentials 头 工作中与XMLHttpRequest.withCredentials 或Fetch API中的Request() 构造器中的credentials 选项结合使用。Credentials必须在前后端都被配置（即the Access-Control-Allow-Credentials header 和 XHR 或Fetch request中都要配置）才能使带credentials的CORS请求成功。</p>
+<p>语法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Access-Control-Allow-Credentials:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h2 id="Access-Control-Allow-Origin"><a href="#Access-Control-Allow-Origin" class="headerlink" title="Access-Control-Allow-Origin"></a>Access-Control-Allow-Origin</h2></blockquote>
+<p>指定了允许访问该资源的域</p>
+<p>语法：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: <span class="variable">&lt;origin&gt;</span> |<span class="string"> *</span></span><br></pre></td></tr></table></figure>
+<p>origin 参数的值指定了允许访问该资源的外域 URI。对于不需要携带身份凭证的请求，服务器可以指定该字段的值为通配符，表示允许来自所有域的请求。</p>
+<p>如果服务端指定了具体的域名而非“*”，那么响应首部中的 Vary 字段的值必须包含 Origin。这将告诉客户端：服务器对不同的源站返回不同的内容。</p>
+<blockquote>
+<h2 id="Access-Control-Allow-Methods"><a href="#Access-Control-Allow-Methods" class="headerlink" title="Access-Control-Allow-Methods"></a>Access-Control-Allow-Methods</h2></blockquote>
+<p>指明了实际请求所允许使用的 HTTP 方法。</p>
+<p>语法：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Methods: &lt;<span class="function"><span class="keyword">method</span>&gt;[, &lt;<span class="title">method</span>&gt;]*</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<h2 id="Access-Control-Allow-Headers"><a href="#Access-Control-Allow-Headers" class="headerlink" title="Access-Control-Allow-Headers"></a>Access-Control-Allow-Headers</h2></blockquote>
+<p>指明了实际请求中允许携带的首部字段。</p>
+<p>语法：</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Allow-Headers: &lt;field-<span class="keyword">name</span>&gt;[, &lt;field-<span class="keyword">name</span>&gt;]*</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h2 id="Access-Control-Expose-Headers"><a href="#Access-Control-Expose-Headers" class="headerlink" title="Access-Control-Expose-Headers"></a>Access-Control-Expose-Headers</h2></blockquote>
+<p>在跨域访问时，XMLHttpRequest对象的getResponseHeader()方法只能拿到一些最基本的响应头，Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma，如果要访问其他头，则需要服务器设置本响应头。</p>
+<p>Access-Control-Expose-Headers 头让服务器把允许浏览器访问的头放入白名单，例如</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Expose-Headers: X-My-Custom-<span class="keyword">Header</span>, X-Another-Custom-<span class="keyword">Header</span></span><br></pre></td></tr></table></figure>
+
+<p>这样浏览器就能够通过getResponseHeader访问X-My-Custom-Header和 X-Another-Custom-Header 响应头了。</p>
+<blockquote>
+<h2 id="Access-Control-Max-Age"><a href="#Access-Control-Max-Age" class="headerlink" title="Access-Control-Max-Age"></a>Access-Control-Max-Age</h2></blockquote>
+<p>指定了preflight请求的结果能够被缓存多久。</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Max-Age: &lt;<span class="keyword">delta</span>-seconds&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>delta-seconds 参数表示preflight请求的结果在多少秒内有效。</p>
+<h2 id="HTTP-请求首部字段"><a href="#HTTP-请求首部字段" class="headerlink" title="HTTP 请求首部字段"></a>HTTP 请求首部字段</h2><blockquote>
+<h2 id="Origin"><a href="#Origin" class="headerlink" title="Origin"></a>Origin</h2></blockquote>
+<p>表明预检请求或实际请求的源站。</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Origin:</span> <span class="params">&lt;origin&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>origin 参数的值为源站 URI。它不包含任何路径信息，只是服务器名称。</p>
+<blockquote>
+<h2 id="Access-Control-Request-Method"><a href="#Access-Control-Request-Method" class="headerlink" title="Access-Control-Request-Method"></a>Access-Control-Request-Method</h2></blockquote>
+<p>用于预检请求。其作用是，将实际请求所使用的 HTTP 方法告诉服务器。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Request-<span class="function"><span class="keyword">Method</span>:</span> &lt;<span class="function"><span class="keyword">method</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<h2 id="Access-Control-Request-Headers"><a href="#Access-Control-Request-Headers" class="headerlink" title="Access-Control-Request-Headers"></a>Access-Control-Request-Headers</h2></blockquote>
+<p>用于预检请求。其作用是，将实际请求所携带的首部字段告诉服务器。</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Request-Headers: &lt;field-<span class="keyword">name</span>&gt;[, &lt;field-<span class="keyword">name</span>&gt;]*</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+            <a href="/tags/axios/" rel="tag"># axios</a>
+          
+            <a href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag"># 跨域</a>
+          
+            <a href="/tags/Option%E8%AF%B7%E6%B1%82/" rel="tag"># Option请求</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/15/%E5%B0%9D%E8%AF%95MAC%E5%AE%89%E8%A3%85vue%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE/" rel="next" title="尝试MAC安装vue开发环境运行项目">
+                <i class="fa fa-chevron-left"></i> 尝试MAC安装vue开发环境运行项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/20/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95wiki%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" rel="prev" title="搭建一个简单wiki遇到问题总结">
+                搭建一个简单wiki遇到问题总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Darifo" />
+            
+              <p class="site-author-name" itemprop="name">Darifo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/darifo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:feaglenet@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.darifo.xyz/" title="Darifo`s Blog" target="_blank">Darifo`s Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、使用axios异步请求跨域问题解决"><span class="nav-number">1.</span> <span class="nav-text">1、使用axios异步请求跨域问题解决</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、发送-OPTION-预检请求导致的接口错误解决"><span class="nav-number">2.</span> <span class="nav-text">2、发送 OPTION 预检请求导致的接口错误解决</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关文档说明："><span class="nav-number">3.</span> <span class="nav-text">相关文档说明：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-响应首部字段"><span class="nav-number">3.1.</span> <span class="nav-text">HTTP 响应首部字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-Control-Allow-Credentials"><span class="nav-number">3.1.1.</span> <span class="nav-text">Access-Control-Allow-Credentials</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Control-Allow-Origin"><span class="nav-number">3.2.</span> <span class="nav-text">Access-Control-Allow-Origin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Control-Allow-Methods"><span class="nav-number">3.3.</span> <span class="nav-text">Access-Control-Allow-Methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Control-Allow-Headers"><span class="nav-number">3.4.</span> <span class="nav-text">Access-Control-Allow-Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Control-Expose-Headers"><span class="nav-number">3.5.</span> <span class="nav-text">Access-Control-Expose-Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Control-Max-Age"><span class="nav-number">3.6.</span> <span class="nav-text">Access-Control-Max-Age</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-请求首部字段"><span class="nav-number">3.7.</span> <span class="nav-text">HTTP 请求首部字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Origin"><span class="nav-number">3.8.</span> <span class="nav-text">Origin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Control-Request-Method"><span class="nav-number">3.9.</span> <span class="nav-text">Access-Control-Request-Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Control-Request-Headers"><span class="nav-number">3.10.</span> <span class="nav-text">Access-Control-Request-Headers</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Darifo`s Blog</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
